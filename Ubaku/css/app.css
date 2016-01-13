@@ -1,0 +1,22 @@
+﻿body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+span {
+}
+
+.xl {
+    font-size: x-large;
+}
+
+.xxl {
+    font-size: xx-large;
+}
+
+.offset-top-lg {
+    margin-top: 20px;
+}
+
+.offset-top-xl {
+    margin-top: 40px;
+}
