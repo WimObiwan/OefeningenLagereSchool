@@ -42,6 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="scripts\models\challenge.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeEndDriver.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeEndDriverConfiguration.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeFactory.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeFactoryConfiguration.ts" />
+    <TypeScriptCompile Include="scripts\models\exerciseConfiguration.ts" />
+    <TypeScriptCompile Include="scripts\models\exerciseDriver.ts" />
+    <TypeScriptCompile Include="scripts\models\exerciseEndDriverConfiguration.ts" />
+    <TypeScriptCompile Include="scripts\models\exerciseStatus.ts" />
+    <TypeScriptCompile Include="scripts\models\responseStatus.ts" />
+    <TypeScriptCompile Include="scripts\models\severity.ts" />
     <TypeScriptCompile Include="scripts\models\modelBase.ts" />
     <TypeScriptCompile Include="scripts\models\response.ts" />
     <TypeScriptCompile Include="scripts\models\exercise.ts" />

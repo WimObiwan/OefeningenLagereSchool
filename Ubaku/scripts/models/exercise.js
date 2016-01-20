@@ -7,21 +7,13 @@ var app;
 (function (app) {
     var models;
     (function (models) {
-        'use strict';
+        "use strict";
         var Exercise = (function (_super) {
             __extends(Exercise, _super);
             function Exercise() {
                 _super.call(this);
                 this.challenges = [];
             }
-            Exercise.prototype.getPreviousChallenge = function () {
-                if (this.challenges.length <= 1) {
-                    return null;
-                }
-                else {
-                    return this.challenges[this.challenges.length - 2];
-                }
-            };
             return Exercise;
         })(models.ModelBase);
         models.Exercise = Exercise;

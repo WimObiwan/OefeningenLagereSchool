@@ -1,17 +1,24 @@
-﻿Oefeningen:
+﻿Niet zelfde oef als vorige genereren
+Oefeningen:
 - Splitsen tot... (0..10, 15, 20, ...)
 - Optellen, aftrekken tot...
-Aanraken / verslepen van de oplossing
-Als fout: juiste oplossing laten zien
-Optie: x oefeningen na mekaar
-Optie: oefenen tot x keer juist
 Lopende score laten zien (rood/oranje/groen?)
 Percent voltooid laten zien in balkje
 Alles loggen (opgave, elke poging, timing, oplossing, ...)
 Juiste oplossing laten zien voor beperkte periode, dan naar volgende
 
-ChallengeFactory/Provider => geeft telkens volgende opgave, bv. splitshuisje van X [in volgorde|random]; splitsen tot X
-ChallengeEndFactory/Provider => beslist wanneer de opgave gedaan is (altijd, enkel als juiste oplossing, ...)
-ExerciseEndFactory/Provider => beslist wanneer de ronde gedaan is (na x tijd, x juiste oplossingen, x oefeningen, ...)
+Options:
+- challengeFactory
+	- type: "splittingNumbers"
+	- options (depends on type)
+		- minNumberToSplit
+		- maxNumberToSplit
+		- sequence: "random|up|down"
+- challengeEndDriver
+	- type: "answered|solved|manual"
+- exerciseEndDriver
+	- type: "time|challengesCompleted|challengesSolved"
+	- options (depends on type)
+		- endAfterSeconds | endAfterChallengesCompleted | endAfterChallengesSolved
 
 http://www.oefenmeer.nl/SplitsGratisHTML5/index.html, http://www.computermeester.be/splitsingen.htm

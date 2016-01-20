@@ -2,47 +2,57 @@
     Nummers Splitsen
 </h1>
 <h2>
-    Opgave {{currentExercise.challenges.length}}
+    Opgave {{exerciseDriver.status.challengeNumber}}
 </h2>
 <div class="offset-top-xl">
-    <table>
-        <tr>
-            <td></td>
-            <td></td>
-            <td><a class="alert alert-info xxl">{{currentChallenge.numberToSplit}}</a></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><span class="xxl">/</span></td>
-            <td></td>
-            <td><span class="xxl">\</span></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><a class="alert alert-info xl">{{currentChallenge.splitComponent}}</a></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><span class="alert xl" ng-class="currentChallenge.getLastResponse() === null ? 'alert-warning' : (currentChallenge.getLastResponse().isSolution === true ? 'alert-success' : 'alert-danger')">{{currentChallenge.getLastAnswerOr('?')}}</span></td>
-        </tr>
-    </table>
-    <div class="offset-top-xl">
-        <span ng-repeat="availableAnswer in currentChallenge.availableAnswers">
-            <button class="btn btn-default btn-lg btn-warning" ng-click="respond(availableAnswer)">{{availableAnswer}}</button>
-        </span>
-    </div>
-    <div ng-hide="currentExercise.getPreviousChallenge() === null || currentExercise.getPreviousChallenge().getLastResponse() === null" class="offset-top-lg">
-        <div class="alert xl" ng-class="currentExercise.getPreviousChallenge().getLastResponse().isSolution === true ? 'alert-success' : 'alert-danger'">
-            <span ng-show="currentExercise.getPreviousChallenge().getLastResponse().isSolution === true" class="glyphicon glyphicon-thumbs-up"></span>
-            <span ng-show="currentExercise.getPreviousChallenge().getLastResponse().isSolution === false" class="glyphicon glyphicon-thumbs-down"></span>
-            <span>{{currentExercise.getPreviousChallenge().getLastResponseMessage()}}</span>
+
+    <!-- Current Challenge -->
+    <div>
+        <table>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><a class="alert alert-info xxl">{{exerciseDriver.currentChallenge.numberToSplit}}</a></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span class="xxl">/</span></td>
+                <td></td>
+                <td><span class="xxl">\</span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a class="alert alert-info xl">{{exerciseDriver.currentChallenge.splitComponent}}</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><span class="alert xl" ng-class="exerciseDriver.currentChallenge.getLastResponse() === null ? 'alert-warning' : (exerciseDriver.currentChallenge.isSolved ? 'alert-success' : 'alert-danger')">{{exerciseDriver.currentChallenge.getLastAnswerOr('?')}}</span></td>
+            </tr>
+        </table>
+        <div class="offset-top-xl">
+            <span ng-repeat="availableAnswer in exerciseDriver.currentChallenge.availableAnswers">
+                <button class="btn btn-default btn-lg btn-warning" ng-click="respond(availableAnswer)">{{availableAnswer}}</button>
+            </span>
         </div>
     </div>
-    <!--<div class="progress">
-        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 2%;">
-            2%
+
+    <!-- Last Response Status -->
+    <div ng-hide="exerciseDriver.status.lastResponseStatus === null" class="offset-top-lg">
+        <div class="alert xl" ng-class="exerciseDriver.status.lastResponseStatus.messageSeverity === Severity.Success ? 'alert-success' : 'alert-danger'">
+            <span ng-show="exerciseDriver.status.lastResponseStatus.messageSeverity === Severity.Success" class="glyphicon glyphicon-thumbs-up"></span>
+            <span ng-hide="exerciseDriver.status.lastResponseStatus.messageSeverity === Severity.Success" class="glyphicon glyphicon-thumbs-down"></span>
+            <span>{{exerciseDriver.status.lastResponseStatus.message}}</span>
         </div>
-    </div>-->
+    </div>
+
+    <!-- Exercise Status -->
+    <div>
+        <!--<div class="progress">
+            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 2%;">
+                2%
+            </div>
+        </div>-->
+    </div>
 </div>

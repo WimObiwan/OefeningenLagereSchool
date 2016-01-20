@@ -2,13 +2,16 @@ var app;
 (function (app) {
     var models;
     (function (models) {
-        'use strict';
-        (function (ResponseStatus) {
-            ResponseStatus[ResponseStatus["Skipped"] = 0] = "Skipped";
-            ResponseStatus[ResponseStatus["Success"] = 1] = "Success";
-            ResponseStatus[ResponseStatus["Failed"] = 2] = "Failed";
-        })(models.ResponseStatus || (models.ResponseStatus = {}));
-        var ResponseStatus = models.ResponseStatus;
+        "use strict";
+        var ResponseStatus = (function () {
+            function ResponseStatus(response, message, messageSeverity) {
+                this.response = response;
+                this.message = message;
+                this.messageSeverity = messageSeverity;
+            }
+            return ResponseStatus;
+        })();
+        models.ResponseStatus = ResponseStatus;
     })(models = app.models || (app.models = {}));
 })(app || (app = {}));
-//# sourceMappingURL=ResponseStatus.js.map
+//# sourceMappingURL=responseStatus.js.map

@@ -7,7 +7,7 @@ var app;
 (function (app) {
     var models;
     (function (models) {
-        'use strict';
+        "use strict";
         var Challenge = (function (_super) {
             __extends(Challenge, _super);
             function Challenge(numberToSplit, splitComponent, availableAnswers, solution) {
@@ -17,7 +17,18 @@ var app;
                 this.availableAnswers = availableAnswers;
                 this.solution = solution;
                 this.responses = [];
+                this.isSolved = false;
             }
+            Challenge.prototype.addResponse = function (answer) {
+                if (this.isSolved) {
+                    throw new Error("The challenge has already been solved.");
+                }
+                var response = new app.models.Response(answer, this.solution === answer);
+                this.responses.push(response);
+                this.isSolved = response.isSolution;
+                var messageSeverity = response.isSolution ? app.models.Severity.Success : app.models.Severity.Error;
+                return new models.ResponseStatus(response, this.getResponseMessage(response), messageSeverity);
+            };
             Challenge.prototype.getLastResponse = function () {
                 return this.responses.length === 0 ? null : this.responses[this.responses.length - 1];
             };
@@ -25,18 +36,12 @@ var app;
                 var lastResponse = this.getLastResponse();
                 return lastResponse === null ? defaultValue : lastResponse.answer.toString();
             };
-            Challenge.prototype.getLastResponseMessage = function () {
-                var lastResponse = this.getLastResponse();
-                if (lastResponse === null) {
-                    return null;
+            Challenge.prototype.getResponseMessage = function (response) {
+                if (response.isSolution) {
+                    return "Goed zo! " + this.numberToSplit + " kan je splitsen in " + this.splitComponent + " en " + response.answer + ".";
                 }
                 else {
-                    if (lastResponse.isSolution) {
-                        return "Goed zo! " + this.numberToSplit + " kan je splitsen in " + this.splitComponent + " en " + lastResponse.answer + ".";
-                    }
-                    else {
-                        return "Jammer! " + this.numberToSplit + " kan je niet splitsen in " + this.splitComponent + " en " + lastResponse.answer + ".";
-                    }
+                    return "Jammer! " + this.numberToSplit + " kan je niet splitsen in " + this.splitComponent + " en " + response.answer + ".";
                 }
             };
             return Challenge;

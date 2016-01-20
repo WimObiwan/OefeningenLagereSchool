@@ -1,5 +1,5 @@
 ﻿module app.models {
-    'use strict';
+    "use strict";
 
     export interface IModelBase {
         createdTime: Date;

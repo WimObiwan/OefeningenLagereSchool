@@ -1,7 +1,7 @@
 ﻿/// <reference path="typings/references.d.ts" />
 
 module app {
-    'use strict';
+    "use strict";
 
     angular.module('app', ['ngRoute'])
         .config(['$routeProvider', '$httpProvider', function ($routeProvider: ng.route.IRouteProvider, $httpProvider: ng.IHttpProvider) {
@@ -13,4 +13,8 @@ module app {
                 })
                 .otherwise({ redirectTo: "/" });
         }])
+        .run(['$rootScope', function ($rootScope: any) {
+            // Make enums available on the root scope and therefore any child scope.
+            $rootScope.Severity = app.models.Severity;
+        }]);
 }

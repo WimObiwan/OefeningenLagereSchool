@@ -2,7 +2,7 @@ var app;
 (function (app) {
     var models;
     (function (models) {
-        'use strict';
+        "use strict";
         var ModelBase = (function () {
             function ModelBase() {
                 this.createdTime = new Date();

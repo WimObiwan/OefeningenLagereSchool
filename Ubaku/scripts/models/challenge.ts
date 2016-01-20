@@ -1,5 +1,5 @@
 ﻿module app.models {
-    'use strict';
+    "use strict";
 
     export interface IChallenge extends IModelBase {
         numberToSplit: number;
@@ -7,39 +7,47 @@
         availableAnswers: number[];
         solution: number;
 
+        isSolved: boolean;
         responses: IResponse[];
+
+        addResponse(answer: number): ResponseStatus;
         getLastResponse(): IResponse;
         getLastAnswerOr(defaultValue: string): string;
-        getLastResponseMessage(): string;
     }
 
     export class Challenge extends ModelBase implements IChallenge {
-        public responses: IResponse[];
+        public responses: IResponse[] = [];
+        public isSolved: boolean = false;
 
         constructor(public numberToSplit: number, public splitComponent: number, public availableAnswers: number[], public solution: number) {
             super();
-            this.responses = [];
         }
 
-        getLastResponse() {
+        public addResponse(answer: number): ResponseStatus {
+            if (this.isSolved) {
+                throw new Error("The challenge has already been solved.");
+            }
+            var response = new app.models.Response(answer, this.solution === answer);
+            this.responses.push(response);
+            this.isSolved = response.isSolution;
+            var messageSeverity = response.isSolution ? app.models.Severity.Success : app.models.Severity.Error;
+            return new ResponseStatus(response, this.getResponseMessage(response), messageSeverity);
+        }
+
+        public getLastResponse() {
             return this.responses.length === 0 ? null : this.responses[this.responses.length - 1];
         }
 
-        getLastAnswerOr(defaultValue: string): string {
+        public getLastAnswerOr(defaultValue: string): string {
             var lastResponse = this.getLastResponse();
             return lastResponse === null ? defaultValue : lastResponse.answer.toString();
         }
 
-        getLastResponseMessage(): string {
-            var lastResponse = this.getLastResponse();
-            if (lastResponse === null) {
-                return null;
+        private getResponseMessage(response: IResponse): string {
+            if (response.isSolution) {
+                return "Goed zo! " + this.numberToSplit + " kan je splitsen in " + this.splitComponent + " en " + response.answer + ".";
             } else {
-                if (lastResponse.isSolution) {
-                    return "Goed zo! " + this.numberToSplit + " kan je splitsen in " + this.splitComponent + " en " + lastResponse.answer + ".";
-                } else {
-                    return "Jammer! " + this.numberToSplit + " kan je niet splitsen in " + this.splitComponent + " en " + lastResponse.answer + ".";
-                }
+                return "Jammer! " + this.numberToSplit + " kan je niet splitsen in " + this.splitComponent + " en " + response.answer + ".";
             }
         }
     }

@@ -1,6 +1,6 @@
 var app;
 (function (app) {
-    'use strict';
+    "use strict";
     var RootCtrl = (function () {
         //static $inject = [];
         function RootCtrl() {

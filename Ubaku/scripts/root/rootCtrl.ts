@@ -1,5 +1,5 @@
 ﻿module app {
-    'use strict';
+    "use strict";
 
     interface IRootCtrl {
     }

@@ -7,7 +7,7 @@ var app;
 (function (app) {
     var models;
     (function (models) {
-        'use strict';
+        "use strict";
         var Response = (function (_super) {
             __extends(Response, _super);
             function Response(answer, isSolution) {
