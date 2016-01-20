@@ -3,8 +3,17 @@
 module app {
     "use strict";
 
-    angular.module('app', ['ngRoute'])
-        .config(['$routeProvider', '$httpProvider', function ($routeProvider: ng.route.IRouteProvider, $httpProvider: ng.IHttpProvider) {
+    angular.module("app", ["ngRoute"])
+        // Filters
+        .filter("percentage", ["$filter", function ($filter: ng.IFilterService) {
+            // This filter makes the assumption that the input will be in decimal form (i.e. 17% is 0.17).
+            return function (input: number, decimals: number) {
+                return $filter("number")(input * 100, decimals) + "%";
+            };
+        }])
+
+        // Configuration
+        .config(["$routeProvider", "$httpProvider", function ($routeProvider: ng.route.IRouteProvider, $httpProvider: ng.IHttpProvider) {
             // Configure the routes.
             $routeProvider
                 .when("/", {
@@ -13,7 +22,9 @@ module app {
                 })
                 .otherwise({ redirectTo: "/" });
         }])
-        .run(['$rootScope', function ($rootScope: any) {
+
+        // Initialization
+        .run(["$rootScope", function ($rootScope: any) {
             // Make enums available on the root scope and therefore any child scope.
             $rootScope.Severity = app.models.Severity;
         }]);

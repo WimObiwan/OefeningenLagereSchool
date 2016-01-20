@@ -6,11 +6,13 @@
         }
 
         public createChallenge(): app.models.IChallenge {
-
             var type = this.configuration.type || ChallengeFactoryConfiguration.TypeSplittingNumbers;
+
             if (type === ChallengeFactoryConfiguration.TypeSplittingNumbers) {
                 var minNumber = this.configuration.options.minNumberToSplit || 0;
                 var maxNumber = this.configuration.options.maxNumberToSplit || 10;
+                // TODO-M: Implement sequence
+                var sequence = this.configuration.options.sequence || "random"; // TODO-L: Constants
 
                 var numberToSplit = this.getRandomInt(minNumber, maxNumber);
                 var splitComponent = this.getRandomInt(0, numberToSplit);

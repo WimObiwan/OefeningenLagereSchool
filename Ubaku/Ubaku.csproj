@@ -48,6 +48,7 @@
     <TypeScriptCompile Include="scripts\models\challengeFactoryConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\exerciseConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\exerciseDriver.ts" />
+    <TypeScriptCompile Include="scripts\models\exerciseEndDriver.ts" />
     <TypeScriptCompile Include="scripts\models\exerciseEndDriverConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\exerciseStatus.ts" />
     <TypeScriptCompile Include="scripts\models\responseStatus.ts" />

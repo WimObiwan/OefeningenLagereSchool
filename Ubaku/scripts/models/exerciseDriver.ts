@@ -12,6 +12,7 @@
     export class ExerciseDriver implements IExerciseDriver {
         private challengeFactory: ChallengeFactory;
         private challengeEndDriver: ChallengeEndDriver;
+        private exerciseEndDriver: ExerciseEndDriver;
         private exercise: IExercise = new Exercise();
 
         public status: ExerciseStatus = new ExerciseStatus();
@@ -20,6 +21,7 @@
         public constructor(private configuration: ExerciseConfiguration) {
             this.challengeFactory = new ChallengeFactory(this.configuration.challengeFactory);
             this.challengeEndDriver = new ChallengeEndDriver(this.configuration.challengeEndDriver);
+            this.exerciseEndDriver = new ExerciseEndDriver(this.configuration.exerciseEndDriver);
         }
 
         public start() {
@@ -29,10 +31,17 @@
         public respond(answer: number): ResponseStatus {
             var challenge = this.currentChallenge;
             var responseStatus = challenge.addResponse(answer);
-            this.status.lastResponseStatus = responseStatus;
-            if (this.challengeEndDriver.shouldEnd(challenge)) {
-                this.startNewChallenge();
+
+            if (!this.exerciseEndDriver.shouldEnd(this.exercise)) {
+                if (this.challengeEndDriver.shouldEnd(challenge)) {
+                    this.status.challengesCompletedCount += 1;
+                    this.startNewChallenge();
+                }
             }
+
+            this.status.lastResponseStatus = responseStatus;
+            this.status.challengesSolvedCount += (responseStatus.response.isSolution ? 1 : 0);
+            this.status.challengesSolvedPercentage = this.status.challengesSolvedCount / this.status.challengesCompletedCount;
             return responseStatus;
         }
 
