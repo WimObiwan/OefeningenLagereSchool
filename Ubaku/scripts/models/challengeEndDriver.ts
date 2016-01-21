@@ -2,20 +2,20 @@
     "use strict";
 
     export class ChallengeEndDriver {
-        private type: string = null;
+        private type: ChallengeEndDriverType = null;
 
         constructor(private configuration: ChallengeEndDriverConfiguration) {
-            this.type = this.configuration.type || ChallengeEndDriverConfiguration.TypeSolved;
+            this.type = this.configuration.type || Defaults.ChallengeEndDriverType;
         }
 
         public shouldEnd(lastChallenge: IChallenge): boolean {
-            if (this.type === ChallengeEndDriverConfiguration.TypeSolved) {
+            if (this.type === ChallengeEndDriverType.Solved) {
                 return lastChallenge.isSolved;
             }
-            else if (this.type === ChallengeEndDriverConfiguration.TypeAnswered) {
+            else if (this.type === ChallengeEndDriverType.Answered) {
                 return true;
             }
-            else if (this.type === ChallengeEndDriverConfiguration.TypeManual) {
+            else if (this.type === ChallengeEndDriverType.Manual) {
                 return false;
             }
             else {

@@ -2,13 +2,8 @@
     "use strict";
 
     export class ChallengeFactoryConfiguration {
-        public static TypeSplittingNumbers: string = "splittingNumbers"; // TODO-M: Can use enums instead of string consts?
-        public static TypeSplittingNumbersSequenceRandom: string = "random";
-        public static TypeSplittingNumbersSequenceUp: string = "up";
-        public static TypeSplittingNumbersSequenceDown: string = "down";
-
-        public type: string;
-        public options: any;
+        public type: ChallengeFactoryType;
+        public options: any; // TODO-L: Use actual classes instead of any (also in other places)
 
         public constructor() {
             this.options = [];

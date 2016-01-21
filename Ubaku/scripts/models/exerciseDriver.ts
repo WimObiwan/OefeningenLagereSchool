@@ -34,6 +34,7 @@
             this.status.lastResponseStatus = responseStatus;
 
             if (this.challengeEndDriver.shouldEnd(challenge)) {
+                // TODO-M: When ChallengeEndDriverType is Solved (and Manual?), score is always 100%
                 this.status.challengesCompletedCount += 1;
                 this.status.challengesSolvedCount += (responseStatus.response.isSolution ? 1 : 0);
                 this.status.challengesSolvedPercentage = this.status.challengesSolvedCount / this.status.challengesCompletedCount;

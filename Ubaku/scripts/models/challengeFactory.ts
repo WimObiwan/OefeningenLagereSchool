@@ -2,9 +2,9 @@
     "use strict";
 
     export class ChallengeFactory {
-        private type: string = null;
-        private numberToSplitSequence: string = null;
-        private splitComponentSequence: string = null;
+        private type: ChallengeFactoryType = null;
+        private numberToSplitSequence: SequenceType = null;
+        private splitComponentSequence: SequenceType = null;
         private minNumberToSplit: number = null;
         private maxNumberToSplit: number = null;
         private availableAnswers: number[] = [];
@@ -13,45 +13,25 @@
 
         public constructor(private configuration: ChallengeFactoryConfiguration) {
             // Determine the configuration parameters.
-            this.type = this.configuration.type || ChallengeFactoryConfiguration.TypeSplittingNumbers;
-            this.numberToSplitSequence = this.configuration.options.numberToSplitSequence || ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceRandom;
-            if (this.numberToSplitSequence === ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceRandom) {
+            this.type = this.configuration.type || Defaults.ChallengeFactoryType;
+            this.numberToSplitSequence = this.configuration.options.numberToSplitSequence || Defaults.NumberToSplitSequenceType;
+            if (this.numberToSplitSequence === SequenceType.Random) {
                 // If the number to split is random, so must be the split component.
-                this.splitComponentSequence = ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceRandom;
+                this.splitComponentSequence = SequenceType.Random;
             } else {
-                this.splitComponentSequence = this.configuration.options.splitComponentSequence || ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceRandom;
+                this.splitComponentSequence = this.configuration.options.splitComponentSequence || Defaults.SplitComponentSequenceType;
             }
-            this.minNumberToSplit = this.configuration.options.minNumberToSplit || 0;
-            this.maxNumberToSplit = this.configuration.options.maxNumberToSplit || 10;
+            this.minNumberToSplit = this.configuration.options.minNumberToSplit || Defaults.MinNumberToSplit;
+            this.maxNumberToSplit = this.configuration.options.maxNumberToSplit || Defaults.MaxNumberToSplit;
 
             // Generate the array of available answers.
-            this.availableAnswers = ChallengeFactory.createArray(0, this.maxNumberToSplit, ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceUp);
-        }
-
-        private static createArray(min: number, max: number, sequence: string): number[] {
-            var values = new Array<number>(1 + max - min);
-            for (var i = 0; i < values.length; i++) {
-                values[i] = min + i;
-            }
-            if (sequence === ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceUp) {
-                // Do nothing extra.
-            } else if (sequence === ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceRandom) {
-                ChallengeFactory.shuffle(values);
-            } else if (sequence === ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceDown) {
-                values = values.reverse();
-            } else {
-                throw new Error("Unknown sequence type: " + sequence);
-            }
-            return values;
-        }
-
-        private static shuffle<T>(o: T[]) {
-            for (var j: number, x: T, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-            return o;
+            this.availableAnswers = ChallengeFactory.createArray(0, this.maxNumberToSplit, SequenceType.Up);
         }
 
         public createChallenge(): app.models.IChallenge {
-            if (this.type === ChallengeFactoryConfiguration.TypeSplittingNumbers) {
+            if (this.type === ChallengeFactoryType.SplittingNumbers) {
+                // TODO-H: Random numbers to split doesn't work properly (both should then be completely random at every challenge)
+
                 if (this.numbersToSplitQueue.length === 0) {
                     // There are no more numbers to split in the current batch, generate a new queue.
                     this.numbersToSplitQueue = ChallengeFactory.createArray(this.minNumberToSplit, this.maxNumberToSplit, this.numberToSplitSequence);
@@ -77,6 +57,28 @@
             } else {
                 throw new Error("Unknown challenge type: " + this.type);
             }
+        }
+
+        private static createArray(min: number, max: number, sequence: SequenceType): number[] {
+            var values = new Array<number>(1 + max - min);
+            for (var i = 0; i < values.length; i++) {
+                values[i] = min + i;
+            }
+            if (sequence === SequenceType.Up) {
+                // Do nothing extra.
+            } else if (sequence === SequenceType.Random) {
+                ChallengeFactory.shuffleArray(values);
+            } else if (sequence === SequenceType.Down) {
+                values = values.reverse();
+            } else {
+                throw new Error("Unknown sequence type: " + sequence);
+            }
+            return values;
+        }
+
+        private static shuffleArray<T>(value: T[]) {
+            for (var j: number, x: T, i = value.length; i; j = Math.floor(Math.random() * i), x = value[--i], value[i] = value[j], value[j] = x);
+            return value;
         }
 
         private getRandomInt(minInclusive: number, maxInclusive: number): number {

@@ -11,22 +11,22 @@
         public constructor(private $scope: ISplittingNumbersScope) {
             var configuration = new app.models.ExerciseConfiguration();
 
-            configuration.exerciseEndDriver.type = app.models.ExerciseEndDriverConfiguration.TypeInfinite;
+            configuration.exerciseEndDriver.type = app.models.ExerciseEndDriverType.Infinite;
             configuration.exerciseEndDriver.options = {
                 endAfterChallengesCompleted: 10,
                 endAfterChallengesSolved: 10,
                 endAfterSeconds: 10
             };
 
-            configuration.challengeFactory.type = app.models.ChallengeFactoryConfiguration.TypeSplittingNumbers;
+            configuration.challengeFactory.type = app.models.ChallengeFactoryType.SplittingNumbers;
             configuration.challengeFactory.options = {
-                minNumberToSplit: 10,
+                minNumberToSplit: 0,
                 maxNumberToSplit: 10,
-                numberToSplitSequence: app.models.ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceUp,
-                splitComponentSequence: app.models.ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceRandom
+                numberToSplitSequence: app.models.SequenceType.Up,
+                splitComponentSequence: app.models.SequenceType.Random
             };
 
-            configuration.challengeEndDriver.type = app.models.ChallengeEndDriverConfiguration.TypeAnswered;
+            configuration.challengeEndDriver.type = app.models.ChallengeEndDriverType.Answered;
 
             this.$scope.exerciseDriver = new app.models.ExerciseDriver(configuration);
             this.$scope.exerciseDriver.start();

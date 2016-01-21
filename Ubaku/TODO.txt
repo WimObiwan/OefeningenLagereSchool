@@ -1,4 +1,6 @@
-﻿Oefeningen:
+﻿Helpers for bootstrap classes in views
+
+Oefeningen:
 - Splitsen tot... (0..10, 15, 20, ...)
 - Optellen, aftrekken tot...
 Percent voltooid laten zien in balkje
