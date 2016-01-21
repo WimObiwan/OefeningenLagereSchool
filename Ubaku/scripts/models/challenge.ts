@@ -10,6 +10,7 @@
         isSolved: boolean;
         responses: IResponse[];
 
+        equals(other: IChallenge): boolean;
         addResponse(answer: number): ResponseStatus;
         getLastResponse(): IResponse;
         getLastAnswerOr(defaultValue: string): string;
@@ -21,6 +22,16 @@
 
         constructor(public numberToSplit: number, public splitComponent: number, public availableAnswers: number[], public solution: number) {
             super();
+        }
+
+        public equals(other: IChallenge) {
+            if (other === null) {
+                return false;
+            }
+            if (other.numberToSplit === this.numberToSplit && other.splitComponent === this.splitComponent) {
+                return true;
+            }
+            return false;
         }
 
         public addResponse(answer: number): ResponseStatus {

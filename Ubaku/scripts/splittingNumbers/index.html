@@ -15,41 +15,55 @@
     </div>
 </div>
 
-<h2>Opgave {{exerciseDriver.status.challengeNumber}}</h2>
-<div class="offset-top-xl">
+<!-- Exercise Result -->
+<div ng-show="exerciseDriver.status.isComplete">
+    <h2>Resultaat</h2>
+    <dl class="dl-horizontal">
+        <dt>Opgaven</dt>
+        <dd>{{exerciseDriver.status.challengesCompletedCount}}</dd>
+        <dt>Score</dt>
+        <dd>{{exerciseDriver.status.challengesSolvedCount}}</dd>
+        <dt>Percentage</dt>
+        <dd>{{exerciseDriver.status.challengesSolvedPercentage | percentage:0}}</dd>
+    </dl>
+</div>
 
+<!-- Challenge -->
+<div ng-hide="exerciseDriver.currentChallenge === null">
+    <h2>Opgave {{exerciseDriver.status.challengeNumber}}</h2>
     <!-- Current Challenge -->
-    <div>
-        <table>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><a class="alert alert-info xxl">{{exerciseDriver.currentChallenge.numberToSplit}}</a></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><span class="xxl">/</span></td>
-                <td></td>
-                <td><span class="xxl">\</span></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><a class="alert alert-info xl">{{exerciseDriver.currentChallenge.splitComponent}}</a></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><span class="alert xl" ng-class="exerciseDriver.currentChallenge.getLastResponse() === null ? 'alert-warning' : (exerciseDriver.currentChallenge.isSolved ? 'alert-success' : 'alert-danger')">{{exerciseDriver.currentChallenge.getLastAnswerOr('?')}}</span></td>
-            </tr>
-        </table>
-        <div class="offset-top-xl">
-            <span ng-repeat="availableAnswer in exerciseDriver.currentChallenge.availableAnswers">
-                <button class="btn btn-default btn-lg btn-warning" ng-click="respond(availableAnswer)">{{availableAnswer}}</button>
-            </span>
+    <div class="offset-top-xl">
+        <div>
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><a class="alert alert-info xxl">{{exerciseDriver.currentChallenge.numberToSplit}}</a></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span class="xxl">/</span></td>
+                    <td></td>
+                    <td><span class="xxl">\</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a class="alert alert-info xl">{{exerciseDriver.currentChallenge.splitComponent}}</a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><span class="alert xl" ng-class="exerciseDriver.currentChallenge.getLastResponse() === null ? 'alert-warning' : (exerciseDriver.currentChallenge.isSolved ? 'alert-success' : 'alert-danger')">{{exerciseDriver.currentChallenge.getLastAnswerOr('?')}}</span></td>
+                </tr>
+            </table>
+            <div class="offset-top-xl">
+                <span ng-repeat="availableAnswer in exerciseDriver.currentChallenge.availableAnswers">
+                    <button class="btn btn-default btn-lg btn-warning" ng-click="respond(availableAnswer)">{{availableAnswer}}</button>
+                </span>
+            </div>
         </div>
     </div>
-
     <!-- Last Response Status -->
     <div ng-hide="exerciseDriver.status.lastResponseStatus === null" class="offset-top-lg">
         <div class="alert xl" ng-class="exerciseDriver.status.lastResponseStatus.messageSeverity === Severity.Success ? 'alert-success' : 'alert-danger'">

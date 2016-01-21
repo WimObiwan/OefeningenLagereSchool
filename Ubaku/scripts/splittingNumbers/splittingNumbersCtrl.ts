@@ -12,10 +12,19 @@
             var configuration = new app.models.ExerciseConfiguration();
 
             configuration.exerciseEndDriver.type = app.models.ExerciseEndDriverConfiguration.TypeInfinite;
-            configuration.exerciseEndDriver.options = {};
+            configuration.exerciseEndDriver.options = {
+                endAfterChallengesCompleted: 10,
+                endAfterChallengesSolved: 10,
+                endAfterSeconds: 10
+            };
 
             configuration.challengeFactory.type = app.models.ChallengeFactoryConfiguration.TypeSplittingNumbers;
-            configuration.challengeFactory.options = { minNumberToSplit: 0, maxNumberToSplit: 10, sequence: "random" };
+            configuration.challengeFactory.options = {
+                minNumberToSplit: 10,
+                maxNumberToSplit: 10,
+                numberToSplitSequence: app.models.ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceUp,
+                splitComponentSequence: app.models.ChallengeFactoryConfiguration.TypeSplittingNumbersSequenceRandom
+            };
 
             configuration.challengeEndDriver.type = app.models.ChallengeEndDriverConfiguration.TypeAnswered;
 

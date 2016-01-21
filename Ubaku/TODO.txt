@@ -1,24 +1,8 @@
-﻿Niet zelfde oef als vorige genereren
-Oefeningen:
+﻿Oefeningen:
 - Splitsen tot... (0..10, 15, 20, ...)
 - Optellen, aftrekken tot...
-Lopende score laten zien (rood/oranje/groen?)
 Percent voltooid laten zien in balkje
 Alles loggen (opgave, elke poging, timing, oplossing, ...)
 Juiste oplossing laten zien voor beperkte periode, dan naar volgende
-
-Options:
-- challengeFactory
-	- type: "splittingNumbers"
-	- options (depends on type)
-		- minNumberToSplit
-		- maxNumberToSplit
-		- sequence: "random|up|down"
-- challengeEndDriver
-	- type: "answered|solved|manual"
-- exerciseEndDriver
-	- type: "time|challengesCompleted|challengesSolved"
-	- options (depends on type)
-		- endAfterSeconds | endAfterChallengesCompleted | endAfterChallengesSolved
 
 http://www.oefenmeer.nl/SplitsGratisHTML5/index.html, http://www.computermeester.be/splitsingen.htm
