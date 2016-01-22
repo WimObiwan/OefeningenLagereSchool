@@ -55,7 +55,9 @@
         }
 
         private getResponseMessage(response: IResponse): string {
-            if (response.isSolution) {
+            if (response.answer === null) {
+                return "Je hebt de vorige oefening overgeslagen.";
+            } else if (response.isSolution) {
                 return "Goed zo! " + this.numberToSplit + " kan je splitsen in " + this.splitComponent + " en " + response.answer + ".";
             } else {
                 return "Jammer! " + this.numberToSplit + " kan je niet splitsen in " + this.splitComponent + " en " + response.answer + ".";

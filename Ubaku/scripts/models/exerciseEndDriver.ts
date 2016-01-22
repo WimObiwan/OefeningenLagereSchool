@@ -18,14 +18,11 @@
 
             if (this.type === ExerciseEndDriverType.Infinite) {
                 return false;
-            }
-            else if (this.type === ExerciseEndDriverType.ChallengesCompleted) {
+            } else if (this.type === ExerciseEndDriverType.ChallengesCompleted) {
                 return status.challengesCompletedCount >= this.endAfterChallengesCompleted;
-            }
-            else if (this.type === ExerciseEndDriverType.ChallengesSolved) {
+            } else if (this.type === ExerciseEndDriverType.ChallengesSolved) {
                 return status.challengesSolvedCount >= this.endAfterChallengesSolved;
-            }
-            else {
+            } else {
                 throw new Error("Unknown exercise end driver type: " + this.type);
             }
         }

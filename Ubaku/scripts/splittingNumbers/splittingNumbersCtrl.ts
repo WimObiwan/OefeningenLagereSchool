@@ -3,7 +3,8 @@
 
     interface ISplittingNumbersScope extends ng.IScope {
         exerciseDriver: app.models.IExerciseDriver;
-        respond(answer: number): void;
+        respondToCurrentChallenge(answer: number): void;
+        skipCurrentChallenge(): void;
     }
 
     class SplittingNumbersCtrl {
@@ -11,7 +12,7 @@
         public constructor(private $scope: ISplittingNumbersScope) {
             var configuration = new app.models.ExerciseConfiguration();
 
-            configuration.exerciseEndDriver.type = app.models.ExerciseEndDriverType.Infinite;
+            configuration.exerciseEndDriver.type = app.models.ExerciseEndDriverType.ChallengesCompleted;
             configuration.exerciseEndDriver.options = {
                 endAfterChallengesCompleted: 10,
                 endAfterChallengesSolved: 10,
@@ -26,11 +27,12 @@
                 splitComponentSequence: app.models.SequenceType.Random
             };
 
-            configuration.challengeEndDriver.type = app.models.ChallengeEndDriverType.Answered;
+            configuration.challengeEndDriver.type = app.models.ChallengeEndDriverType.Solved;
 
             this.$scope.exerciseDriver = new app.models.ExerciseDriver(configuration);
             this.$scope.exerciseDriver.start();
-            this.$scope.respond = (answer) => this.$scope.exerciseDriver.respond(answer);
+            this.$scope.respondToCurrentChallenge = (answer) => this.$scope.exerciseDriver.respondToCurrentChallenge(answer);
+            this.$scope.skipCurrentChallenge = () => this.$scope.exerciseDriver.skipCurrentChallenge();
         }
     }
 

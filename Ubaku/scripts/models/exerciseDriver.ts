@@ -6,7 +6,8 @@
         currentChallenge: IChallenge;
 
         start(): void;
-        respond(answer: number): void;
+        respondToCurrentChallenge(answer: number): void;
+        skipCurrentChallenge(): void;
     }
 
     export class ExerciseDriver implements IExerciseDriver {
@@ -28,27 +29,28 @@
             this.startNewChallenge();
         }
 
-        public respond(answer: number): ResponseStatus {
+        public respondToCurrentChallenge(answer: number) {
             var challenge = this.currentChallenge;
             var responseStatus = challenge.addResponse(answer);
             this.status.lastResponseStatus = responseStatus;
+            this.status.challengesAnsweredCount += 1;
+            this.status.challengesSolvedCount += (responseStatus.response.isSolution ? 1 : 0);
+            this.status.challengesSolvedPercentage = this.status.challengesSolvedCount / this.status.challengesAnsweredCount;
 
-            if (this.challengeEndDriver.shouldEnd(challenge)) {
-                // TODO-M: When ChallengeEndDriverType is Solved (and Manual?), score is always 100%
+            if (answer === null || this.challengeEndDriver.shouldEnd(challenge)) {
                 this.status.challengesCompletedCount += 1;
-                this.status.challengesSolvedCount += (responseStatus.response.isSolution ? 1 : 0);
-                this.status.challengesSolvedPercentage = this.status.challengesSolvedCount / this.status.challengesCompletedCount;
                 if (this.exerciseEndDriver.shouldEnd(this.exercise, this.status)) {
                     this.currentChallenge = null;
                     this.status.isComplete = true;
                     this.status.challengeNumber = null;
-                }
-                else {
+                } else {
                     this.startNewChallenge();
                 }
             }
+        }
 
-            return responseStatus;
+        public skipCurrentChallenge(): void {
+            this.respondToCurrentChallenge(null);
         }
 
         private startNewChallenge(): void {

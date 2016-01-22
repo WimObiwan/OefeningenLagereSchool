@@ -13,10 +13,26 @@ span {
     font-size: xx-large;
 }
 
+.offset-top-md {
+    margin-top: 10px;
+}
+
 .offset-top-lg {
     margin-top: 20px;
 }
 
 .offset-top-xl {
     margin-top: 40px;
+}
+
+.offset-bottom-md {
+    margin-bottom: 10px;
+}
+
+.offset-bottom-lg {
+    margin-bottom: 20px;
+}
+
+.offset-bottom-xl {
+    margin-bottom: 40px;
 }

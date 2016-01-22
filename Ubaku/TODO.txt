@@ -1,10 +1,10 @@
 ﻿Helpers for bootstrap classes in views
+Constants for angular app/ctrl/module/svc...
 
 Oefeningen:
 - Splitsen tot... (0..10, 15, 20, ...)
 - Optellen, aftrekken tot...
 Percent voltooid laten zien in balkje
 Alles loggen (opgave, elke poging, timing, oplossing, ...)
-Juiste oplossing laten zien voor beperkte periode, dan naar volgende
 
 http://www.oefenmeer.nl/SplitsGratisHTML5/index.html, http://www.computermeester.be/splitsingen.htm
