@@ -23,8 +23,8 @@
             configuration.challengeFactory.options = {
                 minNumberToSplit: 0,
                 maxNumberToSplit: 10,
-                numberToSplitSequence: app.models.SequenceType.Up,
-                splitComponentSequence: app.models.SequenceType.Random
+                numberToSplitSequence: app.models.SequenceType.Random,
+                splitComponentSequence: app.models.SequenceType.Up
             };
 
             configuration.challengeEndDriver.type = app.models.ChallengeEndDriverType.Answered;

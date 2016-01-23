@@ -15,12 +15,7 @@
             // Determine the configuration parameters.
             this.type = this.configuration.type || Defaults.ChallengeFactoryType;
             this.numberToSplitSequence = this.configuration.options.numberToSplitSequence || Defaults.NumberToSplitSequenceType;
-            if (this.numberToSplitSequence === SequenceType.Random) {
-                // If the number to split is random, so must be the split component.
-                this.splitComponentSequence = SequenceType.Random;
-            } else {
-                this.splitComponentSequence = this.configuration.options.splitComponentSequence || Defaults.SplitComponentSequenceType;
-            }
+            this.splitComponentSequence = this.configuration.options.splitComponentSequence || Defaults.SplitComponentSequenceType;
             this.minNumberToSplit = this.configuration.options.minNumberToSplit || Defaults.MinNumberToSplit;
             this.maxNumberToSplit = this.configuration.options.maxNumberToSplit || Defaults.MaxNumberToSplit;
 
@@ -30,25 +25,28 @@
 
         public createChallenge(): app.models.IChallenge {
             if (this.type === ChallengeFactoryType.SplittingNumbers) {
-                // TODO-H: Random numbers to split doesn't work properly (both should then be completely random at every challenge)
+                if (this.numberToSplitSequence === SequenceType.Random) {
+                    var numberToSplit = this.getRandomInt(this.minNumberToSplit, this.maxNumberToSplit);
+                    var splitComponent = this.getRandomInt(0, numberToSplit);
+                } else {
+                    if (this.numbersToSplitQueue.length === 0) {
+                        // There are no more numbers to split in the current batch, generate a new queue.
+                        this.numbersToSplitQueue = ChallengeFactory.createArray(this.minNumberToSplit, this.maxNumberToSplit, this.numberToSplitSequence);
+                    }
+                    var numberToSplit = this.numbersToSplitQueue[0];
 
-                if (this.numbersToSplitQueue.length === 0) {
-                    // There are no more numbers to split in the current batch, generate a new queue.
-                    this.numbersToSplitQueue = ChallengeFactory.createArray(this.minNumberToSplit, this.maxNumberToSplit, this.numberToSplitSequence);
-                }
-                var numberToSplit = this.numbersToSplitQueue[0];
+                    if (this.splitComponentsQueue.length === 0) {
+                        // There are no more split components in the current batch, generate a new queue.
+                        this.splitComponentsQueue = ChallengeFactory.createArray(0, numberToSplit, this.splitComponentSequence);
+                    }
+                    var splitComponent = this.splitComponentsQueue[0];
 
-                if (this.splitComponentsQueue.length === 0) {
-                    // There are no more split components in the current batch, generate a new queue.
-                    this.splitComponentsQueue = ChallengeFactory.createArray(0, numberToSplit, this.splitComponentSequence);
-                }
-                var splitComponent = this.splitComponentsQueue[0];
-
-                // Take a split component from the queue.
-                this.splitComponentsQueue = this.splitComponentsQueue.splice(1);
-                if (this.splitComponentsQueue.length === 0) {
-                    // If the last split component was taken, move to the next number to split in the queue.
-                    this.numbersToSplitQueue = this.numbersToSplitQueue.splice(1);
+                    // Take a split component from the queue.
+                    this.splitComponentsQueue = this.splitComponentsQueue.splice(1);
+                    if (this.splitComponentsQueue.length === 0) {
+                        // If the last split component was taken, move to the next number to split in the queue.
+                        this.numbersToSplitQueue = this.numbersToSplitQueue.splice(1);
+                    }
                 }
 
                 // Determine the solution and create the challenge.
