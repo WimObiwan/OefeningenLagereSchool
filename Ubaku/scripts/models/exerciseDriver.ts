@@ -23,6 +23,7 @@
             this.challengeFactory = new ChallengeFactory(this.configuration.challengeFactory);
             this.challengeEndDriver = new ChallengeEndDriver(this.configuration.challengeEndDriver);
             this.exerciseEndDriver = new ExerciseEndDriver(this.configuration.exerciseEndDriver);
+            this.status.exerciseTotalSteps = this.exerciseEndDriver.getTotalSteps();
         }
 
         public start() {
@@ -47,6 +48,8 @@
                     this.startNewChallenge();
                 }
             }
+
+            this.updateExerciseStatus();
         }
 
         public skipCurrentChallenge(): void {
@@ -66,6 +69,12 @@
             this.exercise.challenges.push(newChallenge);
             this.currentChallenge = newChallenge;
             this.status.challengeNumber = this.exercise.challenges.indexOf(this.currentChallenge) + 1;
+            this.updateExerciseStatus();
+        }
+
+        private updateExerciseStatus(): void {
+            this.status.exerciseCurrentStep = this.exerciseEndDriver.getCurrentStep(this.status);
+            this.status.exerciseCompletePercentage = this.status.exerciseCurrentStep / this.status.exerciseTotalSteps;
         }
     }
 }

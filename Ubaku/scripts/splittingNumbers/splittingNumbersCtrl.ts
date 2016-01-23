@@ -27,7 +27,7 @@
                 splitComponentSequence: app.models.SequenceType.Random
             };
 
-            configuration.challengeEndDriver.type = app.models.ChallengeEndDriverType.Solved;
+            configuration.challengeEndDriver.type = app.models.ChallengeEndDriverType.Answered;
 
             this.$scope.exerciseDriver = new app.models.ExerciseDriver(configuration);
             this.$scope.exerciseDriver.start();
