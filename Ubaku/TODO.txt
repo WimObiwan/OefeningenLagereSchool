@@ -1,4 +1,6 @@
-﻿Helpers for bootstrap classes in views
+﻿Options UI
+Responsive design (pull-right not rendering nicely)
+Helpers for bootstrap classes in views
 Constants for angular app/ctrl/module/svc...
 Oefeningen: optellen, aftrekken tot...
 Alles loggen (opgave, elke poging, timing, oplossing, ...)
