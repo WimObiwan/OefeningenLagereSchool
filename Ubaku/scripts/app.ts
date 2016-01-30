@@ -27,5 +27,9 @@ module app {
         .run(["$rootScope", function ($rootScope: any) {
             // Make enums available on the root scope and therefore any child scope.
             $rootScope.Severity = app.models.Severity;
+            $rootScope.ExerciseEndDriverType = app.models.ExerciseEndDriverType;
+            $rootScope.ChallengeFactoryType = app.models.ChallengeFactoryType;
+            $rootScope.ChallengeEndDriverType = app.models.ChallengeEndDriverType;
+            $rootScope.SequenceType = app.models.SequenceType;
         }]);
 }

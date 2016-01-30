@@ -5,6 +5,7 @@
         configuration: app.models.ExerciseConfiguration;
         exerciseDriver: app.models.IExerciseDriver;
         startExercise(): void;
+        stopExercise(): void;
         respondToCurrentChallenge(answer: number): void;
         skipCurrentChallenge(): void;
     }
@@ -16,12 +17,18 @@
             this.$scope.respondToCurrentChallenge = (answer) => this.$scope.exerciseDriver.respondToCurrentChallenge(answer);
             this.$scope.skipCurrentChallenge = () => this.$scope.exerciseDriver.skipCurrentChallenge();
             this.$scope.startExercise = () => this.startExercise();
-            this.startExercise();
+            this.$scope.stopExercise = () => this.stopExercise();
+            this.$scope.exerciseDriver = null;
         }
 
         public startExercise(): void {
-            this.$scope.exerciseDriver = new app.models.ExerciseDriver(this.$scope.configuration);
+            var configuration = this.clone(this.$scope.configuration);
+            this.$scope.exerciseDriver = new app.models.ExerciseDriver(configuration);
             this.$scope.exerciseDriver.start();
+        }
+
+        public stopExercise(): void {
+            this.$scope.exerciseDriver = null;
         }
 
         private getDefaultConfiguration(): app.models.ExerciseConfiguration {
@@ -45,6 +52,10 @@
             configuration.challengeEndDriver.type = app.models.ChallengeEndDriverType.Answered;
 
             return configuration;
+        }
+
+        private clone<T>(value: T): T {
+            return JSON.parse(JSON.stringify(value));
         }
     }
 

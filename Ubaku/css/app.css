@@ -36,3 +36,34 @@ span {
 .offset-bottom-xl {
     margin-bottom: 40px;
 }
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 350px;
+}
+
+    /* Allow to override when needed */
+    input.wide,
+    select.wide,
+    textarea.wide {
+        max-width: none;
+    }
+
+    input[type="checkbox"] {
+        width: auto;
+    }
+
+/* Misc */
+.width-sm {
+    width: 60px !important;
+}
+
+.width-md {
+    width: 140px !important;
+}
+
+label {
+    font-weight: normal;
+}
