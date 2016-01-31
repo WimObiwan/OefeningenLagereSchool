@@ -24,7 +24,7 @@
         }
 
         public createChallenge(): app.models.IChallenge {
-            if (this.type === ChallengeFactoryType.SplittingNumbers) {
+            if (this.type === ChallengeFactoryType.SplitNumbers || this.type === ChallengeFactoryType.Subtract) {
                 if (this.numberToSplitSequence === SequenceType.Random) {
                     var numberToSplit = this.getRandomInt(this.minNumberToSplit, this.maxNumberToSplit);
                     var splitComponent = this.getRandomInt(0, numberToSplit);
@@ -51,7 +51,30 @@
 
                 // Determine the solution and create the challenge.
                 var solution = numberToSplit - splitComponent;
-                return new app.models.Challenge(numberToSplit, splitComponent, this.availableAnswers, solution);
+
+                if (this.type === ChallengeFactoryType.SplitNumbers) {
+                    var layout = ChallengeLayoutType.SplitTop;
+                    var uiComponents = [
+                        new ChallengeUIComponent(ChallengeUIComponentType.PrimaryComponent, numberToSplit),
+                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, splitComponent),
+                        new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
+                    ];
+                    var correctResponseMessage = "Goed zo! " + numberToSplit + " kan je splitsen in " + splitComponent + " en {answer}.";
+                    var incorrectResponseMessage = "Jammer! " + numberToSplit + " kan je niet splitsen in " + splitComponent + " en {answer}.";
+                    return new app.models.Challenge(layout, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
+                } else {
+                    var layout = ChallengeLayoutType.LeftToRight;
+                    var uiComponents = [
+                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, numberToSplit),
+                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "-"),
+                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, splitComponent),
+                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "="),
+                        new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
+                    ];
+                    var correctResponseMessage = "Goed zo! " + numberToSplit + " min " + splitComponent + " is gelijk aan {answer}.";
+                    var incorrectResponseMessage = "Jammer! " + numberToSplit + " min " + splitComponent + " is niet gelijk aan {answer}.";
+                    return new app.models.Challenge(layout, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
+                }
             } else {
                 throw new Error("Unknown challenge type: " + this.type);
             }

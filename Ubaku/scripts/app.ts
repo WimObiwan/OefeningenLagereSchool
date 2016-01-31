@@ -31,5 +31,7 @@ module app {
             $rootScope.ChallengeFactoryType = app.models.ChallengeFactoryType;
             $rootScope.ChallengeEndDriverType = app.models.ChallengeEndDriverType;
             $rootScope.SequenceType = app.models.SequenceType;
+            $rootScope.ChallengeLayoutType = app.models.ChallengeLayoutType;
+            $rootScope.ChallengeUIComponentType = app.models.ChallengeUIComponentType;
         }]);
 }

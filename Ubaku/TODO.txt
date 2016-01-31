@@ -1,7 +1,4 @@
 ﻿Oefeningen: optellen, aftrekken tot...
-Challenge UI:
-	ChallengeComponent class with Type = XxxComponent, Ornament (bv. +-= in grijstint), AnswerPlaceholder (?)
-	ChallengeLayout enum: SplitTop, LeftToRight, ...
 Als splitsen van bv 8 en 9 en 20 oefeningen => doet eerst 9, dan 8, dan terug 9
 Responsive design (pull-right not rendering nicely)
 Helpers for bootstrap classes in views

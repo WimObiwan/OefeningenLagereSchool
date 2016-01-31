@@ -48,6 +48,9 @@
     <TypeScriptCompile Include="scripts\models\challengeFactory.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactoryConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactoryType.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeLayoutType.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeUIComponent.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeUIComponentType.ts" />
     <TypeScriptCompile Include="scripts\models\defaults.ts" />
     <TypeScriptCompile Include="scripts\models\exerciseConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\exerciseDriver.ts" />

@@ -2,10 +2,10 @@
     "use strict";
 
     export interface IChallenge extends IModelBase {
-        numberToSplit: number;
-        splitComponent: number;
         availableAnswers: number[];
         solution: number;
+        layout: ChallengeLayoutType;
+        uiComponents: ChallengeUIComponent[];
 
         isSolved: boolean;
         responses: IResponse[];
@@ -13,14 +13,13 @@
         equals(other: IChallenge): boolean;
         addResponse(answer: number): ResponseStatus;
         getLastResponse(): IResponse;
-        getLastAnswerOr(defaultValue: string): string;
     }
 
     export class Challenge extends ModelBase implements IChallenge {
         public responses: IResponse[] = [];
         public isSolved: boolean = false;
 
-        constructor(public numberToSplit: number, public splitComponent: number, public availableAnswers: number[], public solution: number) {
+        constructor(public layout: ChallengeLayoutType, public uiComponents: ChallengeUIComponent[], public availableAnswers: number[], public solution: number, public correctResponseMessage: string, public incorrectResponseMessage: string) {
             super();
         }
 
@@ -28,10 +27,18 @@
             if (other === null) {
                 return false;
             }
-            if (other.numberToSplit === this.numberToSplit && other.splitComponent === this.splitComponent) {
-                return true;
+            if (other.layout !== this.layout) {
+                return false;
             }
-            return false;
+            if (other.uiComponents.length !== this.uiComponents.length) {
+                return false;
+            }
+            for (var i = 0; i < other.uiComponents.length; i++) {
+                if (!other.uiComponents[i].equals(this.uiComponents[i])) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public addResponse(answer: number): ResponseStatus {
@@ -49,18 +56,13 @@
             return this.responses.length === 0 ? null : this.responses[this.responses.length - 1];
         }
 
-        public getLastAnswerOr(defaultValue: string): string {
-            var lastResponse = this.getLastResponse();
-            return lastResponse === null ? defaultValue : lastResponse.answer.toString();
-        }
-
         private getResponseMessage(response: IResponse): string {
             if (response.answer === null) {
                 return "Je hebt de vorige oefening overgeslagen.";
             } else if (response.isSolution) {
-                return "Goed zo! " + this.numberToSplit + " kan je splitsen in " + this.splitComponent + " en " + response.answer + ".";
+                return this.correctResponseMessage.replace("{answer}", response.answer.toString());
             } else {
-                return "Jammer! " + this.numberToSplit + " kan je niet splitsen in " + this.splitComponent + " en " + response.answer + ".";
+                return this.incorrectResponseMessage.replace("{answer}", response.answer.toString());
             }
         }
     }

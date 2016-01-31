@@ -6,7 +6,7 @@
         public static ExerciseEndAfterChallengesCompleted = 10;
         public static ExerciseEndAfterChallengesSolved = 10;
         public static ExerciseEndAfterSeconds = 60;
-        public static ChallengeFactoryType = ChallengeFactoryType.SplittingNumbers;
+        public static ChallengeFactoryType = ChallengeFactoryType.SplitNumbers;
         public static ChallengeEndDriverType = ChallengeEndDriverType.Solved;
         public static NumberToSplitSequenceType = SequenceType.Random;
         public static SplitComponentSequenceType = SequenceType.Random;

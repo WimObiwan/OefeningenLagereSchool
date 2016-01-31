@@ -41,7 +41,7 @@
                 endAfterSeconds: 10
             };
 
-            configuration.challengeFactory.type = app.models.ChallengeFactoryType.SplittingNumbers;
+            configuration.challengeFactory.type = app.models.ChallengeFactoryType.SplitNumbers;
             configuration.challengeFactory.options = {
                 minNumberToSplit: 0,
                 maxNumberToSplit: 10,

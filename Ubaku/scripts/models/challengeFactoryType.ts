@@ -2,6 +2,7 @@
     "use strict";
 
     export enum ChallengeFactoryType {
-        SplittingNumbers
+        SplitNumbers,
+        Subtract
     }
 }
