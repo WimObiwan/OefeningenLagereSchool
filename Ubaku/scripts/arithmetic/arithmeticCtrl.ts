@@ -1,7 +1,7 @@
-﻿module app.splittingNumbers {
+﻿module app.arithmetic {
     "use strict";
 
-    interface ISplittingNumbersScope extends ng.IScope {
+    interface IArithmeticScope extends ng.IScope {
         configuration: app.models.ExerciseConfiguration;
         exerciseDriver: app.models.IExerciseDriver;
         startExercise(): void;
@@ -10,9 +10,9 @@
         skipCurrentChallenge(): void;
     }
 
-    class SplittingNumbersCtrl {
+    class ArithmeticCtrl {
         public static $inject = ["$scope"];
-        public constructor(private $scope: ISplittingNumbersScope) {
+        public constructor(private $scope: IArithmeticScope) {
             this.$scope.configuration = this.getDefaultConfiguration();
             this.$scope.respondToCurrentChallenge = (answer) => this.$scope.exerciseDriver.respondToCurrentChallenge(answer);
             this.$scope.skipCurrentChallenge = () => this.$scope.exerciseDriver.skipCurrentChallenge();
@@ -59,5 +59,5 @@
         }
     }
 
-    angular.module("app").controller("splittingNumbersCtrl", SplittingNumbersCtrl);
+    angular.module("app").controller("arithmeticCtrl", ArithmeticCtrl);
 }

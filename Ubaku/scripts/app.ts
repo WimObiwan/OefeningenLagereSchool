@@ -17,8 +17,8 @@ module app {
             // Configure the routes.
             $routeProvider
                 .when("/", {
-                    templateUrl: "scripts/splittingNumbers/index.html",
-                    controller: "splittingNumbersCtrl"
+                    templateUrl: "scripts/arithmetic/index.html",
+                    controller: "arithmeticCtrl"
                 })
                 .otherwise({ redirectTo: "/" });
         }])

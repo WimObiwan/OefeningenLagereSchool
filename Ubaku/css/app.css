@@ -25,6 +25,18 @@ span {
     margin-top: 40px;
 }
 
+.offset-left-md {
+    margin-left: 10px !important;
+}
+
+.offset-left-lg {
+    margin-left: 20px !important;
+}
+
+.offset-left-xl {
+    margin-left: 40px !important;
+}
+
 .offset-bottom-md {
     margin-bottom: 10px;
 }

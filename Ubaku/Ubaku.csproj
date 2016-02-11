@@ -36,7 +36,7 @@
     <Content Include="lib\bootstrap.js" />
     <Content Include="lib\bootstrap.min.js" />
     <Content Include="lib\jquery.min.js" />
-    <Content Include="scripts\splittingNumbers\index.html" />
+    <Content Include="scripts\arithmetic\index.html" />
     <Content Include="TODO.txt" />
     <Content Include="web.config" />
   </ItemGroup>
@@ -65,7 +65,7 @@
     <TypeScriptCompile Include="scripts\models\response.ts" />
     <TypeScriptCompile Include="scripts\models\exercise.ts" />
     <TypeScriptCompile Include="scripts\root\rootCtrl.ts" />
-    <TypeScriptCompile Include="scripts\splittingNumbers\splittingNumbersCtrl.ts" />
+    <TypeScriptCompile Include="scripts\arithmetic\arithmeticCtrl.ts" />
     <TypeScriptCompile Include="scripts\typings\references.d.ts" />
     <TypeScriptCompile Include="scripts\app.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-cookies.d.ts" />

@@ -24,7 +24,8 @@
         }
 
         public createChallenge(): app.models.IChallenge {
-            if (this.type === ChallengeFactoryType.SplitNumbers || this.type === ChallengeFactoryType.Subtract) {
+            // TODO-L: Rename options / fields / variables etc to be more generic (not only about splitting numbers anymore).
+            if (this.type === ChallengeFactoryType.SplitNumbers || this.type === ChallengeFactoryType.Subtract || this.type === ChallengeFactoryType.Add) {
                 if (this.numberToSplitSequence === SequenceType.Random) {
                     var numberToSplit = this.getRandomInt(this.minNumberToSplit, this.maxNumberToSplit);
                     var splitComponent = this.getRandomInt(0, numberToSplit);
@@ -62,7 +63,7 @@
                     var correctResponseMessage = "Goed zo! " + numberToSplit + " kan je splitsen in " + splitComponent + " en {answer}.";
                     var incorrectResponseMessage = "Jammer! " + numberToSplit + " kan je niet splitsen in " + splitComponent + " en {answer}.";
                     return new app.models.Challenge(layout, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
-                } else {
+                } else if (this.type === ChallengeFactoryType.Subtract) {
                     var layout = ChallengeLayoutType.LeftToRight;
                     var uiComponents = [
                         new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, numberToSplit),
@@ -74,6 +75,18 @@
                     var correctResponseMessage = "Goed zo! " + numberToSplit + " min " + splitComponent + " is gelijk aan {answer}.";
                     var incorrectResponseMessage = "Jammer! " + numberToSplit + " min " + splitComponent + " is niet gelijk aan {answer}.";
                     return new app.models.Challenge(layout, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
+                } else {
+                    var layout = ChallengeLayoutType.LeftToRight;
+                    var uiComponents = [
+                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, solution),
+                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "+"),
+                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, splitComponent),
+                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "="),
+                        new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
+                    ];
+                    var correctResponseMessage = "Goed zo! " + solution + " plus " + splitComponent + " is gelijk aan {answer}.";
+                    var incorrectResponseMessage = "Jammer! " + solution + " plus " + splitComponent + " is niet gelijk aan {answer}.";
+                    return new app.models.Challenge(layout, uiComponents, this.availableAnswers, numberToSplit, correctResponseMessage, incorrectResponseMessage);
                 }
             } else {
                 throw new Error("Unknown challenge type: " + this.type);
