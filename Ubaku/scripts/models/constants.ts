@@ -13,5 +13,9 @@
         public static StringPlaceholders = {
             Answer: "{answer}"
         };
+        public static ScorePercentageThresholds = {
+            Error: 0.5,
+            Warning: 0.7
+        }
     }
 }

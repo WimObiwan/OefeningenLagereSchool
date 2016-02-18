@@ -106,7 +106,7 @@
                 <dt>Score</dt>
                 <dd>
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped" ng-class="exerciseDriver.status.challengesAnsweredCount > 0 && exerciseDriver.status.challengesSolvedPercentage < 0.5 ? 'progress-bar-danger': 'progress-bar-success'" role="progressbar" style="min-width: 4em;" ng-style="{ 'width': (exerciseDriver.status.challengesSolvedPercentage * 100) + '%'}">
+                        <div class="progress-bar progress-bar-striped progress-bar-{{exerciseDriver.status | bootstrap:'Status-Challenges'}}" role="progressbar" style="min-width: 4em;" ng-style="{ 'width': (exerciseDriver.status.challengesSolvedPercentage * 100) + '%'}">
                             <span>{{exerciseDriver.status.challengesSolvedCount}}</span>
                             <span>/</span>
                             <span>{{exerciseDriver.status.challengesAnsweredCount}}</span>
@@ -164,7 +164,7 @@
                             <td></td>
                             <td>
                                 <span ng-show="exerciseDriver.currentChallenge.getLastResponse() === null" class="alert alert-warning xl">?</span>
-                                <span ng-hide="exerciseDriver.currentChallenge.getLastResponse() === null" class="alert xl" ng-class="exerciseDriver.currentChallenge.isSolved ? 'alert-success' : 'alert-danger'">{{exerciseDriver.currentChallenge.getLastResponse().answer}}</span>
+                                <span ng-hide="exerciseDriver.currentChallenge.getLastResponse() === null" class="alert xl alert-{{exerciseDriver.currentChallenge.isSolved | bootstrap:'boolean'}}">{{exerciseDriver.currentChallenge.getLastResponse().answer}}</span>
                             </td>
                         </tr>
                     </table>
@@ -175,7 +175,7 @@
                             <span ng-show="uiComponent.type === ChallengeUIComponentType.Ornament" class="alert xl">{{uiComponent.content}}</span>
                             <span ng-show="uiComponent.type === ChallengeUIComponentType.AnswerPlaceholder">
                                 <span ng-show="exerciseDriver.currentChallenge.getLastResponse() === null" class="alert alert-warning xl">?</span>
-                                <span ng-hide="exerciseDriver.currentChallenge.getLastResponse() === null" class="alert xl" ng-class="exerciseDriver.currentChallenge.isSolved ? 'alert-success' : 'alert-danger'">{{exerciseDriver.currentChallenge.getLastResponse().answer}}</span>
+                                <span ng-hide="exerciseDriver.currentChallenge.getLastResponse() === null" class="alert xl alert-{{exerciseDriver.currentChallenge.isSolved | bootstrap:'boolean'}}">{{exerciseDriver.currentChallenge.getLastResponse().answer}}</span>
                             </span>
                         </span>
                     </div>
@@ -192,7 +192,7 @@
         </div>
         <!-- Last Response Status -->
         <div ng-hide="exerciseDriver.status.lastResponseStatus === null" class="offset-top-lg">
-            <div class="alert xl" ng-class="exerciseDriver.status.lastResponseStatus.messageSeverity === Severity.Success ? 'alert-success' : 'alert-danger'">
+            <div class="alert xl alert-{{exerciseDriver.status.lastResponseStatus.messageSeverity | bootstrap:'Severity'}}">
                 <span ng-show="exerciseDriver.status.lastResponseStatus.messageSeverity === Severity.Success" class="glyphicon glyphicon-thumbs-up"></span>
                 <span ng-hide="exerciseDriver.status.lastResponseStatus.messageSeverity === Severity.Success" class="glyphicon glyphicon-thumbs-down"></span>
                 <span>{{exerciseDriver.status.lastResponseStatus.message}}</span>

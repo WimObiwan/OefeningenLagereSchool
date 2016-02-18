@@ -11,6 +11,50 @@ module app {
                 return $filter("number")(input * 100, decimals) + "%";
             };
         }])
+        .filter("bootstrap", ["$filter", function ($filter: ng.IFilterService) {
+            return function (input: any, format: string) {
+                if (format === "boolean") {
+                    switch (<boolean>input) {
+                        case true: return "success";
+                        case false: return "danger";
+                        default: return "default";
+                    }
+                } else if (format === "Severity") {
+                    switch (<app.models.Severity>input) {
+                        case app.models.Severity.Info: return "info";
+                        case app.models.Severity.Success: return "success";
+                        case app.models.Severity.Warning: return "warning";
+                        case app.models.Severity.Error: return "danger";
+                        default: return "default";
+                    }
+                } else if (format === "Status-Challenges") {
+                    var status = <app.models.ExerciseStatus>input;
+                    if (status === null || status.challengesAnsweredCount === 0) {
+                        return "info";
+                    }
+                    if (status.challengesSolvedPercentage < app.models.Constants.ScorePercentageThresholds.Error) {
+                        return "danger";
+                    }
+                    if (status.challengesSolvedPercentage < app.models.Constants.ScorePercentageThresholds.Warning) {
+                        return "warning";
+                    }
+                    return "success";
+                } else {
+                    return input;
+                }
+            };
+        }])
+        .filter("datetime", ["$filter", function ($filter: ng.IFilterService) {
+            return function (input: string, format: string) {
+                if (input === null) {
+                    return "";
+                }
+                if (angular.isUndefined(format) || format === null || format === "") {
+                    format = "yyyy-MM-dd HH:mm:ss";
+                }
+                return $filter("date")(new Date(input), format);
+            };
+        }])
 
         // Configuration
         .config(["$routeProvider", "$httpProvider", function ($routeProvider: ng.route.IRouteProvider, $httpProvider: ng.IHttpProvider) {
