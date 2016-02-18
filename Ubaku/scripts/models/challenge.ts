@@ -60,9 +60,9 @@
             if (response.answer === null) {
                 return "Je hebt de vorige oefening overgeslagen.";
             } else if (response.isSolution) {
-                return this.correctResponseMessage.replace("{answer}", response.answer.toString());
+                return this.correctResponseMessage.replace(app.models.Constants.StringPlaceholders.Answer, response.answer.toString());
             } else {
-                return this.incorrectResponseMessage.replace("{answer}", response.answer.toString());
+                return this.incorrectResponseMessage.replace(app.models.Constants.StringPlaceholders.Answer, response.answer.toString());
             }
         }
     }

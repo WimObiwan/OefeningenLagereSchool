@@ -59,5 +59,5 @@
         }
     }
 
-    angular.module("app").controller("arithmeticCtrl", ArithmeticCtrl);
+    angular.module(app.models.Constants.App.AngularAppName).controller(app.models.Constants.ControllerNames.Arithmetic, ArithmeticCtrl);
 }

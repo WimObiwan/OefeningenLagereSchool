@@ -11,5 +11,5 @@
         }
     }
 
-    angular.module("app").controller("rootCtrl", RootCtrl);
+    angular.module(app.models.Constants.App.AngularAppName).controller(app.models.Constants.ControllerNames.Root, RootCtrl);
 }

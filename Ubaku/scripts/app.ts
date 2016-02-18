@@ -3,7 +3,7 @@
 module app {
     "use strict";
 
-    angular.module("app", ["ngRoute"])
+    angular.module(app.models.Constants.App.AngularAppName, ["ngRoute"])
         // Filters
         .filter("percentage", ["$filter", function ($filter: ng.IFilterService) {
             // This filter makes the assumption that the input will be in decimal form (i.e. 17% is 0.17).
@@ -17,8 +17,8 @@ module app {
             // Configure the routes.
             $routeProvider
                 .when("/", {
-                    templateUrl: "scripts/arithmetic/index.html",
-                    controller: "arithmeticCtrl"
+                    templateUrl: "scripts/controllers/arithmetic/index.html",
+                    controller: app.models.Constants.ControllerNames.Arithmetic
                 })
                 .otherwise({ redirectTo: "/" });
         }])

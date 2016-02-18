@@ -7,6 +7,6 @@ var app;
         }
         return RootCtrl;
     })();
-    angular.module("app").controller("rootCtrl", RootCtrl);
+    angular.module(app.models.Constants.App.AngularAppName).controller(app.models.Constants.ControllerNames.Root, RootCtrl);
 })(app || (app = {}));
 //# sourceMappingURL=rootCtrl.js.map

@@ -1,7 +1,6 @@
 ﻿Als splitsen van bv 8 en 9 en 20 oefeningen => doet eerst 9, dan 8, dan terug 9
 Responsive design (pull-right not rendering nicely)
 Filters for bootstrap classes in views
-Constants for angular app/ctrl/module/svc...
 Alles loggen (opgave, elke poging, timing, oplossing, ...)
 Op einde ballonnetjes of zo
 
