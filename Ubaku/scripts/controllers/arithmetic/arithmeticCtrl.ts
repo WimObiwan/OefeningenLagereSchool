@@ -34,22 +34,18 @@
         private getDefaultConfiguration(): app.models.ExerciseConfiguration {
             var configuration = new app.models.ExerciseConfiguration();
 
-            configuration.exerciseEndDriver.type = app.models.ExerciseEndDriverType.ChallengesCompleted;
-            configuration.exerciseEndDriver.options = {
-                endAfterChallengesCompleted: 10,
-                endAfterChallengesSolved: 10,
-                endAfterSeconds: 10
-            };
+            configuration.exerciseCompleteDriver.type = app.models.ExerciseCompleteDriverType.ChallengesCompleted;
+            configuration.exerciseCompleteDriver.completeAfterChallengesCompleted = 10;
+            configuration.exerciseCompleteDriver.completeAfterChallengesSolved = 10;
+            configuration.exerciseCompleteDriver.completeAfterSeconds = 10;
 
             configuration.challengeFactory.type = app.models.ChallengeFactoryType.SplitNumbers;
-            configuration.challengeFactory.options = {
-                minNumberToSplit: 0,
-                maxNumberToSplit: 10,
-                numberToSplitSequence: app.models.SequenceType.Random,
-                splitComponentSequence: app.models.SequenceType.Up
-            };
+            configuration.challengeFactory.minNumber = 0;
+            configuration.challengeFactory.maxNumber = 10;
+            configuration.challengeFactory.primaryComponentSequence = app.models.SequenceType.Random;
+            configuration.challengeFactory.secondaryComponentSequence = app.models.SequenceType.Up;
 
-            configuration.challengeEndDriver.type = app.models.ChallengeEndDriverType.Answered;
+            configuration.challengeCompleteDriver.type = app.models.ChallengeCompleteDriverType.Responded;
 
             return configuration;
         }

@@ -29,7 +29,7 @@ module app {
                     }
                 } else if (format === "Status-Challenges") {
                     var status = <app.models.ExerciseStatus>input;
-                    if (status === null || status.challengesAnsweredCount === 0) {
+                    if (status === null || status.challengesRespondedCount === 0) {
                         return "info";
                     }
                     if (status.challengesSolvedPercentage < app.models.Constants.ScorePercentageThresholds.Error) {
@@ -71,9 +71,9 @@ module app {
         .run(["$rootScope", function ($rootScope: any) {
             // Make enums available on the root scope and therefore any child scope.
             $rootScope.Severity = app.models.Severity;
-            $rootScope.ExerciseEndDriverType = app.models.ExerciseEndDriverType;
+            $rootScope.ExerciseCompleteDriverType = app.models.ExerciseCompleteDriverType;
             $rootScope.ChallengeFactoryType = app.models.ChallengeFactoryType;
-            $rootScope.ChallengeEndDriverType = app.models.ChallengeEndDriverType;
+            $rootScope.ChallengeCompleteDriverType = app.models.ChallengeCompleteDriverType;
             $rootScope.SequenceType = app.models.SequenceType;
             $rootScope.ChallengeLayoutType = app.models.ChallengeLayoutType;
             $rootScope.ChallengeUIComponentType = app.models.ChallengeUIComponentType;

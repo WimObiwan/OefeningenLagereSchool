@@ -2,15 +2,15 @@
     "use strict";
 
     export class Defaults {
-        public static ExerciseEndDriverType = ExerciseEndDriverType.Infinite;
-        public static ExerciseEndAfterChallengesCompleted = 10;
-        public static ExerciseEndAfterChallengesSolved = 10;
-        public static ExerciseEndAfterSeconds = 60;
+        public static ExerciseCompleteDriverType = ExerciseCompleteDriverType.Infinite;
+        public static ExerciseCompleteAfterChallengesCompleted = 10;
+        public static ExerciseCompleteAfterChallengesSolved = 10;
+        public static ExerciseCompleteAfterSeconds = 60;
         public static ChallengeFactoryType = ChallengeFactoryType.SplitNumbers;
-        public static ChallengeEndDriverType = ChallengeEndDriverType.Solved;
-        public static NumberToSplitSequenceType = SequenceType.Random;
-        public static SplitComponentSequenceType = SequenceType.Random;
-        public static MinNumberToSplit = 0;
-        public static MaxNumberToSplit = 0;
+        public static ChallengeCompleteDriverType = ChallengeCompleteDriverType.Solved;
+        public static PrimaryComponentSequenceType = SequenceType.Random;
+        public static SecondaryComponentSequenceType = SequenceType.Random;
+        public static MinNumber = 0;
+        public static MaxNumber = 0;
     }
 }

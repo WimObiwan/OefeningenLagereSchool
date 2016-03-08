@@ -3,94 +3,95 @@
 
     export class ChallengeFactory {
         private type: ChallengeFactoryType = null;
-        private numberToSplitSequence: SequenceType = null;
-        private splitComponentSequence: SequenceType = null;
-        private minNumberToSplit: number = null;
-        private maxNumberToSplit: number = null;
+        private primaryComponentSequence: SequenceType = null;
+        private secondaryComponentSequence: SequenceType = null;
+        private minNumber: number = null;
+        private maxNumber: number = null;
         private availableAnswers: number[] = [];
-        private numbersToSplitQueue: number[] = [];
-        private splitComponentsQueue: number[] = [];
+        private primaryComponentsQueue: number[] = [];
+        private secondaryComponentsQueue: number[] = [];
 
         public constructor(private configuration: ChallengeFactoryConfiguration) {
             // Determine the configuration parameters.
             this.type = this.configuration.type || Defaults.ChallengeFactoryType;
-            this.numberToSplitSequence = this.configuration.options.numberToSplitSequence || Defaults.NumberToSplitSequenceType;
-            this.splitComponentSequence = this.configuration.options.splitComponentSequence || Defaults.SplitComponentSequenceType;
-            this.minNumberToSplit = this.configuration.options.minNumberToSplit || Defaults.MinNumberToSplit;
-            this.maxNumberToSplit = this.configuration.options.maxNumberToSplit || Defaults.MaxNumberToSplit;
+            this.primaryComponentSequence = this.configuration.primaryComponentSequence || Defaults.PrimaryComponentSequenceType;
+            this.secondaryComponentSequence = this.configuration.secondaryComponentSequence || Defaults.SecondaryComponentSequenceType;
+            this.minNumber = this.configuration.minNumber || Defaults.MinNumber;
+            this.maxNumber = this.configuration.maxNumber || Defaults.MaxNumber;
 
             // Generate the array of available answers.
-            this.availableAnswers = ChallengeFactory.createArray(0, this.maxNumberToSplit, SequenceType.Up);
+            this.availableAnswers = ChallengeFactory.createArray(0, this.maxNumber, SequenceType.Up);
         }
 
         public createChallenge(): app.models.IChallenge {
-            // TODO-L: Rename options / fields / variables etc to be more generic (not only about splitting numbers anymore).
             if (this.type === ChallengeFactoryType.SplitNumbers || this.type === ChallengeFactoryType.Subtract || this.type === ChallengeFactoryType.Add) {
-                if (this.numberToSplitSequence === SequenceType.Random) {
-                    var numberToSplit = this.getRandomInt(this.minNumberToSplit, this.maxNumberToSplit);
-                    var splitComponent = this.getRandomInt(0, numberToSplit);
+                if (this.primaryComponentSequence === SequenceType.Random) {
+                    var primaryComponent = this.getRandomInt(this.minNumber, this.maxNumber);
+                    var secondaryComponent = this.getRandomInt(0, primaryComponent);
                 } else {
-                    if (this.numbersToSplitQueue.length === 0) {
-                        // There are no more numbers to split in the current batch, generate a new queue.
-                        this.numbersToSplitQueue = ChallengeFactory.createArray(this.minNumberToSplit, this.maxNumberToSplit, this.numberToSplitSequence);
+                    if (this.primaryComponentsQueue.length === 0) {
+                        // There are no more primary components in the current batch, generate a new queue.
+                        this.primaryComponentsQueue = ChallengeFactory.createArray(this.minNumber, this.maxNumber, this.primaryComponentSequence);
                     }
-                    var numberToSplit = this.numbersToSplitQueue[0];
+                    var primaryComponent = this.primaryComponentsQueue[0];
 
-                    if (this.splitComponentsQueue.length === 0) {
-                        // There are no more split components in the current batch, generate a new queue.
-                        this.splitComponentsQueue = ChallengeFactory.createArray(0, numberToSplit, this.splitComponentSequence);
+                    if (this.secondaryComponentsQueue.length === 0) {
+                        // There are no more secondary components in the current batch, generate a new queue.
+                        this.secondaryComponentsQueue = ChallengeFactory.createArray(0, primaryComponent, this.secondaryComponentSequence);
                     }
-                    var splitComponent = this.splitComponentsQueue[0];
+                    var secondaryComponent = this.secondaryComponentsQueue[0];
 
-                    // Take a split component from the queue.
-                    this.splitComponentsQueue = this.splitComponentsQueue.splice(1);
-                    if (this.splitComponentsQueue.length === 0) {
-                        // If the last split component was taken, move to the next number to split in the queue.
-                        this.numbersToSplitQueue = this.numbersToSplitQueue.splice(1);
+                    // Take a secondary component from the queue.
+                    this.secondaryComponentsQueue = this.secondaryComponentsQueue.splice(1);
+                    if (this.secondaryComponentsQueue.length === 0) {
+                        // If the last secondary component was taken, move to the next primary component in the queue.
+                        this.primaryComponentsQueue = this.primaryComponentsQueue.splice(1);
                     }
                 }
 
                 // Determine the solution and create the challenge.
-                var solution = numberToSplit - splitComponent;
+                var solution = primaryComponent - secondaryComponent;
 
                 if (this.type === ChallengeFactoryType.SplitNumbers) {
+                    // Split Numbers.
                     var layout = ChallengeLayoutType.SplitTop;
                     var uiComponents = [
-                        new ChallengeUIComponent(ChallengeUIComponentType.PrimaryComponent, numberToSplit),
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, splitComponent),
+                        new ChallengeUIComponent(ChallengeUIComponentType.PrimaryComponent, primaryComponent),
+                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, secondaryComponent),
                         new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
                     ];
-                    var correctResponseMessage = "Goed zo! " + numberToSplit + " kan je splitsen in " + splitComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
-                    var incorrectResponseMessage = "Jammer! " + numberToSplit + " kan je niet splitsen in " + splitComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
+                    var correctResponseMessage = "Goed zo! " + primaryComponent + " kan je splitsen in " + secondaryComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
+                    var incorrectResponseMessage = "Jammer! " + primaryComponent + " kan je niet splitsen in " + secondaryComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
                     return new app.models.Challenge(layout, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
                 } else if (this.type === ChallengeFactoryType.Subtract) {
+                    // Subtract.
                     var layout = ChallengeLayoutType.LeftToRight;
                     var uiComponents = [
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, numberToSplit),
+                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, primaryComponent),
                         new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "-"),
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, splitComponent),
+                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, secondaryComponent),
                         new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "="),
                         new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
                     ];
-                    var correctResponseMessage = "Goed zo! " + numberToSplit + " min " + splitComponent + " is gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
-                    var incorrectResponseMessage = "Jammer! " + numberToSplit + " min " + splitComponent + " is niet gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
+                    var correctResponseMessage = "Goed zo! " + primaryComponent + " min " + secondaryComponent + " is gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
+                    var incorrectResponseMessage = "Jammer! " + primaryComponent + " min " + secondaryComponent + " is niet gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
                     return new app.models.Challenge(layout, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
-                } else {
+                } else if (this.type === ChallengeFactoryType.Add) {
+                    // Add.
                     var layout = ChallengeLayoutType.LeftToRight;
                     var uiComponents = [
                         new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, solution),
                         new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "+"),
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, splitComponent),
+                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, secondaryComponent),
                         new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "="),
                         new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
                     ];
-                    var correctResponseMessage = "Goed zo! " + solution + " plus " + splitComponent + " is gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
-                    var incorrectResponseMessage = "Jammer! " + solution + " plus " + splitComponent + " is niet gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
-                    return new app.models.Challenge(layout, uiComponents, this.availableAnswers, numberToSplit, correctResponseMessage, incorrectResponseMessage);
+                    var correctResponseMessage = "Goed zo! " + solution + " plus " + secondaryComponent + " is gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
+                    var incorrectResponseMessage = "Jammer! " + solution + " plus " + secondaryComponent + " is niet gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
+                    return new app.models.Challenge(layout, uiComponents, this.availableAnswers, primaryComponent, correctResponseMessage, incorrectResponseMessage);
                 }
-            } else {
-                throw new Error("Unknown challenge type: " + this.type);
             }
+            throw new Error("Unknown challenge type: " + this.type);
         }
 
         private static createArray(min: number, max: number, sequence: SequenceType): number[] {

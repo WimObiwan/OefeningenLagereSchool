@@ -1,9 +1,9 @@
 ﻿module app.models {
     "use strict";
 
-    export enum ChallengeEndDriverType {
+    export enum ChallengeCompleteDriverType {
         Solved,
-        Answered,
+        Responded,
         Manual // TODO-M: Implement
     }
 }

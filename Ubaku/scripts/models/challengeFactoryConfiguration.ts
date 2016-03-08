@@ -3,10 +3,9 @@
 
     export class ChallengeFactoryConfiguration {
         public type: ChallengeFactoryType;
-        public options: any; // TODO-L: Use actual classes instead of any (also in other places)
-
-        public constructor() {
-            this.options = [];
-        }
+        public minNumber: number;
+        public maxNumber: number;
+        public primaryComponentSequence: app.models.SequenceType;
+        public secondaryComponentSequence: app.models.SequenceType;
     }
 }

@@ -24,61 +24,61 @@
             <dd class="offset-top-lg">
                 <div class="form-inline">
                     opgave is gedaan als ze
-                    <input id="configurationChallengeEndDriverTypeAnswered" type="radio" ng-model="configuration.challengeEndDriver.type" ng-value="{{ChallengeEndDriverType.Answered}}" class="offset-left-md" />
-                    <label for="configurationChallengeEndDriverTypeAnswered"><span class="glyphicon glyphicon-comment"></span> beantwoord is</label>
-                    <input id="configurationChallengeEndDriverTypeSolved" type="radio" ng-model="configuration.challengeEndDriver.type" ng-value="{{ChallengeEndDriverType.Solved}}" class="offset-left-md" />
-                    <label for="configurationChallengeEndDriverTypeSolved"><span class="glyphicon glyphicon-ok"></span> opgelost is</label>
-                    <!--<input id="configurationChallengeEndDriverTypeManual" type="radio" ng-model="configuration.challengeEndDriver.type" ng-value="{{ChallengeEndDriverType.Manual}}" class="offset-left-md" />
-                    <label for="configurationChallengeEndDriverTypeManual">manueel</label>-->
+                    <input id="configurationChallengeCompleteDriverTypeResponded" type="radio" ng-model="configuration.challengeCompleteDriver.type" ng-value="{{ChallengeCompleteDriverType.Responded}}" class="offset-left-md" />
+                    <label for="configurationChallengeCompleteDriverTypeResponded"><span class="glyphicon glyphicon-comment"></span> beantwoord is</label>
+                    <input id="configurationChallengeCompleteDriverTypeSolved" type="radio" ng-model="configuration.challengeCompleteDriver.type" ng-value="{{ChallengeCompleteDriverType.Solved}}" class="offset-left-md" />
+                    <label for="configurationChallengeCompleteDriverTypeSolved"><span class="glyphicon glyphicon-ok"></span> opgelost is</label>
+                    <!--<input id="configurationChallengeCompleteDriverTypeManual" type="radio" ng-model="configuration.challengeCompleteDriver.type" ng-value="{{ChallengeCompleteDriverType.Manual}}" class="offset-left-md" />
+                    <label for="configurationChallengeCompleteDriverTypeManual">manueel</label>-->
                 </div>
                 <div class="form-inline">
-                    <label for="configurationChallengeFactoryOptionsMinNumberToSplit">getallen tussen</label>
-                    <input id="configurationChallengeFactoryOptionsMinNumberToSplit" type="number" ng-model="configuration.challengeFactory.options.minNumberToSplit" class="form-control width-sm" />
-                    <label for="configurationChallengeFactoryOptionsMaxNumberToSplit">en</label>
-                    <input id="configurationChallengeFactoryOptionsMaxNumberToSplit" type="number" ng-model="configuration.challengeFactory.options.maxNumberToSplit" class="form-control width-sm" />
+                    <label for="configurationChallengeFactoryMinNumber">getallen tussen</label>
+                    <input id="configurationChallengeFactoryMinNumber" type="number" ng-model="configuration.challengeFactory.minNumber" class="form-control width-sm" />
+                    <label for="configurationChallengeFactoryMaxNumber">en</label>
+                    <input id="configurationChallengeFactoryMaxNumber" type="number" ng-model="configuration.challengeFactory.maxNumber" class="form-control width-sm" />
                 </div>
                 <div class="form-inline">
                     volgorde hoofdgetal is
-                    <input id="configurationChallengeFactoryOptionsNumberToSplitSequenceRandom" type="radio" ng-model="configuration.challengeFactory.options.numberToSplitSequence" ng-value="{{SequenceType.Random}}" class="offset-left-md" />
-                    <label for="configurationChallengeFactoryOptionsNumberToSplitSequenceRandom"><span class="glyphicon glyphicon-random"></span> willekeurig</label>
-                    <input id="configurationChallengeFactoryOptionsNumberToSplitSequenceUp" type="radio" ng-model="configuration.challengeFactory.options.numberToSplitSequence" ng-value="{{SequenceType.Up}}" class="offset-left-md" />
-                    <label for="configurationChallengeFactoryOptionsNumberToSplitSequenceUp"><span class="glyphicon glyphicon-arrow-up"></span> omhoog</label>
-                    <input id="configurationChallengeFactoryOptionsNumberToSplitSequenceDown" type="radio" ng-model="configuration.challengeFactory.options.numberToSplitSequence" ng-value="{{SequenceType.Down}}" class="offset-left-md" />
-                    <label for="configurationChallengeFactoryOptionsNumberToSplitSequenceDown"><span class="glyphicon glyphicon-arrow-down"></span> omlaag</label>
+                    <input id="configurationChallengeFactoryPrimaryComponentSequenceRandom" type="radio" ng-model="configuration.challengeFactory.primaryComponentSequence" ng-value="{{SequenceType.Random}}" class="offset-left-md" />
+                    <label for="configurationChallengeFactoryPrimaryComponentSequenceRandom"><span class="glyphicon glyphicon-random"></span> willekeurig</label>
+                    <input id="configurationChallengeFactoryPrimaryComponentSequenceUp" type="radio" ng-model="configuration.challengeFactory.primaryComponentSequence" ng-value="{{SequenceType.Up}}" class="offset-left-md" />
+                    <label for="configurationChallengeFactoryPrimaryComponentSequenceUp"><span class="glyphicon glyphicon-arrow-up"></span> omhoog</label>
+                    <input id="configurationChallengeFactoryPrimaryComponentSequenceDown" type="radio" ng-model="configuration.challengeFactory.primaryComponentSequence" ng-value="{{SequenceType.Down}}" class="offset-left-md" />
+                    <label for="configurationChallengeFactoryPrimaryComponentSequenceDown"><span class="glyphicon glyphicon-arrow-down"></span> omlaag</label>
                 </div>
-                <div class="form-inline" ng-hide="configuration.challengeFactory.options.numberToSplitSequence === SequenceType.Random">
+                <div class="form-inline" ng-hide="configuration.challengeFactory.primaryComponentSequence === SequenceType.Random">
                     volgorde andere getallen is
-                    <input id="configurationChallengeFactoryOptionsSplitComponentSequenceRandom" type="radio" ng-model="configuration.challengeFactory.options.splitComponentSequence" ng-value="{{SequenceType.Random}}" class="offset-left-md" />
-                    <label for="configurationChallengeFactoryOptionsSplitComponentSequenceRandom"><span class="glyphicon glyphicon-random"></span> willekeurig</label>
-                    <input id="configurationChallengeFactoryOptionsSplitComponentSequenceUp" type="radio" ng-model="configuration.challengeFactory.options.splitComponentSequence" ng-value="{{SequenceType.Up}}" class="offset-left-md" />
-                    <label for="configurationChallengeFactoryOptionsSplitComponentSequenceUp"><span class="glyphicon glyphicon-arrow-up"></span> omhoog</label>
-                    <input id="configurationChallengeFactoryOptionsSplitComponentSequenceDown" type="radio" ng-model="configuration.challengeFactory.options.splitComponentSequence" ng-value="{{SequenceType.Down}}" class="offset-left-md" />
-                    <label for="configurationChallengeFactoryOptionsSplitComponentSequenceDown"><span class="glyphicon glyphicon-arrow-down"></span> omlaag</label>
+                    <input id="configurationChallengeFactorySecondaryComponentSequenceRandom" type="radio" ng-model="configuration.challengeFactory.secondaryComponentSequence" ng-value="{{SequenceType.Random}}" class="offset-left-md" />
+                    <label for="configurationChallengeFactorySecondaryComponentSequenceRandom"><span class="glyphicon glyphicon-random"></span> willekeurig</label>
+                    <input id="configurationChallengeFactorySecondaryComponentSequenceUp" type="radio" ng-model="configuration.challengeFactory.secondaryComponentSequence" ng-value="{{SequenceType.Up}}" class="offset-left-md" />
+                    <label for="configurationChallengeFactorySecondaryComponentSequenceUp"><span class="glyphicon glyphicon-arrow-up"></span> omhoog</label>
+                    <input id="configurationChallengeFactorySecondaryComponentSequenceDown" type="radio" ng-model="configuration.challengeFactory.secondaryComponentSequence" ng-value="{{SequenceType.Down}}" class="offset-left-md" />
+                    <label for="configurationChallengeFactorySecondaryComponentSequenceDown"><span class="glyphicon glyphicon-arrow-down"></span> omlaag</label>
                 </div>
             </dd>
             <dt class="offset-top-lg">Einde oefening:</dt>
             <dd class="offset-top-lg">
                 <div class="form-inline">
-                    <input id="configurationExerciseEndDriverTypeInfinite" type="radio" ng-model="configuration.exerciseEndDriver.type" ng-value="{{ExerciseEndDriverType.Infinite}}" />
-                    <label for="configurationExerciseEndDriverTypeInfinite">nooit</label>
+                    <input id="configurationExerciseCompleteDriverTypeInfinite" type="radio" ng-model="configuration.exerciseCompleteDriver.type" ng-value="{{ExerciseCompleteDriverType.Infinite}}" />
+                    <label for="configurationExerciseCompleteDriverTypeInfinite">nooit</label>
                 </div>
                 <div class="form-inline">
-                    <input id="configurationExerciseEndDriverTypeChallengesCompleted" type="radio" ng-model="configuration.exerciseEndDriver.type" ng-value="{{ExerciseEndDriverType.ChallengesCompleted}}" />
-                    <label for="configurationExerciseEndDriverTypeChallengesCompleted">na</label>
-                    <input id="configurationExerciseEndDriverOptionsEndAfterChallengesCompleted" type="number" ng-model="configuration.exerciseEndDriver.options.endAfterChallengesCompleted" class="form-control width-sm" />
-                    <label for="configurationExerciseEndDriverOptionsEndAfterChallengesCompleted">oefeningen</label>
+                    <input id="configurationExerciseCompleteDriverTypeChallengesCompleted" type="radio" ng-model="configuration.exerciseCompleteDriver.type" ng-value="{{ExerciseCompleteDriverType.ChallengesCompleted}}" />
+                    <label for="configurationExerciseCompleteDriverTypeChallengesCompleted">na</label>
+                    <input id="configurationExerciseCompleteDriverCompleteAfterChallengesCompleted" type="number" ng-model="configuration.exerciseCompleteDriver.completeAfterChallengesCompleted" class="form-control width-sm" />
+                    <label for="configurationExerciseCompleteDriverCompleteAfterChallengesCompleted">oefeningen</label>
                 </div>
                 <div class="form-inline">
-                    <input id="configurationExerciseEndDriverTypeChallengesSolved" type="radio" ng-model="configuration.exerciseEndDriver.type" ng-value="{{ExerciseEndDriverType.ChallengesSolved}}" />
-                    <label for="configurationExerciseEndDriverTypeChallengesSolved">na</label>
-                    <input id="configurationExerciseEndDriverOptionsEndAfterChallengesSolved" type="number" ng-model="configuration.exerciseEndDriver.options.endAfterChallengesSolved" class="form-control width-sm" />
-                    <label for="configurationExerciseEndDriverOptionsEndAfterChallengesSolved">juiste antwoorden</label>
+                    <input id="configurationExerciseCompleteDriverTypeChallengesSolved" type="radio" ng-model="configuration.exerciseCompleteDriver.type" ng-value="{{ExerciseCompleteDriverType.ChallengesSolved}}" />
+                    <label for="configurationExerciseCompleteDriverTypeChallengesSolved">na</label>
+                    <input id="configurationExerciseCompleteDriverCompleteAfterChallengesSolved" type="number" ng-model="configuration.exerciseCompleteDriver.completeAfterChallengesSolved" class="form-control width-sm" />
+                    <label for="configurationExerciseCompleteDriverCompleteAfterChallengesSolved">juiste antwoorden</label>
                 </div>
                 <!--<div class="form-inline">
-                    <input id="configurationExerciseEndDriverType" type="radio" ng-model="configuration.exerciseEndDriver.type" ng-value="{{ExerciseEndDriverType.Time}}" />
-                    <label for="configurationExerciseEndDriverType">na</label>
-                    <input id="configurationExerciseEndDriverOptionsEndAfterSeconds" type="number" ng-model="configuration.exerciseEndDriver.options.endAfterSeconds" class="form-control width-sm" />
-                    <label for="configurationExerciseEndDriverOptionsEndAfterSeconds">seconden</label>
+                    <input id="configurationExerciseCompleteDriverType" type="radio" ng-model="configuration.exerciseCompleteDriver.type" ng-value="{{ExerciseCompleteDriverType.Time}}" />
+                    <label for="configurationExerciseCompleteDriverType">na</label>
+                    <input id="configurationExerciseCompleteDriverCompleteAfterSeconds" type="number" ng-model="configuration.exerciseCompleteDriver.completeAfterSeconds" class="form-control width-sm" />
+                    <label for="configurationExerciseCompleteDriverCompleteAfterSeconds">seconden</label>
                 </div>-->
             </dd>
         </dl>
@@ -109,7 +109,7 @@
                         <div class="progress-bar progress-bar-striped progress-bar-{{exerciseDriver.status | bootstrap:'Status-Challenges'}}" role="progressbar" style="min-width: 4em;" ng-style="{ 'width': (exerciseDriver.status.challengesSolvedPercentage * 100) + '%'}">
                             <span>{{exerciseDriver.status.challengesSolvedCount}}</span>
                             <span>/</span>
-                            <span>{{exerciseDriver.status.challengesAnsweredCount}}</span>
+                            <span>{{exerciseDriver.status.challengesRespondedCount}}</span>
                             <span>({{exerciseDriver.status.challengesSolvedPercentage | percentage:0}})</span>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
             <dt>Opgaven</dt>
             <dd>{{exerciseDriver.status.challengesCompletedCount}}</dd>
             <dt>Antwoorden</dt>
-            <dd>{{exerciseDriver.status.challengesAnsweredCount}}</dd>
+            <dd>{{exerciseDriver.status.challengesRespondedCount}}</dd>
             <dt>Juiste Antwoorden</dt>
             <dd>{{exerciseDriver.status.challengesSolvedCount}}</dd>
             <dt>Score</dt>

@@ -2,8 +2,8 @@
     "use strict";
 
     export class ExerciseConfiguration {
-        public exerciseEndDriver: ExerciseEndDriverConfiguration = new ExerciseEndDriverConfiguration();
+        public exerciseCompleteDriver: ExerciseCompleteDriverConfiguration = new ExerciseCompleteDriverConfiguration();
         public challengeFactory: ChallengeFactoryConfiguration = new ChallengeFactoryConfiguration();
-        public challengeEndDriver: ChallengeEndDriverConfiguration = new ChallengeEndDriverConfiguration();
+        public challengeCompleteDriver: ChallengeCompleteDriverConfiguration = new ChallengeCompleteDriverConfiguration();
     }
 }

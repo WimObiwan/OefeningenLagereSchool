@@ -12,8 +12,8 @@
 
     export class ExerciseDriver implements IExerciseDriver {
         private challengeFactory: ChallengeFactory;
-        private challengeEndDriver: ChallengeEndDriver;
-        private exerciseEndDriver: ExerciseEndDriver;
+        private challengeCompleteDriver: ChallengeCompleteDriver;
+        private exerciseCompleteDriver: ExerciseCompleteDriver;
         private exercise: IExercise = new Exercise();
 
         public status: ExerciseStatus = new ExerciseStatus();
@@ -21,9 +21,9 @@
 
         public constructor(private configuration: ExerciseConfiguration) {
             this.challengeFactory = new ChallengeFactory(this.configuration.challengeFactory);
-            this.challengeEndDriver = new ChallengeEndDriver(this.configuration.challengeEndDriver);
-            this.exerciseEndDriver = new ExerciseEndDriver(this.configuration.exerciseEndDriver);
-            this.status.exerciseTotalSteps = this.exerciseEndDriver.getTotalSteps();
+            this.challengeCompleteDriver = new ChallengeCompleteDriver(this.configuration.challengeCompleteDriver);
+            this.exerciseCompleteDriver = new ExerciseCompleteDriver(this.configuration.exerciseCompleteDriver);
+            this.status.exerciseTotalSteps = this.exerciseCompleteDriver.getTotalSteps();
         }
 
         public start() {
@@ -34,13 +34,13 @@
             var challenge = this.currentChallenge;
             var responseStatus = challenge.addResponse(answer);
             this.status.lastResponseStatus = responseStatus;
-            this.status.challengesAnsweredCount += 1;
+            this.status.challengesRespondedCount += 1;
             this.status.challengesSolvedCount += (responseStatus.response.isSolution ? 1 : 0);
-            this.status.challengesSolvedPercentage = this.status.challengesSolvedCount / this.status.challengesAnsweredCount;
+            this.status.challengesSolvedPercentage = this.status.challengesSolvedCount / this.status.challengesRespondedCount;
 
-            if (answer === null || this.challengeEndDriver.shouldEnd(challenge)) {
+            if (answer === null || this.challengeCompleteDriver.isComplete(challenge)) {
                 this.status.challengesCompletedCount += 1;
-                if (this.exerciseEndDriver.shouldEnd(this.exercise, this.status)) {
+                if (this.exerciseCompleteDriver.isComplete(this.exercise, this.status)) {
                     this.currentChallenge = null;
                     this.status.isComplete = true;
                     this.status.challengeNumber = null;
@@ -73,7 +73,7 @@
         }
 
         private updateExerciseStatus(): void {
-            this.status.exerciseCurrentStep = this.exerciseEndDriver.getCurrentStep(this.status);
+            this.status.exerciseCurrentStep = this.exerciseCompleteDriver.getCurrentStep(this.status);
             this.status.exerciseCompletePercentage = this.status.exerciseCurrentStep / this.status.exerciseTotalSteps;
         }
     }

@@ -42,9 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="scripts\models\challenge.ts" />
-    <TypeScriptCompile Include="scripts\models\challengeEndDriver.ts" />
-    <TypeScriptCompile Include="scripts\models\challengeEndDriverConfiguration.ts" />
-    <TypeScriptCompile Include="scripts\models\challengeEndDriverType.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeCompleteDriver.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeCompleteDriverConfiguration.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeCompleteDriverType.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactory.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactoryConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactoryType.ts" />
@@ -55,9 +55,9 @@
     <TypeScriptCompile Include="scripts\models\defaults.ts" />
     <TypeScriptCompile Include="scripts\models\exerciseConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\exerciseDriver.ts" />
-    <TypeScriptCompile Include="scripts\models\exerciseEndDriver.ts" />
-    <TypeScriptCompile Include="scripts\models\exerciseEndDriverConfiguration.ts" />
-    <TypeScriptCompile Include="scripts\models\exerciseEndDriverType.ts" />
+    <TypeScriptCompile Include="scripts\models\exerciseCompleteDriver.ts" />
+    <TypeScriptCompile Include="scripts\models\exerciseCompleteDriverConfiguration.ts" />
+    <TypeScriptCompile Include="scripts\models\exerciseCompleteDriverType.ts" />
     <TypeScriptCompile Include="scripts\models\exerciseStatus.ts" />
     <TypeScriptCompile Include="scripts\models\responseStatus.ts" />
     <TypeScriptCompile Include="scripts\models\sequenceType.ts" />

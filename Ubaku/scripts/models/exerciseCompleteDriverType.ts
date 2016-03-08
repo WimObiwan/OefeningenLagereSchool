@@ -1,7 +1,7 @@
 ﻿module app.models {
     "use strict";
 
-    export enum ExerciseEndDriverType {
+    export enum ExerciseCompleteDriverType {
         Infinite,
         ChallengesCompleted,
         ChallengesSolved,
