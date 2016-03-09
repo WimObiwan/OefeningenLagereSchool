@@ -42,9 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="scripts\models\challenge.ts" />
-    <TypeScriptCompile Include="scripts\models\challengeCompleteDriver.ts" />
-    <TypeScriptCompile Include="scripts\models\challengeCompleteDriverConfiguration.ts" />
-    <TypeScriptCompile Include="scripts\models\challengeCompleteDriverType.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeDriver.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeDriverConfiguration.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeCompleteType.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeEndType.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactory.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactoryConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactoryType.ts" />
@@ -116,7 +117,7 @@
   </ProjectExtensions>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
-    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>

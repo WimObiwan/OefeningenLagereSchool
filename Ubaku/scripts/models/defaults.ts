@@ -7,7 +7,8 @@
         public static ExerciseCompleteAfterChallengesSolved = 10;
         public static ExerciseCompleteAfterSeconds = 60;
         public static ChallengeFactoryType = ChallengeFactoryType.SplitNumbers;
-        public static ChallengeCompleteDriverType = ChallengeCompleteDriverType.Solved;
+        public static ChallengeCompleteType = ChallengeCompleteType.Solved;
+        public static ChallengeEndType = ChallengeEndType.ChallengeComplete;
         public static PrimaryComponentSequenceType = SequenceType.Random;
         public static SecondaryComponentSequenceType = SequenceType.Random;
         public static MinNumber = 0;

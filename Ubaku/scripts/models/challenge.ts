@@ -8,6 +8,7 @@
         uiComponents: ChallengeUIComponent[];
 
         isSolved: boolean;
+        isComplete: boolean;
         responses: IResponse[];
 
         equals(other: IChallenge): boolean;
@@ -18,6 +19,7 @@
     export class Challenge extends ModelBase implements IChallenge {
         public responses: IResponse[] = [];
         public isSolved: boolean = false;
+        public isComplete: boolean = false;
 
         constructor(public layout: ChallengeLayoutType, public uiComponents: ChallengeUIComponent[], public availableAnswers: number[], public solution: number, public correctResponseMessage: string, public incorrectResponseMessage: string) {
             super();
@@ -42,9 +44,6 @@
         }
 
         public addResponse(answer: number): ResponseStatus {
-            if (this.isSolved) {
-                throw new Error("The challenge has already been solved.");
-            }
             var response = new app.models.Response(answer, this.solution === answer);
             this.responses.push(response);
             this.isSolved = response.isSolution;

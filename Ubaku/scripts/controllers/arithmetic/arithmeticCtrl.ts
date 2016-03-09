@@ -6,6 +6,8 @@
         exerciseDriver: app.models.IExerciseDriver;
         startExercise(): void;
         stopExercise(): void;
+        moveBackward(): void;
+        moveForward(): void;
         respondToCurrentChallenge(answer: number): void;
         skipCurrentChallenge(): void;
     }
@@ -14,10 +16,12 @@
         public static $inject = ["$scope"];
         public constructor(private $scope: IArithmeticScope) {
             this.$scope.configuration = this.getDefaultConfiguration();
-            this.$scope.respondToCurrentChallenge = (answer) => this.$scope.exerciseDriver.respondToCurrentChallenge(answer);
-            this.$scope.skipCurrentChallenge = () => this.$scope.exerciseDriver.skipCurrentChallenge();
             this.$scope.startExercise = () => this.startExercise();
             this.$scope.stopExercise = () => this.stopExercise();
+            this.$scope.moveBackward = () => this.$scope.exerciseDriver.moveBackward();
+            this.$scope.moveForward = () => this.$scope.exerciseDriver.moveForward();
+            this.$scope.respondToCurrentChallenge = (answer) => this.$scope.exerciseDriver.respondToCurrentChallenge(answer);
+            this.$scope.skipCurrentChallenge = () => this.$scope.exerciseDriver.skipCurrentChallenge();
             this.$scope.exerciseDriver = null;
         }
 
@@ -45,7 +49,8 @@
             configuration.challengeFactory.primaryComponentSequence = app.models.SequenceType.Random;
             configuration.challengeFactory.secondaryComponentSequence = app.models.SequenceType.Up;
 
-            configuration.challengeCompleteDriver.type = app.models.ChallengeCompleteDriverType.Responded;
+            configuration.challengeDriver.challengeCompleteType = app.models.ChallengeCompleteType.Responded;
+            configuration.challengeDriver.challengeEndType = app.models.ChallengeEndType.ChallengeComplete;
 
             return configuration;
         }
