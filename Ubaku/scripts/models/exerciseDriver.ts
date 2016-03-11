@@ -31,17 +31,20 @@
         public constructor(private configuration: ExerciseConfiguration, private $interval: ng.IIntervalService) {
             this.challengeFactory = new ChallengeFactory(this.configuration.challengeFactory);
             this.challengeDriver = new ChallengeDriver(this, this.status.challenge, this.configuration.challengeDriver, this.$interval);
-            this.exerciseCompleteDriver = new ExerciseCompleteDriver(this, this.configuration.exerciseCompleteDriver);
+            this.exerciseCompleteDriver = new ExerciseCompleteDriver(this, this.configuration.exerciseCompleteDriver, this.$interval);
             this.status.exerciseTotalSteps = this.exerciseCompleteDriver.getTotalSteps();
         }
 
         public start(): void {
+            this.exerciseCompleteDriver.stop();
+            this.exerciseCompleteDriver.start();
             this.startNewChallenge();
             this.updateUI();
         }
 
         public stop(): void {
             this.challengeDriver.setChallenge(null);
+            this.exerciseCompleteDriver.stop();
             this.updateUI();
         }
 
@@ -55,11 +58,15 @@
             this.updateUI();
         }
 
+        public onExerciseComplete(): void {
+            this.endExercise();
+            this.updateUI();
+        }
+
         public onChallengeComplete(shouldStartNewChallenge: boolean): void {
             if (shouldStartNewChallenge) {
                 if (this.exerciseCompleteDriver.isComplete()) {
-                    this.status.isComplete = true;
-                    this.status.challengeNumber = null;
+                    this.endExercise();
                 } else {
                     this.startNewChallenge();
                 }
@@ -88,6 +95,18 @@
             this.updateUI();
         }
 
+        public getChallengesRespondedCount(): number {
+            return this.reduceChallenges((challenge) => challenge.responses.length);
+        }
+
+        public getChallengesCompletedCount(): number {
+            return this.reduceChallenges((challenge) => challenge.isComplete ? 1 : 0);
+        }
+
+        public getChallengesSolvedCount(): number {
+            return this.reduceChallenges((challenge) => challenge.isSolved ? 1 : 0);
+        }
+
         private startNewChallenge(): void {
             // Attempt to generate a challenge different from the last one.
             var newChallenge = this.currentChallenge;
@@ -108,6 +127,12 @@
             this.status.challengeNumber = (this.currentChallenge === null ? null : this.exercise.challenges.indexOf(this.currentChallenge) + 1);
         }
 
+        private endExercise(): void {
+            this.challengeDriver.stop();
+            this.currentChallenge.forceComplete();
+            this.status.isComplete = true;
+        }
+
         private updateUI(): void {
             this.status.challengesRespondedCount = this.getChallengesRespondedCount();
             this.status.challengesSolvedCount = this.getChallengesSolvedCount();
@@ -125,18 +150,6 @@
             // If the exercise is not complete, allow moving forward if at the last challenge and it's complete.
             var currentChallengeIndex = this.exercise.challenges.indexOf(this.currentChallenge);
             return currentChallengeIndex === this.exercise.challenges.length - 1 && this.currentChallenge.isComplete && !this.exerciseCompleteDriver.isComplete();
-        }
-
-        public getChallengesRespondedCount(): number {
-            return this.reduceChallenges((challenge) => challenge.responses.length);
-        }
-
-        public getChallengesCompletedCount(): number {
-            return this.reduceChallenges((challenge) => challenge.isComplete ? 1 : 0);
-        }
-
-        public getChallengesSolvedCount(): number {
-            return this.reduceChallenges((challenge) => challenge.isSolved ? 1 : 0);
         }
 
         private reduceChallenges(fn: (challenge: IChallenge) => number): number {

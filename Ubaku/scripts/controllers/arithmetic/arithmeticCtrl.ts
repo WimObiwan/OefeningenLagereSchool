@@ -53,9 +53,9 @@
             configuration.challengeFactory.primaryComponentSequence = app.models.SequenceType.Random;
             configuration.challengeFactory.secondaryComponentSequence = app.models.SequenceType.Up;
 
-            configuration.challengeDriver.challengeCompleteType = app.models.ChallengeCompleteType.Responded;
-            configuration.challengeDriver.challengeEndType = app.models.ChallengeEndType.ChallengeComplete;
-            configuration.challengeDriver.challengeCompleteTimeSeconds = 10;
+            configuration.challengeDriver.completeType = app.models.ChallengeCompleteType.Responded;
+            configuration.challengeDriver.endType = app.models.ChallengeEndType.ChallengeComplete;
+            configuration.challengeDriver.completeAfterSeconds = 10;
 
             return configuration;
         }

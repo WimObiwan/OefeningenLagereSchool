@@ -11,6 +11,8 @@
         public challengesCompletedCount: number = 0;
         public challengesSolvedCount: number = 0;
         public challengesSolvedPercentage: number = 0;
+        public timeRemainingMilliseconds: number = null;
+        public timeRemainingPercentage: number = null;
         public challenge: ChallengeStatus = new ChallengeStatus();
     }
 }

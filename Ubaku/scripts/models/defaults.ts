@@ -8,7 +8,7 @@
         public static ExerciseCompleteAfterSeconds = 60;
         public static ChallengeFactoryType = ChallengeFactoryType.SplitNumbers;
         public static ChallengeCompleteType = ChallengeCompleteType.Solved;
-        public static ChallengeCompleteTimeSeconds = 10;
+        public static ChallengeCompleteAfterSeconds = 10;
         public static ChallengeEndType = ChallengeEndType.ChallengeComplete;
         public static PrimaryComponentSequenceType = SequenceType.Random;
         public static SecondaryComponentSequenceType = SequenceType.Random;

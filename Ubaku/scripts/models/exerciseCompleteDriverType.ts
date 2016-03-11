@@ -5,6 +5,6 @@
         Infinite,
         ChallengesCompleted,
         ChallengesSolved,
-        Time // TODO-M: Implement
+        Time
     }
 }

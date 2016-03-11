@@ -13,6 +13,7 @@
 
         equals(other: IChallenge): boolean;
         addResponse(answer: number): ResponseStatus;
+        forceComplete(): void;
         getResponseStatus(response: Response): ResponseStatus;
         getLastResponse(): IResponse;
     }
@@ -51,6 +52,13 @@
             return this.getResponseStatus(response);
         }
 
+        public forceComplete(): void {
+            if (this.responses.length === 0) {
+                this.addResponse(null);
+            }
+            this.isComplete = true;
+        }
+
         public getResponseStatus(response: Response): ResponseStatus {
             var messageSeverity = response.isSolution ? Severity.Success : Severity.Error;
             return new ResponseStatus(response, this.getResponseMessage(response), messageSeverity);
@@ -62,7 +70,7 @@
 
         private getResponseMessage(response: IResponse): string {
             if (response.answer === null) {
-                return "Je hebt de oefening overgeslagen.";
+                return "Je hebt geen antwoord gegeven.";
             } else if (response.isSolution) {
                 return this.correctResponseMessage.replace(Constants.StringPlaceholders.Answer, response.answer.toString());
             } else {

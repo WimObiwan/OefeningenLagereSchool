@@ -2,8 +2,8 @@
     "use strict";
 
     export class ChallengeDriverConfiguration {
-        public challengeCompleteType: ChallengeCompleteType;
-        public challengeEndType: ChallengeEndType;
-        public challengeCompleteTimeSeconds: number;
+        public completeType: ChallengeCompleteType;
+        public endType: ChallengeEndType;
+        public completeAfterSeconds: number;
     }
 }
