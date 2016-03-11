@@ -4,6 +4,6 @@
     export enum ChallengeCompleteType {
         Solved,
         Responded,
-        Time // TODO-M: Implement
+        Time
     }
 }

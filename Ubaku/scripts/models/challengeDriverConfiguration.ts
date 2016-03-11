@@ -4,5 +4,6 @@
     export class ChallengeDriverConfiguration {
         public challengeCompleteType: ChallengeCompleteType;
         public challengeEndType: ChallengeEndType;
+        public challengeCompleteTimeSeconds: number;
     }
 }

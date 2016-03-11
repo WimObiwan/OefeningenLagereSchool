@@ -11,13 +11,13 @@
         private primaryComponentsQueue: number[] = [];
         private secondaryComponentsQueue: number[] = [];
 
-        public constructor(private configuration: ChallengeFactoryConfiguration) {
+        public constructor(configuration: ChallengeFactoryConfiguration) {
             // Determine the configuration parameters.
-            this.type = this.configuration.type || Defaults.ChallengeFactoryType;
-            this.primaryComponentSequence = this.configuration.primaryComponentSequence || Defaults.PrimaryComponentSequenceType;
-            this.secondaryComponentSequence = this.configuration.secondaryComponentSequence || Defaults.SecondaryComponentSequenceType;
-            this.minNumber = this.configuration.minNumber || Defaults.MinNumber;
-            this.maxNumber = this.configuration.maxNumber || Defaults.MaxNumber;
+            this.type = configuration.type || Defaults.ChallengeFactoryType;
+            this.primaryComponentSequence = configuration.primaryComponentSequence || Defaults.PrimaryComponentSequenceType;
+            this.secondaryComponentSequence = configuration.secondaryComponentSequence || Defaults.SecondaryComponentSequenceType;
+            this.minNumber = configuration.minNumber || Defaults.MinNumber;
+            this.maxNumber = configuration.maxNumber || Defaults.MaxNumber;
 
             // Generate the array of available answers.
             this.availableAnswers = ChallengeFactory.createArray(0, this.maxNumber, SequenceType.Up);

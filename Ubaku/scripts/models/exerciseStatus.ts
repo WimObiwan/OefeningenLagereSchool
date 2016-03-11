@@ -12,6 +12,8 @@
         public challengesCompletedCount: number = 0;
         public challengesSolvedCount: number = 0;
         public challengesSolvedPercentage: number = 0;
-        public lastResponseStatus: ResponseStatus = null;
+        public challengeTimeRemainingMilliseconds: number = null;
+        public challengeTimeRemainingPercentage: number = null;
+        public lastResponseStatus: ResponseStatus = null; // TODO-H: Move to challenge itself
     }
 }

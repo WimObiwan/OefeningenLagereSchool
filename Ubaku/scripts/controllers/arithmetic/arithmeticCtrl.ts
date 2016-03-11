@@ -13,8 +13,8 @@
     }
 
     class ArithmeticCtrl {
-        public static $inject = ["$scope"];
-        public constructor(private $scope: IArithmeticScope) {
+        public static $inject = ["$scope", "$interval"];
+        public constructor(private $scope: IArithmeticScope, private $interval: ng.IIntervalService) {
             this.$scope.configuration = this.getDefaultConfiguration();
             this.$scope.startExercise = () => this.startExercise();
             this.$scope.stopExercise = () => this.stopExercise();
@@ -27,11 +27,15 @@
 
         public startExercise(): void {
             var configuration = this.clone(this.$scope.configuration);
-            this.$scope.exerciseDriver = new app.models.ExerciseDriver(configuration);
+            if (this.$scope.exerciseDriver !== null) {
+                this.$scope.exerciseDriver.stop();
+            }
+            this.$scope.exerciseDriver = new app.models.ExerciseDriver(configuration, this.$interval);
             this.$scope.exerciseDriver.start();
         }
 
         public stopExercise(): void {
+            this.$scope.exerciseDriver.stop();
             this.$scope.exerciseDriver = null;
         }
 
@@ -51,6 +55,7 @@
 
             configuration.challengeDriver.challengeCompleteType = app.models.ChallengeCompleteType.Responded;
             configuration.challengeDriver.challengeEndType = app.models.ChallengeEndType.ChallengeComplete;
+            configuration.challengeDriver.challengeCompleteTimeSeconds = 10;
 
             return configuration;
         }
