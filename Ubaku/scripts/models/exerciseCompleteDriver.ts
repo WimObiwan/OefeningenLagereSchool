@@ -74,8 +74,8 @@
         }
 
         private stopTimer(): void {
-            this.exerciseDriver.status.timeRemainingMilliseconds = null;
-            this.exerciseDriver.status.timeRemainingPercentage = null;
+            this.exerciseDriver.status.timeRemainingMilliseconds = 0;
+            this.exerciseDriver.status.timeRemainingPercentage = 0;
             if (this.timerPromise !== null) {
                 this.$interval.cancel(this.timerPromise);
                 this.timerPromise = null;

@@ -45,7 +45,7 @@
             configuration.exerciseCompleteDriver.type = app.models.ExerciseCompleteDriverType.ChallengesCompleted;
             configuration.exerciseCompleteDriver.completeAfterChallengesCompleted = 10;
             configuration.exerciseCompleteDriver.completeAfterChallengesSolved = 10;
-            configuration.exerciseCompleteDriver.completeAfterSeconds = 10;
+            configuration.exerciseCompleteDriver.completeAfterSeconds = 60;
 
             configuration.challengeFactory.type = app.models.ChallengeFactoryType.SplitNumbers;
             configuration.challengeFactory.minNumber = 0;

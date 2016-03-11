@@ -136,7 +136,9 @@
                     </div>
                     <div ng-hide="exerciseDriver.status.timeRemainingPercentage === null">
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped no-transition" role="progressbar" ng-style="{ 'width': ((1 - exerciseDriver.status.timeRemainingPercentage) * 100) + '%'}" />
+                            <div class="progress-bar progress-bar-striped no-transition" role="progressbar" ng-style="{ 'width': ((1 - exerciseDriver.status.timeRemainingPercentage) * 100) + '%'}">
+                                <span>{{exerciseDriver.status.timeRemainingMilliseconds / 1000 | number:0}}</span>
+                            </div>
                         </div>
                     </div>
                 </dd>
@@ -222,7 +224,9 @@
             </div>
             <div class="panel-footer">
                 <div class="progress" ng-hide="exerciseDriver.status.challenge.timeRemainingPercentage === null">
-                    <div class="progress-bar progress-bar-striped no-transition" role="progressbar" ng-style="{ 'width': (exerciseDriver.status.challenge.timeRemainingPercentage * 100) + '%'}" />
+                    <div class="progress-bar progress-bar-striped no-transition" role="progressbar" ng-style="{ 'width': ((1 - exerciseDriver.status.challenge.timeRemainingPercentage) * 100) + '%'}">
+                        <span>{{exerciseDriver.status.challenge.timeRemainingMilliseconds / 1000 | number:0}}</span>
+                    </div>
                 </div>
                 <div class="offset-bottom-md" ng-hide="exerciseDriver.currentChallenge.isComplete">
                     <span ng-repeat="availableAnswer in exerciseDriver.currentChallenge.availableAnswers">
