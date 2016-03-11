@@ -60,7 +60,6 @@
                 if (this.exerciseCompleteDriver.isComplete()) {
                     this.status.isComplete = true;
                     this.status.challengeNumber = null;
-                    this.setCurrentChallenge(null);
                 } else {
                     this.startNewChallenge();
                 }
@@ -82,7 +81,7 @@
             if (currentChallengeIndex < this.exercise.challenges.length - 1) {
                 // Move forward in the list.
                 this.setCurrentChallenge(this.exercise.challenges[currentChallengeIndex + 1]);
-            } else if (currentChallengeIndex === this.exercise.challenges.length - 1 && this.currentChallenge.isComplete) {
+            } else if (this.canMoveForwardPastEnd()) {
                 // We're at the last challenge and it's complete, so moving to the next actually means starting a new challenge.
                 this.onChallengeComplete(true);
             }
@@ -119,7 +118,13 @@
             var currentChallengeIndex = this.exercise.challenges.indexOf(this.currentChallenge);
             this.canSkipCurrentChallenge = this.challengeDriver.canSkip();
             this.canMoveBackward = this.challengeDriver.canMoveBackward() && (currentChallengeIndex > 0);
-            this.canMoveForward = this.challengeDriver.canMoveForward() && ((currentChallengeIndex < this.exercise.challenges.length - 1) || (currentChallengeIndex === this.exercise.challenges.length - 1 && this.currentChallenge.isComplete));
+            this.canMoveForward = this.challengeDriver.canMoveForward() && ((currentChallengeIndex < this.exercise.challenges.length - 1) || this.canMoveForwardPastEnd());
+        }
+
+        private canMoveForwardPastEnd(): boolean {
+            // If the exercise is not complete, allow moving forward if at the last challenge and it's complete.
+            var currentChallengeIndex = this.exercise.challenges.indexOf(this.currentChallenge);
+            return currentChallengeIndex === this.exercise.challenges.length - 1 && this.currentChallenge.isComplete && !this.exerciseCompleteDriver.isComplete();
         }
 
         public getChallengesRespondedCount(): number {

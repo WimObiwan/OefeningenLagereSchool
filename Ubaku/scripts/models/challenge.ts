@@ -62,7 +62,7 @@
 
         private getResponseMessage(response: IResponse): string {
             if (response.answer === null) {
-                return "Je hebt de vorige oefening overgeslagen.";
+                return "Je hebt de oefening overgeslagen.";
             } else if (response.isSolution) {
                 return this.correctResponseMessage.replace(Constants.StringPlaceholders.Answer, response.answer.toString());
             } else {
