@@ -50,6 +50,7 @@
     <TypeScriptCompile Include="scripts\models\challengeFactoryConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactoryType.ts" />
     <TypeScriptCompile Include="scripts\models\challengeLayoutType.ts" />
+    <TypeScriptCompile Include="scripts\models\challengeStatus.ts" />
     <TypeScriptCompile Include="scripts\models\challengeUIComponent.ts" />
     <TypeScriptCompile Include="scripts\models\challengeUIComponentType.ts" />
     <TypeScriptCompile Include="scripts\models\constants.ts" />

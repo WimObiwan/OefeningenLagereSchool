@@ -13,6 +13,7 @@
 
         equals(other: IChallenge): boolean;
         addResponse(answer: number): ResponseStatus;
+        getResponseStatus(response: Response): ResponseStatus;
         getLastResponse(): IResponse;
     }
 
@@ -44,10 +45,14 @@
         }
 
         public addResponse(answer: number): ResponseStatus {
-            var response = new app.models.Response(answer, this.solution === answer);
+            var response = new Response(answer, this.solution === answer);
             this.responses.push(response);
             this.isSolved = response.isSolution;
-            var messageSeverity = response.isSolution ? app.models.Severity.Success : app.models.Severity.Error;
+            return this.getResponseStatus(response);
+        }
+
+        public getResponseStatus(response: Response): ResponseStatus {
+            var messageSeverity = response.isSolution ? Severity.Success : Severity.Error;
             return new ResponseStatus(response, this.getResponseMessage(response), messageSeverity);
         }
 
@@ -59,9 +64,9 @@
             if (response.answer === null) {
                 return "Je hebt de vorige oefening overgeslagen.";
             } else if (response.isSolution) {
-                return this.correctResponseMessage.replace(app.models.Constants.StringPlaceholders.Answer, response.answer.toString());
+                return this.correctResponseMessage.replace(Constants.StringPlaceholders.Answer, response.answer.toString());
             } else {
-                return this.incorrectResponseMessage.replace(app.models.Constants.StringPlaceholders.Answer, response.answer.toString());
+                return this.incorrectResponseMessage.replace(Constants.StringPlaceholders.Answer, response.answer.toString());
             }
         }
     }

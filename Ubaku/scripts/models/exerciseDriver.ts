@@ -30,7 +30,7 @@
 
         public constructor(private configuration: ExerciseConfiguration, private $interval: ng.IIntervalService) {
             this.challengeFactory = new ChallengeFactory(this.configuration.challengeFactory);
-            this.challengeDriver = new ChallengeDriver(this, this.configuration.challengeDriver, this.$interval);
+            this.challengeDriver = new ChallengeDriver(this, this.status.challenge, this.configuration.challengeDriver, this.$interval);
             this.exerciseCompleteDriver = new ExerciseCompleteDriver(this, this.configuration.exerciseCompleteDriver);
             this.status.exerciseTotalSteps = this.exerciseCompleteDriver.getTotalSteps();
         }
@@ -51,7 +51,7 @@
         }
 
         public respondToCurrentChallenge(answer: number) {
-            this.status.lastResponseStatus = this.challengeDriver.respondToChallenge(answer);
+            this.challengeDriver.respondToChallenge(answer);
             this.updateUI();
         }
 

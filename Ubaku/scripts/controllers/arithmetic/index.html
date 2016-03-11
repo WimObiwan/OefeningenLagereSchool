@@ -214,8 +214,8 @@
                 </div>
             </div>
             <div class="panel-footer">
-                <div class="progress" ng-hide="exerciseDriver.status.challengeTimeRemainingPercentage === null">
-                    <div class="progress-bar progress-bar-striped no-transition" role="progressbar" ng-style="{ 'width': (exerciseDriver.status.challengeTimeRemainingPercentage * 100) + '%'}" />
+                <div class="progress" ng-hide="exerciseDriver.status.challenge.timeRemainingPercentage === null">
+                    <div class="progress-bar progress-bar-striped no-transition" role="progressbar" ng-style="{ 'width': (exerciseDriver.status.challenge.timeRemainingPercentage * 100) + '%'}" />
                 </div>
                 <div class="offset-bottom-md" ng-hide="exerciseDriver.currentChallenge.isComplete">
                     <span ng-repeat="availableAnswer in exerciseDriver.currentChallenge.availableAnswers">
@@ -230,11 +230,11 @@
             </div>
         </div>
         <!-- Last Response Status -->
-        <div ng-hide="exerciseDriver.status.lastResponseStatus === null" class="offset-top-lg">
-            <div class="alert xl alert-{{exerciseDriver.status.lastResponseStatus.messageSeverity | bootstrap:'Severity'}}">
-                <span ng-show="exerciseDriver.status.lastResponseStatus.messageSeverity === Severity.Success" class="glyphicon glyphicon-thumbs-up"></span>
-                <span ng-hide="exerciseDriver.status.lastResponseStatus.messageSeverity === Severity.Success" class="glyphicon glyphicon-thumbs-down"></span>
-                <span>{{exerciseDriver.status.lastResponseStatus.message}}</span>
+        <div ng-hide="exerciseDriver.status.challenge.lastResponseStatus === null" class="offset-top-lg">
+            <div class="alert xl alert-{{exerciseDriver.status.challenge.lastResponseStatus.messageSeverity | bootstrap:'Severity'}}">
+                <span ng-show="exerciseDriver.status.challenge.lastResponseStatus.messageSeverity === Severity.Success" class="glyphicon glyphicon-thumbs-up"></span>
+                <span ng-hide="exerciseDriver.status.challenge.lastResponseStatus.messageSeverity === Severity.Success" class="glyphicon glyphicon-thumbs-down"></span>
+                <span>{{exerciseDriver.status.challenge.lastResponseStatus.message}}</span>
             </div>
         </div>
     </div>

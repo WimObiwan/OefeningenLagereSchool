@@ -5,29 +5,31 @@
         private challengeCompleteType: ChallengeCompleteType;
         private challengeEndType: ChallengeEndType;
         private challengeCompleteTimeMilliseconds: number;
-        private challenge: app.models.IChallenge = null;
+        private challenge: IChallenge = null;
         private challengeStartTime: Date = null;
         private timerPromise: ng.IPromise<void> = null;
 
-        constructor(private exerciseDriver: ExerciseDriver, configuration: ChallengeDriverConfiguration, private $interval: ng.IIntervalService) {
+        constructor(private exerciseDriver: ExerciseDriver, private status: ChallengeStatus, configuration: ChallengeDriverConfiguration, private $interval: ng.IIntervalService) {
             // Determine the configuration parameters.
             this.challengeCompleteType = configuration.challengeCompleteType || Defaults.ChallengeCompleteType;
             this.challengeEndType = configuration.challengeEndType || Defaults.ChallengeEndType;
             this.challengeCompleteTimeMilliseconds = 1000 * (configuration.challengeCompleteTimeSeconds || Defaults.ChallengeCompleteTimeSeconds);
         }
 
-        public setChallenge(challenge: app.models.IChallenge) {
+        public setChallenge(challenge: IChallenge) {
             this.stopTimer();
             this.challenge = challenge;
+            if (this.challenge !== null && this.challenge.responses.length > 0) {
+                this.status.lastResponseStatus = this.challenge.getResponseStatus(this.challenge.getLastResponse());
+            }
             if (this.challenge !== null && !this.challenge.isComplete && this.challengeCompleteType === ChallengeCompleteType.Time) {
                 this.startTimer();
             }
         }
 
-        public respondToChallenge(answer: number): ResponseStatus {
-            var responseStatus = this.challenge.addResponse(answer);
+        public respondToChallenge(answer: number): void {
+            this.status.lastResponseStatus = this.challenge.addResponse(answer);
             this.checkChallengeComplete();
-            return responseStatus;
         }
 
         public canSkip(): boolean {
@@ -59,8 +61,8 @@
         }
 
         private stopTimer(): void {
-            this.exerciseDriver.status.challengeTimeRemainingMilliseconds = null;
-            this.exerciseDriver.status.challengeTimeRemainingPercentage = null;
+            this.status.timeRemainingMilliseconds = null;
+            this.status.timeRemainingPercentage = null;
             if (this.timerPromise !== null) {
                 this.$interval.cancel(this.timerPromise);
                 this.timerPromise = null;
@@ -69,8 +71,8 @@
 
         private onTimerElapsed(): void {
             var challengeTimeRemainingMilliseconds = this.getChallengeTimeRemainingMilliseconds();
-            this.exerciseDriver.status.challengeTimeRemainingMilliseconds = challengeTimeRemainingMilliseconds;
-            this.exerciseDriver.status.challengeTimeRemainingPercentage = challengeTimeRemainingMilliseconds / this.challengeCompleteTimeMilliseconds;
+            this.status.timeRemainingMilliseconds = challengeTimeRemainingMilliseconds;
+            this.status.timeRemainingPercentage = challengeTimeRemainingMilliseconds / this.challengeCompleteTimeMilliseconds;
             if (challengeTimeRemainingMilliseconds <= 0) {
                 if (this.challenge.responses.length === 0) {
                     this.respondToChallenge(null);
