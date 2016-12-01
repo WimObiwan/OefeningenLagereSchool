@@ -10,8 +10,7 @@ var app;
                 this.messageSeverity = messageSeverity;
             }
             return ResponseStatus;
-        })();
+        }());
         models.ResponseStatus = ResponseStatus;
     })(models = app.models || (app.models = {}));
 })(app || (app = {}));
-//# sourceMappingURL=responseStatus.js.map

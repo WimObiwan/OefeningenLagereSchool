@@ -16,8 +16,7 @@ var app;
                 this.isSolution = isSolution;
             }
             return Response;
-        })(models.ModelBase);
+        }(models.ModelBase));
         models.Response = Response;
     })(models = app.models || (app.models = {}));
 })(app || (app = {}));
-//# sourceMappingURL=response.js.map

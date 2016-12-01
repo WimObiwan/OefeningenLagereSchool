@@ -10,43 +10,67 @@ var app;
         "use strict";
         var Challenge = (function (_super) {
             __extends(Challenge, _super);
-            function Challenge(numberToSplit, splitComponent, availableAnswers, solution) {
+            function Challenge(layout, uiComponents, availableAnswers, solution, correctResponseMessage, incorrectResponseMessage) {
                 _super.call(this);
-                this.numberToSplit = numberToSplit;
-                this.splitComponent = splitComponent;
+                this.layout = layout;
+                this.uiComponents = uiComponents;
                 this.availableAnswers = availableAnswers;
                 this.solution = solution;
+                this.correctResponseMessage = correctResponseMessage;
+                this.incorrectResponseMessage = incorrectResponseMessage;
                 this.responses = [];
                 this.isSolved = false;
+                this.isComplete = false;
             }
-            Challenge.prototype.addResponse = function (answer) {
-                if (this.isSolved) {
-                    throw new Error("The challenge has already been solved.");
+            Challenge.prototype.equals = function (other) {
+                if (other === null) {
+                    return false;
                 }
-                var response = new app.models.Response(answer, this.solution === answer);
+                if (other.layout !== this.layout) {
+                    return false;
+                }
+                if (other.uiComponents.length !== this.uiComponents.length) {
+                    return false;
+                }
+                for (var i = 0; i < other.uiComponents.length; i++) {
+                    if (!other.uiComponents[i].equals(this.uiComponents[i])) {
+                        return false;
+                    }
+                }
+                return true;
+            };
+            Challenge.prototype.addResponse = function (answer) {
+                var response = new models.Response(answer, this.solution === answer);
                 this.responses.push(response);
                 this.isSolved = response.isSolution;
-                var messageSeverity = response.isSolution ? app.models.Severity.Success : app.models.Severity.Error;
+                return this.getResponseStatus(response);
+            };
+            Challenge.prototype.forceComplete = function () {
+                if (this.responses.length === 0) {
+                    this.addResponse(null);
+                }
+                this.isComplete = true;
+            };
+            Challenge.prototype.getResponseStatus = function (response) {
+                var messageSeverity = response.isSolution ? models.Severity.Success : models.Severity.Error;
                 return new models.ResponseStatus(response, this.getResponseMessage(response), messageSeverity);
             };
             Challenge.prototype.getLastResponse = function () {
                 return this.responses.length === 0 ? null : this.responses[this.responses.length - 1];
             };
-            Challenge.prototype.getLastAnswerOr = function (defaultValue) {
-                var lastResponse = this.getLastResponse();
-                return lastResponse === null ? defaultValue : lastResponse.answer.toString();
-            };
             Challenge.prototype.getResponseMessage = function (response) {
-                if (response.isSolution) {
-                    return "Goed zo! " + this.numberToSplit + " kan je splitsen in " + this.splitComponent + " en " + response.answer + ".";
+                if (response.answer === null) {
+                    return "Je hebt geen antwoord gegeven.";
+                }
+                else if (response.isSolution) {
+                    return this.correctResponseMessage.replace(models.Constants.StringPlaceholders.Answer, response.answer.toString());
                 }
                 else {
-                    return "Jammer! " + this.numberToSplit + " kan je niet splitsen in " + this.splitComponent + " en " + response.answer + ".";
+                    return this.incorrectResponseMessage.replace(models.Constants.StringPlaceholders.Answer, response.answer.toString());
                 }
             };
             return Challenge;
-        })(models.ModelBase);
+        }(models.ModelBase));
         models.Challenge = Challenge;
     })(models = app.models || (app.models = {}));
 })(app || (app = {}));
-//# sourceMappingURL=challenge.js.map

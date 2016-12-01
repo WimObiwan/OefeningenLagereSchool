@@ -10,7 +10,7 @@
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -37,7 +37,6 @@
     <Content Include="lib\bootstrap.min.js" />
     <Content Include="lib\jquery.min.js" />
     <Content Include="scripts\controllers\arithmetic\index.html" />
-    <Content Include="TODO.txt" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -15,8 +15,7 @@ var app;
                 this.challenges = [];
             }
             return Exercise;
-        })(models.ModelBase);
+        }(models.ModelBase));
         models.Exercise = Exercise;
     })(models = app.models || (app.models = {}));
 })(app || (app = {}));
-//# sourceMappingURL=exercise.js.map

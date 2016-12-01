@@ -8,8 +8,7 @@ var app;
                 this.createdTime = new Date();
             }
             return ModelBase;
-        })();
+        }());
         models.ModelBase = ModelBase;
     })(models = app.models || (app.models = {}));
 })(app || (app = {}));
-//# sourceMappingURL=modelBase.js.map
