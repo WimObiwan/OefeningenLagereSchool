@@ -2,7 +2,6 @@ var app;
 (function (app) {
     "use strict";
     var RootCtrl = (function () {
-        //static $inject = [];
         function RootCtrl() {
         }
         return RootCtrl;
