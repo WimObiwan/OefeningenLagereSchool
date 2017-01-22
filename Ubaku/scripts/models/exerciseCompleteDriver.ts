@@ -88,7 +88,7 @@
             this.exerciseDriver.status.timeRemainingPercentage = exerciseTimeRemainingMilliseconds / this.completeAfterMilliseconds;
             if (exerciseTimeRemainingMilliseconds <= 0) {
                 this.stopTimer();
-                this.exerciseDriver.onExerciseComplete();
+                this.exerciseDriver.onExerciseComplete(true);
             }
         }
 

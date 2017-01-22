@@ -58,15 +58,15 @@
             this.updateUI();
         }
 
-        public onExerciseComplete(): void {
-            this.endExercise();
+        public onExerciseComplete(excludeLastChallenge: Boolean): void {
+            this.endExercise(excludeLastChallenge);
             this.updateUI();
         }
 
         public onChallengeComplete(shouldStartNewChallenge: boolean): void {
             if (shouldStartNewChallenge) {
                 if (this.exerciseCompleteDriver.isComplete()) {
-                    this.endExercise();
+                    this.endExercise(false);
                 } else {
                     this.startNewChallenge();
                 }
@@ -127,9 +127,10 @@
             this.status.challengeNumber = (this.currentChallenge === null ? null : this.exercise.challenges.indexOf(this.currentChallenge) + 1);
         }
 
-        private endExercise(): void {
+        private endExercise(excludeLastChallenge: Boolean): void {
             this.challengeDriver.stop();
-            this.currentChallenge.forceComplete();
+            if (!excludeLastChallenge)
+                this.currentChallenge.forceComplete();
             this.status.isComplete = true;
         }
 
