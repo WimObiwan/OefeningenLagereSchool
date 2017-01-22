@@ -8,6 +8,10 @@
             <dt>Type oefening:</dt>
             <dd>
                 <div class="form-inline">
+                    <input id="configurationChallengeFactoryTypeRandom" type="radio" ng-model="configuration.challengeFactory.type" ng-value="{{ChallengeFactoryType.Random}}" />
+                    <label for="configurationChallengeFactoryTypeRandom"><span class="glyphicon glyphicon-random"></span> Willekeurig</label>
+                </div>
+                <div class="form-inline">
                     <input id="configurationChallengeFactoryTypeSplitNumbers" type="radio" ng-model="configuration.challengeFactory.type" ng-value="{{ChallengeFactoryType.SplitNumbers}}" />
                     <label for="configurationChallengeFactoryTypeSplitNumbers"><span class="glyphicon glyphicon-menu-up"></span> nummers splitsen</label>
                 </div>

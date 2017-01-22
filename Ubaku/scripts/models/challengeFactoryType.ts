@@ -4,6 +4,7 @@
     export enum ChallengeFactoryType {
         SplitNumbers,
         Subtract,
-        Add
+        Add,
+        Random
     }
 }

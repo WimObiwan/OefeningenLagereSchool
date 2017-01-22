@@ -47,7 +47,7 @@
             configuration.exerciseCompleteDriver.completeAfterChallengesSolved = 10;
             configuration.exerciseCompleteDriver.completeAfterMinutes = 12;
 
-            configuration.challengeFactory.type = app.models.ChallengeFactoryType.SplitNumbers;
+            configuration.challengeFactory.type = app.models.ChallengeFactoryType.Random;
             configuration.challengeFactory.minNumber = 0;
             configuration.challengeFactory.maxNumber = 10;
             configuration.challengeFactory.primaryComponentSequence = app.models.SequenceType.Random;

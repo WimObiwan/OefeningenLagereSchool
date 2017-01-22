@@ -2,6 +2,7 @@
     "use strict";
 
     export class ChallengeFactory {
+        private originalType: ChallengeFactoryType = null;
         private type: ChallengeFactoryType = null;
         private primaryComponentSequence: SequenceType = null;
         private secondaryComponentSequence: SequenceType = null;
@@ -13,7 +14,7 @@
 
         public constructor(configuration: ChallengeFactoryConfiguration) {
             // Determine the configuration parameters.
-            this.type = configuration.type || Defaults.ChallengeFactoryType;
+            this.originalType = configuration.type || Defaults.ChallengeFactoryType;
             this.primaryComponentSequence = configuration.primaryComponentSequence || Defaults.PrimaryComponentSequenceType;
             this.secondaryComponentSequence = configuration.secondaryComponentSequence || Defaults.SecondaryComponentSequenceType;
             this.minNumber = configuration.minNumber || Defaults.MinNumber;
@@ -24,6 +25,21 @@
         }
 
         public createChallenge(): app.models.IChallenge {
+            this.type = this.originalType;
+            if (this.type === ChallengeFactoryType.Random) {
+                switch (this.getRandomInt(0, 2)) {
+                    default:
+                    case 0:
+                        this.type = ChallengeFactoryType.SplitNumbers;
+                        break;
+                    case 1:
+                        this.type = ChallengeFactoryType.Add;
+                        break;
+                    case 2:
+                        this.type = ChallengeFactoryType.Subtract;
+                        break;
+                }
+            }
             if (this.type === ChallengeFactoryType.SplitNumbers || this.type === ChallengeFactoryType.Subtract || this.type === ChallengeFactoryType.Add) {
                 if (this.primaryComponentSequence === SequenceType.Random) {
                     var primaryComponent = this.getRandomInt(this.minNumber, this.maxNumber);
