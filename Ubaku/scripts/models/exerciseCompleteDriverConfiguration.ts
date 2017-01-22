@@ -5,6 +5,6 @@
         public type: ExerciseCompleteDriverType;
         public completeAfterChallengesCompleted: number;
         public completeAfterChallengesSolved: number;
-        public completeAfterSeconds: number;
+        public completeAfterMinutes: number;
     }
 }

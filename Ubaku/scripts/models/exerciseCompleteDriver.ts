@@ -14,7 +14,7 @@
             this.type = configuration.type || Defaults.ExerciseCompleteDriverType;
             this.completeAfterChallengesCompleted = configuration.completeAfterChallengesCompleted || Defaults.ExerciseCompleteAfterChallengesCompleted;
             this.completeAfterChallengesSolved = configuration.completeAfterChallengesSolved || Defaults.ExerciseCompleteAfterChallengesSolved;
-            this.completeAfterMilliseconds = 1000 * (configuration.completeAfterSeconds || Defaults.ExerciseCompleteAfterSeconds);
+            this.completeAfterMilliseconds = 60000 * (configuration.completeAfterMinutes || Defaults.ExerciseCompleteAfterMinutes);
         }
 
         public start(): void {
