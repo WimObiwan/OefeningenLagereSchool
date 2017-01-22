@@ -42,7 +42,7 @@
         private getDefaultConfiguration(): app.models.ExerciseConfiguration {
             var configuration = new app.models.ExerciseConfiguration();
 
-            configuration.exerciseCompleteDriver.type = app.models.ExerciseCompleteDriverType.ChallengesCompleted;
+            configuration.exerciseCompleteDriver.type = app.models.ExerciseCompleteDriverType.Infinite;
             configuration.exerciseCompleteDriver.completeAfterChallengesCompleted = 10;
             configuration.exerciseCompleteDriver.completeAfterChallengesSolved = 10;
             configuration.exerciseCompleteDriver.completeAfterSeconds = 60;
