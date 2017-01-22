@@ -241,7 +241,7 @@
                 </div>
                 <div>
                     <button class="btn btn-default btn-lg btn-info" ng-disabled="!exerciseDriver.canMoveBackward" ng-click="moveBackward()"><span class="glyphicon glyphicon-step-backward"></span>&nbsp;Vorige</button>
-                    <button class="btn btn-default btn-lg btn-info" ng-disabled="!exerciseDriver.canMoveForward" ng-click="moveForward()">Volgende&nbsp;<span class="glyphicon glyphicon-step-forward"></span></button>
+                    <button class="btn btn-default btn-lg btn-info" ng-hide="!exerciseDriver.canMoveForward" ng-click="moveForward()">Volgende&nbsp;<span class="glyphicon glyphicon-step-forward"></span></button>
                     <button class="btn btn-default btn-lg btn-warning" ng-show="exerciseDriver.canSkipCurrentChallenge" ng-click="skipCurrentChallenge()">Overslaan&nbsp;<span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
