@@ -1,10 +1,8 @@
-/// <reference path="typings/references.d.ts" />
 var app;
 (function (app) {
     "use strict";
     angular.module(app.models.Constants.App.AngularAppName, ["ngRoute"])
         .filter("percentage", ["$filter", function ($filter) {
-            // This filter makes the assumption that the input will be in decimal form (i.e. 17% is 0.17).
             return function (input, decimals) {
                 return $filter("number")(input * 100, decimals) + "%";
             };
@@ -57,7 +55,6 @@ var app;
             };
         }])
         .config(["$routeProvider", "$httpProvider", function ($routeProvider, $httpProvider) {
-            // Configure the routes.
             $routeProvider
                 .when("/", {
                 templateUrl: "scripts/controllers/arithmetic/index.html",
@@ -66,7 +63,6 @@ var app;
                 .otherwise({ redirectTo: "/" });
         }])
         .run(["$rootScope", function ($rootScope) {
-            // Make enums available on the root scope and therefore any child scope.
             $rootScope.Severity = app.models.Severity;
             $rootScope.ExerciseCompleteDriverType = app.models.ExerciseCompleteDriverType;
             $rootScope.ChallengeFactoryType = app.models.ChallengeFactoryType;
