@@ -8,7 +8,8 @@
         };
         public static ControllerNames = {
             Root: "rootCtrl",
-            Arithmetic: "arithmeticCtrl"
+            Arithmetic: "arithmeticCtrl",
+            TafelBollen: "tafelBollenCtrl"
         };
         public static StringPlaceholders = {
             Answer: "{answer}"

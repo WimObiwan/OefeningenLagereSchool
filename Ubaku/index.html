@@ -15,16 +15,23 @@
     <![endif]-->
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+
+    <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="">1<sup>e</sup> leerjaar</a>
+                <a class="navbar-brand" href="#/">Oefeningen Lagere School</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="#/eerste-leerjaar/rekenen">1<sup>e</sup> leerjaar</a></li>
+                    <li class=""><a href="#/derde-leerjaar/tafelbollen">3<sup>e</sup> leerjaar</a></li>
+                </ul>
+                <p class="navbar-text navbar-right"><small>v1.1-20170126</small></p>
             </div>
         </div>
     </nav>
@@ -61,7 +68,7 @@
     <script src="scripts/models/response.js"></script>
     <!-- Configuration -->
     <script src="scripts/models/challengeDriverConfiguration.js"></script>
-    <script src="scripts/models/challengeFactoryConfiguration.js"></script>
+    <script src="scripts/models/arithmeticChallengeFactoryConfiguration.js"></script>
     <script src="scripts/models/exerciseCompleteDriverConfiguration.js"></script>
     <script src="scripts/models/exerciseConfiguration.js"></script>
     <!-- Enums -->
@@ -83,8 +90,10 @@
     <script src="scripts/models/challengeFactory.js"></script>
     <script src="scripts/models/exerciseCompleteDriver.js"></script>
     <script src="scripts/models/exerciseDriver.js"></script>
+    <script src="scripts/models/arithmeticChallengeFactory.js"></script>
     <!-- Controllers-->
     <script src="scripts/controllers/root/rootCtrl.js"></script>
     <script src="scripts/controllers/arithmetic/arithmeticCtrl.js"></script>
+    <script src="scripts/controllers/tafelbollen/tafelBollenCtrl.js"></script>
 </body>
 </html>

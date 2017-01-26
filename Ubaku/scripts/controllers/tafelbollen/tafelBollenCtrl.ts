@@ -1,7 +1,7 @@
-﻿module app.arithmetic {
+﻿module app.tafelbollen {
     "use strict";
 
-    interface IArithmeticScope extends ng.IScope {
+    interface ITafelBollenScope extends ng.IScope {
         configuration: app.models.ExerciseConfiguration;
         exerciseDriver: app.models.IExerciseDriver;
         startExercise(): void;
@@ -12,9 +12,9 @@
         skipCurrentChallenge(): void;
     }
 
-    class ArithmeticCtrl {
+    class TafelBollenCtrl {
         public static $inject = ["$scope", "$interval"];
-        public constructor(private $scope: IArithmeticScope, private $interval: ng.IIntervalService) {
+        public constructor(private $scope: ITafelBollenScope, private $interval: ng.IIntervalService) {
             this.$scope.configuration = this.getDefaultConfiguration();
             this.$scope.startExercise = () => this.startExercise();
             this.$scope.stopExercise = () => this.stopExercise();
@@ -30,8 +30,9 @@
             if (this.$scope.exerciseDriver !== null) {
                 this.$scope.exerciseDriver.stop();
             }
-            var arithmeticChallengeFactory = new app.models.ArithmeticChallengeFactory(configuration.arithmeticChallengeFactory);
-            this.$scope.exerciseDriver = new app.models.ExerciseDriver(arithmeticChallengeFactory, configuration, this.$interval);
+            this.$scope.exerciseDriver = new app.models.ExerciseDriver(
+                new app.models.ArithmeticChallengeFactory(configuration.arithmeticChallengeFactory),
+                configuration, this.$interval);
             this.$scope.exerciseDriver.start();
         }
 
@@ -66,5 +67,5 @@
         }
     }
 
-    angular.module(app.models.Constants.App.AngularAppName).controller(app.models.Constants.ControllerNames.Arithmetic, ArithmeticCtrl);
+    angular.module(app.models.Constants.App.AngularAppName).controller(app.models.Constants.ControllerNames.TafelBollen, TafelBollenCtrl);
 }

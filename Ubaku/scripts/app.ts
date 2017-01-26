@@ -60,9 +60,16 @@ module app {
         .config(["$routeProvider", "$httpProvider", function ($routeProvider: ng.route.IRouteProvider, $httpProvider: ng.IHttpProvider) {
             // Configure the routes.
             $routeProvider
-                .when("/", {
+                .when("/eerste-leerjaar/rekenen", {
                     templateUrl: "scripts/controllers/arithmetic/index.html",
                     controller: app.models.Constants.ControllerNames.Arithmetic
+                })
+                .when("/derde-leerjaar/tafelbollen", {
+                    templateUrl: "scripts/controllers/tafelbollen/index.html",
+                    controller: app.models.Constants.ControllerNames.TafelBollen
+                })
+                .when("/", {
+                    templateUrl: "home.html"
                 })
                 .otherwise({ redirectTo: "/" });
         }])

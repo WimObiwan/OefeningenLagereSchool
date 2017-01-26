@@ -27,6 +27,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="home.html" />
     <Content Include="lib\angular-cookies.min.js" />
     <Content Include="lib\angular-route.min.js" />
     <Content Include="lib\angular-touch.min.js" />
@@ -37,16 +38,19 @@
     <Content Include="lib\bootstrap.min.js" />
     <Content Include="lib\jquery.min.js" />
     <Content Include="scripts\controllers\arithmetic\index.html" />
+    <Content Include="scripts\controllers\tafelbollen\index.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="scripts\controllers\tafelbollen\tafelBollenCtrl.ts" />
     <TypeScriptCompile Include="scripts\models\challenge.ts" />
     <TypeScriptCompile Include="scripts\models\challengeDriver.ts" />
     <TypeScriptCompile Include="scripts\models\challengeDriverConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\challengeCompleteType.ts" />
     <TypeScriptCompile Include="scripts\models\challengeEndType.ts" />
+    <TypeScriptCompile Include="scripts\models\arithmeticChallengeFactory.ts" />
+    <TypeScriptCompile Include="scripts\models\arithmeticChallengeFactoryConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactory.ts" />
-    <TypeScriptCompile Include="scripts\models\challengeFactoryConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactoryType.ts" />
     <TypeScriptCompile Include="scripts\models\challengeLayoutType.ts" />
     <TypeScriptCompile Include="scripts\models\challengeStatus.ts" />

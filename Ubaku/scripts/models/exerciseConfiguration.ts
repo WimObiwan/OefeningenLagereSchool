@@ -3,7 +3,7 @@
 
     export class ExerciseConfiguration {
         public exerciseCompleteDriver: ExerciseCompleteDriverConfiguration = new ExerciseCompleteDriverConfiguration();
-        public challengeFactory: ChallengeFactoryConfiguration = new ChallengeFactoryConfiguration();
+        public arithmeticChallengeFactory: ArithmeticChallengeFactoryConfiguration = new ArithmeticChallengeFactoryConfiguration();
         public challengeDriver: ChallengeDriverConfiguration = new ChallengeDriverConfiguration();
     }
 }

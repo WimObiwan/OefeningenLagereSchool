@@ -17,7 +17,7 @@
     }
 
     export class ExerciseDriver implements IExerciseDriver {
-        private challengeFactory: ChallengeFactory;
+        private challengeFactory: IChallengeFactory;
         private challengeDriver: ChallengeDriver;
         private exerciseCompleteDriver: ExerciseCompleteDriver;
         private exercise: IExercise = new Exercise();
@@ -28,8 +28,8 @@
         public canMoveBackward: boolean = false;
         public canMoveForward: boolean = false;
 
-        public constructor(private configuration: ExerciseConfiguration, private $interval: ng.IIntervalService) {
-            this.challengeFactory = new ChallengeFactory(this.configuration.challengeFactory);
+        public constructor(private challengeFactory_: IChallengeFactory, private configuration: ExerciseConfiguration, private $interval: ng.IIntervalService) {
+            this.challengeFactory = challengeFactory_;
             this.challengeDriver = new ChallengeDriver(this, this.status.challenge, this.configuration.challengeDriver, this.$interval);
             this.exerciseCompleteDriver = new ExerciseCompleteDriver(this, this.configuration.exerciseCompleteDriver, this.$interval);
             this.status.exerciseTotalSteps = this.exerciseCompleteDriver.getTotalSteps();
