@@ -46,8 +46,9 @@
     <TypeScriptCompile Include="scripts\models\challengeDriverConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\challengeCompleteType.ts" />
     <TypeScriptCompile Include="scripts\models\challengeEndType.ts" />
+    <TypeScriptCompile Include="scripts\models\arithmeticChallengeFactory.ts" />
+    <TypeScriptCompile Include="scripts\models\arithmeticChallengeFactoryConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactory.ts" />
-    <TypeScriptCompile Include="scripts\models\challengeFactoryConfiguration.ts" />
     <TypeScriptCompile Include="scripts\models\challengeFactoryType.ts" />
     <TypeScriptCompile Include="scripts\models\challengeLayoutType.ts" />
     <TypeScriptCompile Include="scripts\models\challengeStatus.ts" />

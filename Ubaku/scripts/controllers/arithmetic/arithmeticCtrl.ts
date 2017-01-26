@@ -30,7 +30,8 @@
             if (this.$scope.exerciseDriver !== null) {
                 this.$scope.exerciseDriver.stop();
             }
-            this.$scope.exerciseDriver = new app.models.ExerciseDriver(configuration, this.$interval);
+            var arithmeticChallengeFactory = new app.models.ArithmeticChallengeFactory(configuration.arithmeticChallengeFactory);
+            this.$scope.exerciseDriver = new app.models.ExerciseDriver(arithmeticChallengeFactory, configuration, this.$interval);
             this.$scope.exerciseDriver.start();
         }
 
@@ -47,11 +48,11 @@
             configuration.exerciseCompleteDriver.completeAfterChallengesSolved = 10;
             configuration.exerciseCompleteDriver.completeAfterMinutes = 12;
 
-            configuration.challengeFactory.type = app.models.ChallengeFactoryType.Random;
-            configuration.challengeFactory.minNumber = 0;
-            configuration.challengeFactory.maxNumber = 10;
-            configuration.challengeFactory.primaryComponentSequence = app.models.SequenceType.Random;
-            configuration.challengeFactory.secondaryComponentSequence = app.models.SequenceType.Up;
+            configuration.arithmeticChallengeFactory.type = app.models.ChallengeFactoryType.Random;
+            configuration.arithmeticChallengeFactory.minNumber = 0;
+            configuration.arithmeticChallengeFactory.maxNumber = 10;
+            configuration.arithmeticChallengeFactory.primaryComponentSequence = app.models.SequenceType.Random;
+            configuration.arithmeticChallengeFactory.secondaryComponentSequence = app.models.SequenceType.Up;
 
             configuration.challengeDriver.completeType = app.models.ChallengeCompleteType.Solved;
             configuration.challengeDriver.endType = app.models.ChallengeEndType.ChallengeComplete;

@@ -1,7 +1,7 @@
 ﻿module app.models {
     "use strict";
 
-    export class ChallengeFactoryConfiguration {
+    export class ArithmeticChallengeFactoryConfiguration {
         public type: ChallengeFactoryType;
         public minNumber: number;
         public maxNumber: number;
