@@ -27,6 +27,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="home.html" />
     <Content Include="lib\angular-cookies.min.js" />
     <Content Include="lib\angular-route.min.js" />
     <Content Include="lib\angular-touch.min.js" />
