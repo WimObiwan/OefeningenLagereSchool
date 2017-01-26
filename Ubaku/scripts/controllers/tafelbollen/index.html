@@ -1,0 +1,217 @@
+﻿<h1>3<sup>e</sup> leerjaar - Tafelbollen</h1>
+
+<div class="alert alert-warning" role="alert">
+    <strong>Opgelet!</strong> Aan deze pagina wordt nog gewerkt. Kom later eens terug!
+</div>
+
+<!-- Options -->
+<div ng-show="exerciseDriver === null">
+    <h3>Opties</h3>
+    <div>
+        <dl class="dl-horizontal">
+            <!--<dt class="offset-top-lg">Getallen tussen:</dt>
+            <dd class="offset-top-lg">
+                <div class="form-inline">
+                    <input id="configurationChallengeFactoryMinNumber" type="number" ng-model="configuration.challengeFactory.minNumber" class="form-control width-sm" />
+                    <label for="configurationChallengeFactoryMaxNumber">en</label>
+                    <input id="configurationChallengeFactoryMaxNumber" type="number" ng-model="configuration.challengeFactory.maxNumber" class="form-control width-sm" />
+                </div>
+            </dd>-->
+            <dt class="offset-top-lg">Einde oefening:</dt>
+            <dd class="offset-top-lg">
+                <div class="form-inline">
+                    <input id="configurationExerciseCompleteDriverTypeInfinite" type="radio" ng-model="configuration.exerciseCompleteDriver.type" ng-value="{{ExerciseCompleteDriverType.Infinite}}" />
+                    <label for="configurationExerciseCompleteDriverTypeInfinite">nooit</label>
+                </div>
+                <div class="form-inline">
+                    <input id="configurationExerciseCompleteDriverTypeChallengesCompleted" type="radio" ng-model="configuration.exerciseCompleteDriver.type" ng-value="{{ExerciseCompleteDriverType.ChallengesCompleted}}" />
+                    <label for="configurationExerciseCompleteDriverTypeChallengesCompleted">na</label>
+                    <input id="configurationExerciseCompleteDriverCompleteAfterChallengesCompleted" type="number" ng-model="configuration.exerciseCompleteDriver.completeAfterChallengesCompleted" class="form-control width-sm" />
+                    <label for="configurationExerciseCompleteDriverCompleteAfterChallengesCompleted">oefeningen</label>
+                </div>
+                <div class="form-inline">
+                    <input id="configurationExerciseCompleteDriverTypeChallengesSolved" type="radio" ng-model="configuration.exerciseCompleteDriver.type" ng-value="{{ExerciseCompleteDriverType.ChallengesSolved}}" />
+                    <label for="configurationExerciseCompleteDriverTypeChallengesSolved">na</label>
+                    <input id="configurationExerciseCompleteDriverCompleteAfterChallengesSolved" type="number" ng-model="configuration.exerciseCompleteDriver.completeAfterChallengesSolved" class="form-control width-sm" />
+                    <label for="configurationExerciseCompleteDriverCompleteAfterChallengesSolved">juiste antwoorden</label>
+                </div>
+                <div class="form-inline">
+                    <input id="configurationExerciseCompleteDriverType" type="radio" ng-model="configuration.exerciseCompleteDriver.type" ng-value="{{ExerciseCompleteDriverType.Time}}" />
+                    <label for="configurationExerciseCompleteDriverType">na</label>
+                    <input id="configurationExerciseCompleteDriverCompleteAfterMinutes" type="number" ng-model="configuration.exerciseCompleteDriver.completeAfterMinutes" class="form-control width-sm" />
+                    <label for="configurationExerciseCompleteDriverCompleteAfterMinuten">minuten</label>
+                </div>
+            </dd>
+            <dt class="offset-top-lg">Einde opgave:</dt>
+            <dd class="offset-top-lg">
+                <div>
+                    <input id="configurationChallengeDriverCompleteTypeResponded" type="radio" ng-model="configuration.challengeDriver.completeType" ng-value="{{ChallengeCompleteType.Responded}}" />
+                    <label for="configurationChallengeDriverCompleteTypeResponded"><span class="glyphicon glyphicon-comment"></span> als ze beantwoord is</label>
+                </div>
+                <div>
+                    <input id="configurationChallengeDriverCompleteTypeSolved" type="radio" ng-model="configuration.challengeDriver.completeType" ng-value="{{ChallengeCompleteType.Solved}}" />
+                    <label for="configurationChallengeDriverCompleteTypeSolved"><span class="glyphicon glyphicon-ok"></span> als ze opgelost is</label>
+                </div>
+                <div class="form-inline">
+                    <input id="configurationChallengeDriverCompleteTypeTime" type="radio" ng-model="configuration.challengeDriver.completeType" ng-value="{{ChallengeCompleteType.Time}}" />
+                    <label for="configurationChallengeDriverCompleteTypeTime"><span class="glyphicon glyphicon-time"></span> na</label>
+                    <input id="configurationChallengeDriverCompleteAfterSeconds" type="number" ng-model="configuration.challengeDriver.completeAfterSeconds" class="form-control width-sm" />
+                    <label for="configurationChallengeDriverCompleteAfterSeconds">seconden</label>
+                </div>
+            </dd>
+            <dt class="offset-top-lg">Volgende opgave:</dt>
+            <dd class="offset-top-lg">
+                <div>
+                    <input id="configurationChallengeDriverEndTypeChallengeComplete" type="radio" ng-model="configuration.challengeDriver.endType" ng-value="{{ChallengeEndType.ChallengeComplete}}" />
+                    <label for="configurationChallengeDriverEndTypeChallengeComplete"><span class="glyphicon glyphicon-forward"></span> automatisch</label>
+                </div>
+                <div>
+                    <input id="configurationChallengeDriverEndTypeManual" type="radio" ng-model="configuration.challengeDriver.endType" ng-value="{{ChallengeEndType.Manual}}" />
+                    <label for="configurationChallengeDriverEndTypeManual"><span class="glyphicon glyphicon-step-forward"></span> manueel</label>
+                </div>
+            </dd>
+        </dl>
+        <button class="btn btn-default btn-success" ng-click="startExercise()"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Start</button>
+    </div>
+
+    <hr />
+    <div class="container">
+        Suggesties: &nbsp; <a href="mailto:wim@obiwan.be"><span class="glyphicon glyphicon-envelope"></span> wim@obiwan.be</a>
+    </div>
+
+</div>
+
+<div ng-hide="exerciseDriver === null">
+    <!-- Exercise Status -->
+    <div>
+        <h3>Voortgang</h3>
+        <div>
+            <dl class="dl-horizontal">
+                <dt ng-hide="exerciseDriver.status.exerciseTotalSteps === null && exerciseDriver.status.timeRemainingPercentage === null">Oefening</dt>
+                <dd ng-hide="exerciseDriver.status.exerciseTotalSteps === null && exerciseDriver.status.timeRemainingPercentage === null">
+                    <div ng-hide="exerciseDriver.status.exerciseTotalSteps === null">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="min-width: 4em;" ng-style="{ 'width': (exerciseDriver.status.exerciseCompletePercentage * 100) + '%'}">
+                                <span>{{exerciseDriver.status.exerciseCurrentStep}}</span>
+                                <span>/</span>
+                                <span>{{exerciseDriver.status.exerciseTotalSteps}}</span>
+                                <span>({{exerciseDriver.status.exerciseCompletePercentage | percentage:0}})</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-hide="exerciseDriver.status.timeRemainingPercentage === null">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped no-transition" role="progressbar" ng-style="{ 'width': ((1 - exerciseDriver.status.timeRemainingPercentage) * 100) + '%'}">
+                                <span>{{exerciseDriver.status.timeRemainingMilliseconds / 1000 | number:0}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </dd>
+                <dt>Score</dt>
+                <dd>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-{{exerciseDriver.status | bootstrap:'Status-Challenges'}}" role="progressbar" style="min-width: 4em;" ng-style="{ 'width': (exerciseDriver.status.challengesSolvedPercentage * 100) + '%'}">
+                            <span>{{exerciseDriver.status.challengesSolvedCount}}</span>
+                            <span>/</span>
+                            <span>{{exerciseDriver.status.challengesRespondedCount}}</span>
+                            <span>({{exerciseDriver.status.challengesSolvedPercentage | percentage:0}})</span>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+            <button class="btn btn-default btn-danger" ng-click="stopExercise()"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Stoppen</button>
+            <button class="btn btn-default btn-warning" ng-click="startExercise()"><span class="glyphicon glyphicon-repeat"></span>&nbsp;Opnieuw Beginnen</button>
+        </div>
+    </div>
+
+    <!-- Exercise Result -->
+    <div ng-show="exerciseDriver.status.isComplete">
+        <h3>Resultaat</h3>
+        <dl class="dl-horizontal">
+            <dt>Opgaven</dt>
+            <dd>{{exerciseDriver.status.challengesCompletedCount}}</dd>
+            <dt>Antwoorden</dt>
+            <dd>{{exerciseDriver.status.challengesRespondedCount}}</dd>
+            <dt>Juiste Antwoorden</dt>
+            <dd>{{exerciseDriver.status.challengesSolvedCount}}</dd>
+            <dt>Score</dt>
+            <dd>{{exerciseDriver.status.challengesSolvedPercentage | percentage:0}}</dd>
+        </dl>
+    </div>
+
+    <!-- Challenge -->
+    <div ng-hide="exerciseDriver.currentChallenge === null">
+        <h3>Opgave {{exerciseDriver.status.challengeNumber}}</h3>
+        <!-- Current Challenge -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="offset-top-lg offset-bottom-lg">
+                    <table ng-show="exerciseDriver.currentChallenge.layout === ChallengeLayoutType.SplitTop">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><a class="alert alert-info xxl">{{exerciseDriver.currentChallenge.uiComponents[0].content}}</a></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span class="xxl">/</span></td>
+                            <td></td>
+                            <td><span class="xxl">\</span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a class="alert alert-info xl">{{exerciseDriver.currentChallenge.uiComponents[1].content}}</a></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span ng-show="exerciseDriver.currentChallenge.getLastResponse() === null" class="alert alert-warning xl">?</span>
+                                <span ng-show="exerciseDriver.currentChallenge.getLastResponse() !== null && exerciseDriver.currentChallenge.getLastResponse().answer === null" class="alert xl alert-warning">X</span>
+                                <span ng-show="exerciseDriver.currentChallenge.getLastResponse() !== null && exerciseDriver.currentChallenge.getLastResponse().answer !== null" class="alert xl alert-{{exerciseDriver.currentChallenge.isSolved | bootstrap:'boolean'}}">{{exerciseDriver.currentChallenge.getLastResponse().answer}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <div ng-show="exerciseDriver.currentChallenge.layout === ChallengeLayoutType.LeftToRight">
+                        <span ng-repeat="uiComponent in exerciseDriver.currentChallenge.uiComponents">
+                            <span ng-show="uiComponent.type === ChallengeUIComponentType.PrimaryComponent" class="alert alert-info xxl">{{uiComponent.content}}</span>
+                            <span ng-show="uiComponent.type === ChallengeUIComponentType.SecondaryComponent" class="alert alert-info xl">{{uiComponent.content}}</span>
+                            <span ng-show="uiComponent.type === ChallengeUIComponentType.Ornament" class="alert xl">{{uiComponent.content}}</span>
+                            <span ng-show="uiComponent.type === ChallengeUIComponentType.AnswerPlaceholder">
+                                <span ng-show="exerciseDriver.currentChallenge.getLastResponse() === null" class="alert alert-warning xl">?</span>
+                                <span ng-show="exerciseDriver.currentChallenge.getLastResponse() !== null && exerciseDriver.currentChallenge.getLastResponse().answer === null" class="alert xl alert-warning">X</span>
+                                <span ng-show="exerciseDriver.currentChallenge.getLastResponse() !== null && exerciseDriver.currentChallenge.getLastResponse().answer !== null" class="alert xl alert-{{exerciseDriver.currentChallenge.isSolved | bootstrap:'boolean'}}">{{exerciseDriver.currentChallenge.getLastResponse().answer}}</span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="progress" ng-hide="exerciseDriver.status.challenge.timeRemainingPercentage === null">
+                    <div class="progress-bar progress-bar-striped no-transition" role="progressbar" ng-style="{ 'width': ((1 - exerciseDriver.status.challenge.timeRemainingPercentage) * 100) + '%'}">
+                        <span>{{exerciseDriver.status.challenge.timeRemainingMilliseconds / 1000 | number:0}}</span>
+                    </div>
+                </div>
+                <div class="offset-bottom-md" ng-hide="exerciseDriver.currentChallenge.isComplete">
+                    <span ng-repeat="availableAnswer in exerciseDriver.currentChallenge.availableAnswers">
+                        <button class="btn btn-default btn-lg btn-warning" ng-click="respondToCurrentChallenge(availableAnswer)">{{availableAnswer}}</button>
+                    </span>
+                </div>
+                <div>
+                    <button class="btn btn-default btn-lg btn-info" ng-disabled="!exerciseDriver.canMoveBackward" ng-click="moveBackward()"><span class="glyphicon glyphicon-step-backward"></span>&nbsp;Vorige</button>
+                    <button class="btn btn-default btn-lg btn-info" ng-hide="!exerciseDriver.canMoveForward" ng-click="moveForward()">Volgende&nbsp;<span class="glyphicon glyphicon-step-forward"></span></button>
+                    <button class="btn btn-default btn-lg btn-warning" ng-show="exerciseDriver.canSkipCurrentChallenge" ng-click="skipCurrentChallenge()">Overslaan&nbsp;<span class="glyphicon glyphicon-send"></span></button>
+                </div>
+            </div>
+        </div>
+        <!-- Last Response Status -->
+        <div ng-hide="exerciseDriver.status.challenge.lastResponseStatus === null" class="offset-top-lg">
+            <div class="alert xl alert-{{exerciseDriver.status.challenge.lastResponseStatus.messageSeverity | bootstrap:'Severity'}}">
+                <span ng-show="exerciseDriver.status.challenge.lastResponseStatus.messageSeverity === Severity.Success" class="glyphicon glyphicon-thumbs-up"></span>
+                <span ng-hide="exerciseDriver.status.challenge.lastResponseStatus.messageSeverity === Severity.Success" class="glyphicon glyphicon-thumbs-down"></span>
+                <span>{{exerciseDriver.status.challenge.lastResponseStatus.message}}</span>
+            </div>
+        </div>
+    </div>
+</div>

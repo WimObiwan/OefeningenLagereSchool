@@ -38,9 +38,11 @@
     <Content Include="lib\bootstrap.min.js" />
     <Content Include="lib\jquery.min.js" />
     <Content Include="scripts\controllers\arithmetic\index.html" />
+    <Content Include="scripts\controllers\tafelbollen\index.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="scripts\controllers\tafelbollen\tafelBollenCtrl.ts" />
     <TypeScriptCompile Include="scripts\models\challenge.ts" />
     <TypeScriptCompile Include="scripts\models\challengeDriver.ts" />
     <TypeScriptCompile Include="scripts\models\challengeDriverConfiguration.ts" />
