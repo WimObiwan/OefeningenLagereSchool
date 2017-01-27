@@ -31,7 +31,7 @@
                     <li class=""><a href="#/eerste-leerjaar/rekenen">1<sup>e</sup> leerjaar</a></li>
                     <li class=""><a href="#/derde-leerjaar/tafelbollen">3<sup>e</sup> leerjaar</a></li>
                 </ul>
-                <p class="navbar-text navbar-right"><small>v1.1-20170126</small></p>
+                <p class="navbar-text navbar-right small" id="version">v?</p>
             </div>
         </div>
     </nav>
@@ -48,6 +48,14 @@
 
   ga('create', 'UA-2703249-18', 'auto');
   ga('send', 'pageview');
+
+  var client = new XMLHttpRequest();
+  client.open('GET', 'version.txt');
+  client.onreadystatechange = function () {
+      var version = document.getElementById('version');
+      version.innerHTML = client.responseText.replace('\n', '-')
+  }
+  client.send();
 
     </script>
 
