@@ -9,14 +9,14 @@
     <h3>Opties</h3>
     <div>
         <dl class="dl-horizontal">
-            <!--<dt class="offset-top-lg">Getallen tussen:</dt>
+            <dt class="">Getallen tussen:</dt>
             <dd class="offset-top-lg">
                 <div class="form-inline">
-                    <input id="configurationChallengeFactoryMinNumber" type="number" ng-model="configuration.challengeFactory.minNumber" class="form-control width-sm" />
+                    <input id="configurationChallengeFactoryMinNumber" type="number" ng-model="configuration.tafelBollenChallengeFactory.minNumber" class="form-control width-sm" />
                     <label for="configurationChallengeFactoryMaxNumber">en</label>
-                    <input id="configurationChallengeFactoryMaxNumber" type="number" ng-model="configuration.challengeFactory.maxNumber" class="form-control width-sm" />
+                    <input id="configurationChallengeFactoryMaxNumber" type="number" ng-model="configuration.tafelBollenChallengeFactory.maxNumber" class="form-control width-sm" />
                 </div>
-            </dd>-->
+            </dd>
             <dt class="offset-top-lg">Einde oefening:</dt>
             <dd class="offset-top-lg">
                 <div class="form-inline">
@@ -137,9 +137,12 @@
     <!-- Challenge -->
     <div ng-hide="exerciseDriver.currentChallenge === null">
         <h3>Opgave {{exerciseDriver.status.challengeNumber}}</h3>
+
         <!-- Current Challenge -->
         <div class="panel panel-default">
             <div class="panel-body">
+                Welke cijfers staan op de tafelbol van {{exerciseDriver.currentChallenge.uiComponents[0].content}}
+                <!--
                 <div class="offset-top-lg offset-bottom-lg">
                     <table ng-show="exerciseDriver.currentChallenge.layout === ChallengeLayoutType.SplitTop">
                         <tr>
@@ -199,6 +202,7 @@
                     <button class="btn btn-default btn-lg btn-warning" ng-show="exerciseDriver.canSkipCurrentChallenge" ng-click="skipCurrentChallenge()">Overslaan&nbsp;<span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
+            -->
         </div>
         <!-- Last Response Status -->
         <div ng-hide="exerciseDriver.status.challenge.lastResponseStatus === null" class="offset-top-lg">

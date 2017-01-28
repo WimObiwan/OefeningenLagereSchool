@@ -3,56 +3,38 @@
 
     declare var ga: any;
 
-    export class ArithmeticChallengeFactory implements IChallengeFactory {
-        private originalType: ChallengeFactoryType = null;
-        private type: ChallengeFactoryType = null;
-        private primaryComponentSequence: SequenceType = null;
-        private secondaryComponentSequence: SequenceType = null;
+    export class TafelBollenChallengeFactory implements IChallengeFactory {
         private minNumber: number = null;
         private maxNumber: number = null;
         private availableAnswers: number[] = [];
-        private primaryComponentsQueue: number[] = [];
-        private secondaryComponentsQueue: number[] = [];
 
-        public constructor(configuration: ArithmeticChallengeFactoryConfiguration) {
+        public constructor(configuration: TafelBollenChallengeFactoryConfiguration) {
             // Determine the configuration parameters.
-            this.originalType = configuration.type || Defaults.ChallengeFactoryType;
-            this.primaryComponentSequence = configuration.primaryComponentSequence || Defaults.PrimaryComponentSequenceType;
-            this.secondaryComponentSequence = configuration.secondaryComponentSequence || Defaults.SecondaryComponentSequenceType;
             this.minNumber = configuration.minNumber || Defaults.MinNumber;
             this.maxNumber = configuration.maxNumber || Defaults.MaxNumber;
 
             // Generate the array of available answers.
-            this.availableAnswers = ArithmeticChallengeFactory.createArray(0, this.maxNumber, SequenceType.Up);
+            this.availableAnswers = TafelBollenChallengeFactory.createArray(0, this.maxNumber, SequenceType.Up);
         }
 
         public createChallenge(): app.models.IChallenge {
-            this.type = this.originalType;
-            if (this.type === ChallengeFactoryType.Random) {
-                switch (this.getRandomInt(0, 2)) {
-                    default:
-                    case 0:
-                        this.type = ChallengeFactoryType.SplitNumbers;
-                        break;
-                    case 1:
-                        this.type = ChallengeFactoryType.Add;
-                        break;
-                    case 2:
-                        this.type = ChallengeFactoryType.Subtract;
-                        break;
-                }
-            }
-
             if (ga) {
-                var typeText: string;
-                switch (this.type) {
-                    case ChallengeFactoryType.SplitNumbers: typeText = 'SplitNumbers'; break;
-                    case ChallengeFactoryType.Add: typeText = 'Add'; break;
-                    case ChallengeFactoryType.Subtract: typeText = 'Subtract'; break;
-                }
-                ga('send', 'event', 'Challenge', 'Start', typeText);
+                ga('send', 'event', 'leerjaar-3', 'tafelbollen', this.maxNumber.toString());
             }
 
+            var number = this.getRandomInt(this.minNumber, this.maxNumber);
+
+            throw new Error("Not Implemented");
+
+            //var uiComponents = [
+            //    new ChallengeUIComponent(ChallengeUIComponentType.PrimaryComponent, primaryComponent),
+            //    new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, secondaryComponent),
+            //    new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
+            //];
+
+            //return new app.models.Challenge(NotApplicable, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
+
+            /*
             if (this.type === ChallengeFactoryType.SplitNumbers || this.type === ChallengeFactoryType.Subtract || this.type === ChallengeFactoryType.Add) {
                 if (this.primaryComponentSequence === SequenceType.Random) {
                     var primaryComponent = this.getRandomInt(this.minNumber, this.maxNumber);
@@ -121,6 +103,7 @@
                 }
             }
             throw new Error("Unknown challenge type: " + this.type);
+            */
         }
 
         private static createArray(min: number, max: number, sequence: SequenceType): number[] {
@@ -131,7 +114,7 @@
             if (sequence === SequenceType.Up) {
                 // Do nothing extra.
             } else if (sequence === SequenceType.Random) {
-                ArithmeticChallengeFactory.shuffleArray(values);
+                TafelBollenChallengeFactory.shuffleArray(values);
             } else if (sequence === SequenceType.Down) {
                 values = values.reverse();
             } else {

@@ -1,37 +1,17 @@
 ﻿module app.models {
     "use strict";
 
-    export interface IChallenge extends IModelBase {
-        availableAnswers: number[];
-        solution: number;
-        layout: ChallengeLayoutType;
-        uiComponents: ChallengeUIComponent[];
-
-        isSolved: boolean;
-        isComplete: boolean;
-        responses: IResponse[];
-
-        equals(other: IChallenge): boolean;
-        addResponse(answer: number): ResponseStatus;
-        forceComplete(): void;
-        getResponseStatus(response: Response): ResponseStatus;
-        getLastResponse(): IResponse;
-    }
-
-    export class Challenge extends ModelBase implements IChallenge {
+    export class TafelBollenChallenge extends ModelBase implements IChallenge {
         public responses: IResponse[] = [];
         public isSolved: boolean = false;
         public isComplete: boolean = false;
 
-        constructor(public layout: ChallengeLayoutType, public uiComponents: ChallengeUIComponent[], public availableAnswers: number[], public solution: number, public correctResponseMessage: string, public incorrectResponseMessage: string) {
+        constructor(public uiComponents: ChallengeUIComponent[], public availableAnswers: number[], public solution: number, public correctResponseMessage: string, public incorrectResponseMessage: string) {
             super();
         }
 
-        public equals(other: IChallenge) {
+        public equals(other: ArithmeticChallenge) {
             if (other === null) {
-                return false;
-            }
-            if (other.layout !== this.layout) {
                 return false;
             }
             if (other.uiComponents.length !== this.uiComponents.length) {

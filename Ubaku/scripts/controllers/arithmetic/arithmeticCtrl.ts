@@ -48,6 +48,7 @@
             configuration.exerciseCompleteDriver.completeAfterChallengesSolved = 10;
             configuration.exerciseCompleteDriver.completeAfterMinutes = 12;
 
+            configuration.arithmeticChallengeFactory = new app.models.ArithmeticChallengeFactoryConfiguration();
             configuration.arithmeticChallengeFactory.type = app.models.ChallengeFactoryType.Random;
             configuration.arithmeticChallengeFactory.minNumber = 0;
             configuration.arithmeticChallengeFactory.maxNumber = 10;
