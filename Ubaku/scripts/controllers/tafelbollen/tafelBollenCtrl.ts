@@ -31,7 +31,7 @@
                 this.$scope.exerciseDriver.stop();
             }
             this.$scope.exerciseDriver = new app.models.ExerciseDriver(
-                new app.models.ArithmeticChallengeFactory(configuration.arithmeticChallengeFactory),
+                new app.models.TafelBollenChallengeFactory(configuration.tafelBollenChallengeFactory),
                 configuration, this.$interval);
             this.$scope.exerciseDriver.start();
         }
@@ -49,11 +49,9 @@
             configuration.exerciseCompleteDriver.completeAfterChallengesSolved = 10;
             configuration.exerciseCompleteDriver.completeAfterMinutes = 12;
 
-            configuration.arithmeticChallengeFactory.type = app.models.ChallengeFactoryType.Random;
-            configuration.arithmeticChallengeFactory.minNumber = 0;
-            configuration.arithmeticChallengeFactory.maxNumber = 10;
-            configuration.arithmeticChallengeFactory.primaryComponentSequence = app.models.SequenceType.Random;
-            configuration.arithmeticChallengeFactory.secondaryComponentSequence = app.models.SequenceType.Up;
+            configuration.tafelBollenChallengeFactory = new app.models.TafelBollenChallengeFactoryConfiguration();
+            configuration.tafelBollenChallengeFactory.minNumber = 11;
+            configuration.tafelBollenChallengeFactory.maxNumber = 40;
 
             configuration.challengeDriver.completeType = app.models.ChallengeCompleteType.Solved;
             configuration.challengeDriver.endType = app.models.ChallengeEndType.ChallengeComplete;

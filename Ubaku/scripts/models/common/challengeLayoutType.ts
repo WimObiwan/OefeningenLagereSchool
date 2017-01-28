@@ -2,6 +2,7 @@
     "use strict";
 
     export enum ChallengeLayoutType {
+        NotApplicable,
         SplitTop,
         LeftToRight
     }
