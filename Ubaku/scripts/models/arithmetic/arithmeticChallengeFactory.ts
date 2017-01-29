@@ -1,8 +1,6 @@
 ﻿module app.models {
     "use strict";
 
-    declare var ga: any;
-
     export class ArithmeticChallengeFactory implements IChallengeFactory {
         private originalType: ChallengeFactoryType = null;
         private type: ChallengeFactoryType = null;
@@ -41,16 +39,6 @@
                         this.type = ChallengeFactoryType.Subtract;
                         break;
                 }
-            }
-
-            if (ga) {
-                var typeText: string;
-                switch (this.type) {
-                    case ChallengeFactoryType.SplitNumbers: typeText = 'SplitNumbers'; break;
-                    case ChallengeFactoryType.Add: typeText = 'Add'; break;
-                    case ChallengeFactoryType.Subtract: typeText = 'Subtract'; break;
-                }
-                ga('send', 'event', 'Challenge', 'Start', typeText);
             }
 
             if (this.type === ChallengeFactoryType.SplitNumbers || this.type === ChallengeFactoryType.Subtract || this.type === ChallengeFactoryType.Add) {

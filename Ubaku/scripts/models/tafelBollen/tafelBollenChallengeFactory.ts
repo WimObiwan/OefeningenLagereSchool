@@ -1,8 +1,6 @@
 ﻿module app.models {
     "use strict";
 
-    declare var ga: any;
-
     export class TafelBollenChallengeFactory implements IChallengeFactory {
         private minNumber: number = null;
         private maxNumber: number = null;
@@ -21,10 +19,6 @@
         }
 
         public createChallenge(): app.models.IChallenge {
-            if (ga) {
-                ga('send', 'event', 'leerjaar-3', 'tafelbollen', this.maxNumber.toString());
-            }
-
             var solution : Array<number> = [];
             var number : number;
 
