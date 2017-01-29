@@ -2,10 +2,11 @@
     "use strict";
 
     export class ArithmeticChallenge extends ModelBase implements IChallenge {
-        public responses: IResponse[] = [];
         public isSolved: boolean = false;
         public isComplete: boolean = false;
+        public responseCount: number = 0;
         public layout: ChallengeLayoutType;
+        public lastResponse: IResponse = null;
 
         constructor(public layout_: ChallengeLayoutType, public uiComponents: ChallengeUIComponent[], public availableAnswers: number[], public solution: number, public correctResponseMessage: string, public incorrectResponseMessage: string) {
             super();
@@ -32,16 +33,13 @@
         }
 
         public addResponse(answer: number): ResponseStatus {
-            var response = new Response(answer, this.solution === answer);
-            this.responses.push(response);
-            this.isSolved = response.isSolution;
-            return this.getResponseStatus(response);
+            this.lastResponse = new Response(answer, this.solution === answer);
+            this.responseCount++;
+            this.isSolved = this.lastResponse.isSolution;
+            return this.getResponseStatus(this.lastResponse);
         }
 
         public forceComplete(): void {
-            if (this.responses.length === 0) {
-                this.addResponse(null);
-            }
             this.isComplete = true;
         }
 
@@ -50,8 +48,8 @@
             return new ResponseStatus(response, this.getResponseMessage(response), messageSeverity);
         }
 
-        public getLastResponse() {
-            return this.responses.length === 0 ? null : this.responses[this.responses.length - 1];
+        public getLastResponse(): IResponse {
+            return this.lastResponse;
         }
 
         private getResponseMessage(response: IResponse): string {

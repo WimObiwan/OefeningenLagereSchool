@@ -69,7 +69,7 @@
         }
 
         public getChallengesRespondedCount(): number {
-            return this.reduceChallenges((challenge) => challenge.responses.length);
+            return this.reduceChallenges((challenge) => challenge.responseCount);
         }
 
         public getChallengesCompletedCount(): number {

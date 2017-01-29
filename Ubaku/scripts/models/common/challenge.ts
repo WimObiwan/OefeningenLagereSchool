@@ -9,7 +9,7 @@
 
         isSolved: boolean;
         isComplete: boolean;
-        responses: IResponse[];
+        responseCount: number;
 
         equals(other: IChallenge): boolean;
         addResponse(answer: number): ResponseStatus;

@@ -5,6 +5,7 @@
         public responses: IResponse[] = [];
         public isSolved: boolean = false;
         public isComplete: boolean = false;
+        public responseCount: number = 0;
 
         constructor(public uiComponents: ChallengeUIComponent[], public availableAnswers: number[], public solution: number[], public correctResponseMessage: string, public incorrectResponseMessage: string) {
             super();
@@ -28,6 +29,7 @@
         public addResponse(answer: number): ResponseStatus {
             var response = new Response(answer, false); // TODO!!!
             this.responses.push(response);
+            this.responseCount++;
             this.isSolved = response.isSolution;
             return this.getResponseStatus(response);
         }

@@ -19,7 +19,7 @@
         public setChallenge(challenge: IChallenge) {
             this.stopTimer();
             this.challenge = challenge;
-            if (this.challenge !== null && this.challenge.responses.length > 0) {
+            if (this.challenge !== null && this.challenge.responseCount > 0) {
                 this.status.lastResponseStatus = this.challenge.getResponseStatus(this.challenge.getLastResponse());
             }
             if (this.challenge !== null && !this.challenge.isComplete && this.completeType === ChallengeCompleteType.Time) {
@@ -88,9 +88,9 @@
             if (this.completeType === ChallengeCompleteType.Solved) {
                 return this.challenge.isSolved;
             } else if (this.completeType === ChallengeCompleteType.Responded) {
-                return this.challenge.responses.length > 0;
+                return this.challenge.responseCount > 0;
             } else if (this.completeType === ChallengeCompleteType.Time) {
-                return this.challenge.responses.length > 0 || this.getChallengeTimeRemainingMilliseconds() <= 0;
+                return this.challenge.responseCount > 0 || this.getChallengeTimeRemainingMilliseconds() <= 0;
             } else {
                 throw new Error("Unknown challenge complete type: " + this.completeType);
             }
