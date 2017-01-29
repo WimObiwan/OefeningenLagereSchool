@@ -6,8 +6,6 @@
         exerciseDriver: app.models.IExerciseDriver;
         startExercise(): void;
         stopExercise(): void;
-        moveBackward(): void;
-        moveForward(): void;
         respondToCurrentChallenge(answer: number): void;
         skipCurrentChallenge(): void;
     }
@@ -18,8 +16,6 @@
             this.$scope.configuration = this.getDefaultConfiguration();
             this.$scope.startExercise = () => this.startExercise();
             this.$scope.stopExercise = () => this.stopExercise();
-            this.$scope.moveBackward = () => this.$scope.exerciseDriver.moveBackward();
-            this.$scope.moveForward = () => this.$scope.exerciseDriver.moveForward();
             this.$scope.respondToCurrentChallenge = (answer) => this.$scope.exerciseDriver.respondToCurrentChallenge(answer);
             this.$scope.skipCurrentChallenge = () => this.$scope.exerciseDriver.skipCurrentChallenge();
             this.$scope.exerciseDriver = null;

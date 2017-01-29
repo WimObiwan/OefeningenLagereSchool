@@ -45,18 +45,6 @@
             }
         }
 
-        public canMoveBackward(): boolean {
-            return this.canMoveForward();
-        }
-
-        public canMoveForward(): boolean {
-            if (this.completeType === ChallengeCompleteType.Time) {
-                return this.challenge === null || this.challenge.isComplete;
-            } else {
-                return true;
-            }
-        }
-
         public stop(): void {
             this.stopTimer();
         }
