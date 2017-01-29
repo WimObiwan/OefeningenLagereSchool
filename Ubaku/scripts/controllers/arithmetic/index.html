@@ -217,10 +217,10 @@
                     </table>
                     <div ng-show="exerciseDriver.currentChallenge.layout === ChallengeLayoutType.LeftToRight">
                         <span ng-repeat="uiComponent in exerciseDriver.currentChallenge.uiComponents">
-                            <span ng-show="uiComponent.type === ChallengeUIComponentType.PrimaryComponent" class="alert alert-info xxl">{{uiComponent.content}}</span>
-                            <span ng-show="uiComponent.type === ChallengeUIComponentType.SecondaryComponent" class="alert alert-info xl">{{uiComponent.content}}</span>
-                            <span ng-show="uiComponent.type === ChallengeUIComponentType.Ornament" class="alert xl">{{uiComponent.content}}</span>
-                            <span ng-show="uiComponent.type === ChallengeUIComponentType.AnswerPlaceholder">
+                            <span ng-show="uiComponent.type === ArithmeticChallengeUIComponentType.PrimaryComponent" class="alert alert-info xxl">{{uiComponent.content}}</span>
+                            <span ng-show="uiComponent.type === ArithmeticChallengeUIComponentType.SecondaryComponent" class="alert alert-info xl">{{uiComponent.content}}</span>
+                            <span ng-show="uiComponent.type === ArithmeticChallengeUIComponentType.Ornament" class="alert xl">{{uiComponent.content}}</span>
+                            <span ng-show="uiComponent.type === ArithmeticChallengeUIComponentType.AnswerPlaceholder">
                                 <span ng-show="exerciseDriver.currentChallenge.getLastResponse() === null" class="alert alert-warning xl">?</span>
                                 <span ng-show="exerciseDriver.currentChallenge.getLastResponse() !== null && exerciseDriver.currentChallenge.getLastResponse().answer === null" class="alert xl alert-warning">X</span>
                                 <span ng-show="exerciseDriver.currentChallenge.getLastResponse() !== null && exerciseDriver.currentChallenge.getLastResponse().answer !== null" class="alert xl alert-{{exerciseDriver.currentChallenge.isSolved | bootstrap:'boolean'}}">{{exerciseDriver.currentChallenge.getLastResponse().answer}}</span>

@@ -44,6 +44,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="scripts\controllers\tafelBollen\tafelBollenCtrl.ts" />
     <TypeScriptCompile Include="scripts\models\arithmetic\arithmeticChallenge.ts" />
+    <TypeScriptCompile Include="scripts\models\tafelBollen\tafelBollenChallengeUIComponentType.ts" />
     <TypeScriptCompile Include="scripts\models\tafelBollen\tafelBollenChallenge.ts" />
     <TypeScriptCompile Include="scripts\models\tafelBollen\tafelBollenChallengeFactory.ts" />
     <TypeScriptCompile Include="scripts\models\tafelBollen\tafelBollenChallengeFactoryConfiguration.ts" />
@@ -59,7 +60,7 @@
     <TypeScriptCompile Include="scripts\models\common\challengeLayoutType.ts" />
     <TypeScriptCompile Include="scripts\models\common\challengeStatus.ts" />
     <TypeScriptCompile Include="scripts\models\common\challengeUIComponent.ts" />
-    <TypeScriptCompile Include="scripts\models\common\challengeUIComponentType.ts" />
+    <TypeScriptCompile Include="scripts\models\arithmetic\arithmeticChallengeUIComponentType.ts" />
     <TypeScriptCompile Include="scripts\models\common\constants.ts" />
     <TypeScriptCompile Include="scripts\models\common\defaults.ts" />
     <TypeScriptCompile Include="scripts\models\common\exerciseConfiguration.ts" />

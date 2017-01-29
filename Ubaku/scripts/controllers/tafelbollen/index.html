@@ -141,7 +141,7 @@
         <!-- Current Challenge -->
         <div class="panel panel-default">
             <div class="panel-body">
-                Welke cijfers staan op de tafelbol van {{exerciseDriver.currentChallenge.uiComponents[0].content}}
+                Welke cijfers staan op de tafelbol van <span class = "badge">{{exerciseDriver.currentChallenge.uiComponents[0].content}}</span>
                 <!--
                 <div class="offset-top-lg offset-bottom-lg">
                     <table ng-show="exerciseDriver.currentChallenge.layout === ChallengeLayoutType.SplitTop">
@@ -184,6 +184,7 @@
                         </span>
                     </div>
                 </div>
+                -->
             </div>
             <div class="panel-footer">
                 <div class="progress" ng-hide="exerciseDriver.status.challenge.timeRemainingPercentage === null">
@@ -202,7 +203,6 @@
                     <button class="btn btn-default btn-lg btn-warning" ng-show="exerciseDriver.canSkipCurrentChallenge" ng-click="skipCurrentChallenge()">Overslaan&nbsp;<span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
-            -->
         </div>
         <!-- Last Response Status -->
         <div ng-hide="exerciseDriver.status.challenge.lastResponseStatus === null" class="offset-top-lg">

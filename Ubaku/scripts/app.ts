@@ -84,6 +84,6 @@ module app {
             $rootScope.ChallengeEndType = app.models.ChallengeEndType;
             $rootScope.SequenceType = app.models.SequenceType;
             $rootScope.ChallengeLayoutType = app.models.ChallengeLayoutType;
-            $rootScope.ChallengeUIComponentType = app.models.ChallengeUIComponentType;
+            $rootScope.ArithmeticChallengeUIComponentType = app.models.ArithmeticChallengeUIComponentType;
         }]);
 }

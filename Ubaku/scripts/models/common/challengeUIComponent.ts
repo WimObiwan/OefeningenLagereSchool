@@ -2,7 +2,7 @@
     "use strict";
 
     export class ChallengeUIComponent {
-        constructor(public type: ChallengeUIComponentType, public content?: any) {
+        constructor(public type: number, public content?: any) {
         }
 
         equals(other: ChallengeUIComponent): boolean {

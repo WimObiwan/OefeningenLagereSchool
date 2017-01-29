@@ -85,9 +85,9 @@
                     // Split Numbers.
                     var layout = ChallengeLayoutType.SplitTop;
                     var uiComponents = [
-                        new ChallengeUIComponent(ChallengeUIComponentType.PrimaryComponent, primaryComponent),
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, secondaryComponent),
-                        new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.PrimaryComponent, primaryComponent),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.SecondaryComponent, secondaryComponent),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.AnswerPlaceholder)
                     ];
                     var correctResponseMessage = "Goed zo! " + primaryComponent + " kan je splitsen in " + secondaryComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
                     var incorrectResponseMessage = "Jammer! " + primaryComponent + " kan je niet splitsen in " + secondaryComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
@@ -96,11 +96,11 @@
                     // Subtract.
                     var layout = ChallengeLayoutType.LeftToRight;
                     var uiComponents = [
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, primaryComponent),
-                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "-"),
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, secondaryComponent),
-                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "="),
-                        new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.SecondaryComponent, primaryComponent),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.Ornament, "-"),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.SecondaryComponent, secondaryComponent),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.Ornament, "="),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.AnswerPlaceholder)
                     ];
                     var correctResponseMessage = "Goed zo! " + primaryComponent + " min " + secondaryComponent + " is gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
                     var incorrectResponseMessage = "Jammer! " + primaryComponent + " min " + secondaryComponent + " is niet gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
@@ -109,11 +109,11 @@
                     // Add.
                     var layout = ChallengeLayoutType.LeftToRight;
                     var uiComponents = [
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, solution),
-                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "+"),
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, secondaryComponent),
-                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "="),
-                        new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.SecondaryComponent, solution),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.Ornament, "+"),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.SecondaryComponent, secondaryComponent),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.Ornament, "="),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.AnswerPlaceholder)
                     ];
                     var correctResponseMessage = "Goed zo! " + solution + " plus " + secondaryComponent + " is gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
                     var incorrectResponseMessage = "Jammer! " + solution + " plus " + secondaryComponent + " is niet gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";

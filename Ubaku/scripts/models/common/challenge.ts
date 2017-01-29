@@ -3,7 +3,7 @@
 
     export interface IChallenge extends IModelBase {
         availableAnswers: number[];
-        solution: number;
+        //solution: number;
         //layout: ChallengeLayoutType;
         uiComponents: ChallengeUIComponent[];
 
