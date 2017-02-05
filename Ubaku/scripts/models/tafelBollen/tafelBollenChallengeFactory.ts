@@ -1,8 +1,6 @@
 ﻿module app.models {
     "use strict";
 
-    declare var ga: any;
-
     export class TafelBollenChallengeFactory implements IChallengeFactory {
         private minNumber: number = null;
         private maxNumber: number = null;
@@ -14,25 +12,37 @@
             this.maxNumber = configuration.maxNumber || Defaults.MaxNumber;
 
             // Generate the array of available answers.
-            this.availableAnswers = TafelBollenChallengeFactory.createArray(0, this.maxNumber, SequenceType.Up);
+            if (this.minNumber > 100) this.minNumber = 100;
+            if (this.maxNumber > 100) this.maxNumber = 100;
+
+            this.availableAnswers = TafelBollenChallengeFactory.createArray(2, 10, SequenceType.Up);
         }
 
         public createChallenge(): app.models.IChallenge {
-            if (ga) {
-                ga('send', 'event', 'leerjaar-3', 'tafelbollen', this.maxNumber.toString());
-            }
+            var solution : Array<number> = [];
+            var number : number;
 
-            var number = this.getRandomInt(this.minNumber, this.maxNumber);
+            do {
+                number = this.getRandomInt(this.minNumber, this.maxNumber);
 
-            throw new Error("Not Implemented");
+                for (var factor = 2; factor <= Math.sqrt(number); factor++) {
+                    var otherFactor = number / factor;
+                    if (number % factor === 0 && otherFactor <= 10) {
+                        solution.push(factor);
+                        if (otherFactor != factor)
+                            solution.push(otherFactor);
+                    }
+                }
+            } while (solution.length == 0);
 
-            //var uiComponents = [
-            //    new ChallengeUIComponent(ChallengeUIComponentType.PrimaryComponent, primaryComponent),
-            //    new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, secondaryComponent),
-            //    new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
-            //];
+            var uiComponents = [
+                new ChallengeUIComponent(TafelBollenChallengeUIComponentType.Number, number),
+            ];
 
-            //return new app.models.Challenge(NotApplicable, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
+            var correctResponseMessage = "Goed zo!"; //+ primaryComponent + " kan je splitsen in " + secondaryComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
+            var incorrectResponseMessage = "Jammer! De oplossing is " + solution.join(", "); // + primaryComponent + " kan je niet splitsen in " + secondaryComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
+
+            return new app.models.TafelBollenChallenge(uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
 
             /*
             if (this.type === ChallengeFactoryType.SplitNumbers || this.type === ChallengeFactoryType.Subtract || this.type === ChallengeFactoryType.Add) {

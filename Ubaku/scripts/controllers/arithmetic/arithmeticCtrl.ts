@@ -6,8 +6,6 @@
         exerciseDriver: app.models.IExerciseDriver;
         startExercise(): void;
         stopExercise(): void;
-        moveBackward(): void;
-        moveForward(): void;
         respondToCurrentChallenge(answer: number): void;
         skipCurrentChallenge(): void;
     }
@@ -18,8 +16,6 @@
             this.$scope.configuration = this.getDefaultConfiguration();
             this.$scope.startExercise = () => this.startExercise();
             this.$scope.stopExercise = () => this.stopExercise();
-            this.$scope.moveBackward = () => this.$scope.exerciseDriver.moveBackward();
-            this.$scope.moveForward = () => this.$scope.exerciseDriver.moveForward();
             this.$scope.respondToCurrentChallenge = (answer) => this.$scope.exerciseDriver.respondToCurrentChallenge(answer);
             this.$scope.skipCurrentChallenge = () => this.$scope.exerciseDriver.skipCurrentChallenge();
             this.$scope.exerciseDriver = null;
@@ -54,9 +50,9 @@
             configuration.arithmeticChallengeFactory.maxNumber = 10;
             configuration.arithmeticChallengeFactory.primaryComponentSequence = app.models.SequenceType.Random;
             configuration.arithmeticChallengeFactory.secondaryComponentSequence = app.models.SequenceType.Up;
+            configuration.arithmeticChallengeFactory.showNumberPatternType = app.models.ShowNumberPatternType.None;
 
             configuration.challengeDriver.completeType = app.models.ChallengeCompleteType.Solved;
-            configuration.challengeDriver.endType = app.models.ChallengeEndType.ChallengeComplete;
             configuration.challengeDriver.completeAfterSeconds = 10;
 
             return configuration;

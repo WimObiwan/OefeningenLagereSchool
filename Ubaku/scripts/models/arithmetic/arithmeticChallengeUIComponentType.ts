@@ -1,7 +1,7 @@
 ﻿module app.models {
     "use strict";
 
-    export enum ChallengeUIComponentType {
+    export enum ArithmeticChallengeUIComponentType {
         PrimaryComponent,
         SecondaryComponent,
         AnswerPlaceholder,

@@ -1,8 +1,6 @@
 ﻿module app.models {
     "use strict";
 
-    declare var ga: any;
-
     export class ArithmeticChallengeFactory implements IChallengeFactory {
         private originalType: ChallengeFactoryType = null;
         private type: ChallengeFactoryType = null;
@@ -43,16 +41,6 @@
                 }
             }
 
-            if (ga) {
-                var typeText: string;
-                switch (this.type) {
-                    case ChallengeFactoryType.SplitNumbers: typeText = 'SplitNumbers'; break;
-                    case ChallengeFactoryType.Add: typeText = 'Add'; break;
-                    case ChallengeFactoryType.Subtract: typeText = 'Subtract'; break;
-                }
-                ga('send', 'event', 'Challenge', 'Start', typeText);
-            }
-
             if (this.type === ChallengeFactoryType.SplitNumbers || this.type === ChallengeFactoryType.Subtract || this.type === ChallengeFactoryType.Add) {
                 if (this.primaryComponentSequence === SequenceType.Random) {
                     var primaryComponent = this.getRandomInt(this.minNumber, this.maxNumber);
@@ -85,39 +73,45 @@
                     // Split Numbers.
                     var layout = ChallengeLayoutType.SplitTop;
                     var uiComponents = [
-                        new ChallengeUIComponent(ChallengeUIComponentType.PrimaryComponent, primaryComponent),
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, secondaryComponent),
-                        new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.PrimaryComponent, primaryComponent),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.SecondaryComponent, secondaryComponent),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.AnswerPlaceholder)
                     ];
                     var correctResponseMessage = "Goed zo! " + primaryComponent + " kan je splitsen in " + secondaryComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
                     var incorrectResponseMessage = "Jammer! " + primaryComponent + " kan je niet splitsen in " + secondaryComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
-                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
+                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, solution,
+                        secondaryComponent, solution, 0,
+                        correctResponseMessage, incorrectResponseMessage);
                 } else if (this.type === ChallengeFactoryType.Subtract) {
                     // Subtract.
                     var layout = ChallengeLayoutType.LeftToRight;
                     var uiComponents = [
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, primaryComponent),
-                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "-"),
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, secondaryComponent),
-                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "="),
-                        new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.SecondaryComponent, primaryComponent),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.Ornament, "-"),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.SecondaryComponent, secondaryComponent),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.Ornament, "="),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.AnswerPlaceholder)
                     ];
                     var correctResponseMessage = "Goed zo! " + primaryComponent + " min " + secondaryComponent + " is gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
                     var incorrectResponseMessage = "Jammer! " + primaryComponent + " min " + secondaryComponent + " is niet gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
-                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
+                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, solution,
+                        solution, 0, secondaryComponent,
+                        correctResponseMessage, incorrectResponseMessage);
                 } else if (this.type === ChallengeFactoryType.Add) {
                     // Add.
                     var layout = ChallengeLayoutType.LeftToRight;
                     var uiComponents = [
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, solution),
-                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "+"),
-                        new ChallengeUIComponent(ChallengeUIComponentType.SecondaryComponent, secondaryComponent),
-                        new ChallengeUIComponent(ChallengeUIComponentType.Ornament, "="),
-                        new ChallengeUIComponent(ChallengeUIComponentType.AnswerPlaceholder)
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.SecondaryComponent, solution),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.Ornament, "+"),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.SecondaryComponent, secondaryComponent),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.Ornament, "="),
+                        new ChallengeUIComponent(ArithmeticChallengeUIComponentType.AnswerPlaceholder)
                     ];
                     var correctResponseMessage = "Goed zo! " + solution + " plus " + secondaryComponent + " is gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
                     var incorrectResponseMessage = "Jammer! " + solution + " plus " + secondaryComponent + " is niet gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
-                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, primaryComponent, correctResponseMessage, incorrectResponseMessage);
+                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, primaryComponent,
+                        solution, secondaryComponent, 0,
+                        correctResponseMessage, incorrectResponseMessage);
                 }
             }
             throw new Error("Unknown challenge type: " + this.type);

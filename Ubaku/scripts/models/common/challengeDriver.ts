@@ -3,7 +3,6 @@
 
     export class ChallengeDriver {
         private completeType: ChallengeCompleteType;
-        private endType: ChallengeEndType;
         private completeAfterMilliseconds: number;
         private challenge: IChallenge = null;
         private challengeStartTime: Date = null;
@@ -12,14 +11,13 @@
         constructor(private exerciseDriver: ExerciseDriver, private status: ChallengeStatus, configuration: ChallengeDriverConfiguration, private $interval: ng.IIntervalService) {
             // Determine the configuration parameters.
             this.completeType = configuration.completeType || Defaults.ChallengeCompleteType;
-            this.endType = configuration.endType || Defaults.ChallengeEndType;
             this.completeAfterMilliseconds = 1000 * (configuration.completeAfterSeconds || Defaults.ChallengeCompleteAfterSeconds);
         }
 
         public setChallenge(challenge: IChallenge) {
             this.stopTimer();
             this.challenge = challenge;
-            if (this.challenge !== null && this.challenge.responses.length > 0) {
+            if (this.challenge !== null && this.challenge.responseCount > 0) {
                 this.status.lastResponseStatus = this.challenge.getResponseStatus(this.challenge.getLastResponse());
             }
             if (this.challenge !== null && !this.challenge.isComplete && this.completeType === ChallengeCompleteType.Time) {
@@ -42,18 +40,6 @@
                 return false;
             } else {
                 return !this.challenge.isComplete;
-            }
-        }
-
-        public canMoveBackward(): boolean {
-            return this.canMoveForward();
-        }
-
-        public canMoveForward(): boolean {
-            if (this.completeType === ChallengeCompleteType.Time) {
-                return this.challenge === null || this.challenge.isComplete;
-            } else {
-                return true;
             }
         }
 
@@ -83,6 +69,7 @@
             if (challengeTimeRemainingMilliseconds <= 0) {
                 this.challenge.forceComplete();
                 this.onChallengeComplete();
+                this.status.lastResponseStatus = this.challenge.addResponse(null);
             }
         }
 
@@ -100,22 +87,16 @@
             if (this.completeType === ChallengeCompleteType.Solved) {
                 return this.challenge.isSolved;
             } else if (this.completeType === ChallengeCompleteType.Responded) {
-                return this.challenge.responses.length > 0;
+                return this.challenge.responseCount > 0;
             } else if (this.completeType === ChallengeCompleteType.Time) {
-                return this.challenge.responses.length > 0 || this.getChallengeTimeRemainingMilliseconds() <= 0;
+                return this.challenge.responseCount > 0 || this.getChallengeTimeRemainingMilliseconds() <= 0;
             } else {
                 throw new Error("Unknown challenge complete type: " + this.completeType);
             }
         }
 
         private shouldStartNewChallenge(): boolean {
-            if (this.endType === ChallengeEndType.Manual) {
-                return false;
-            } else if (this.endType === ChallengeEndType.ChallengeComplete) {
-                return this.challenge.isComplete;
-            } else {
-                throw new Error("Unknown challenge end type: " + this.completeType);
-            }
+            return this.challenge.isComplete;
         }
     }
 }

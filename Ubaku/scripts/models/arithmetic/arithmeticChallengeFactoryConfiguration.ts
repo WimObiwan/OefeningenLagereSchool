@@ -7,5 +7,6 @@
         public maxNumber: number;
         public primaryComponentSequence: app.models.SequenceType;
         public secondaryComponentSequence: app.models.SequenceType;
+        public showNumberPatternType: app.models.ShowNumberPatternType;
     }
 }

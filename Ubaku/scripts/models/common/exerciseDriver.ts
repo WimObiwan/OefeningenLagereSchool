@@ -5,15 +5,11 @@
         status: ExerciseStatus;
         currentChallenge: IChallenge;
         canSkipCurrentChallenge: boolean;
-        canMoveBackward: boolean;
-        canMoveForward: boolean;
 
         start(): void;
         stop(): void;
         respondToCurrentChallenge(answer: number): void;
         skipCurrentChallenge(): void;
-        moveBackward(): void;
-        moveForward(): void;
     }
 
     export class ExerciseDriver implements IExerciseDriver {
@@ -25,8 +21,6 @@
         public status: ExerciseStatus = new ExerciseStatus();
         public currentChallenge: IChallenge = null;
         public canSkipCurrentChallenge: boolean = true;
-        public canMoveBackward: boolean = false;
-        public canMoveForward: boolean = false;
 
         public constructor(private challengeFactory_: IChallengeFactory, private configuration: ExerciseConfiguration, private $interval: ng.IIntervalService) {
             this.challengeFactory = challengeFactory_;
@@ -74,29 +68,8 @@
             this.updateUI();
         }
 
-        public moveBackward(): void {
-            var currentChallengeIndex = this.exercise.challenges.indexOf(this.currentChallenge);
-            if (currentChallengeIndex > 0) {
-                // Move backward in the list.
-                this.setCurrentChallenge(this.exercise.challenges[currentChallengeIndex - 1]);
-            }
-            this.updateUI();
-        }
-
-        public moveForward(): void {
-            var currentChallengeIndex = this.exercise.challenges.indexOf(this.currentChallenge);
-            if (currentChallengeIndex < this.exercise.challenges.length - 1) {
-                // Move forward in the list.
-                this.setCurrentChallenge(this.exercise.challenges[currentChallengeIndex + 1]);
-            } else if (this.canMoveForwardPastEnd()) {
-                // We're at the last challenge and it's complete, so moving to the next actually means starting a new challenge.
-                this.onChallengeComplete(true);
-            }
-            this.updateUI();
-        }
-
         public getChallengesRespondedCount(): number {
-            return this.reduceChallenges((challenge) => challenge.responses.length);
+            return this.reduceChallenges((challenge) => challenge.responseCount);
         }
 
         public getChallengesCompletedCount(): number {
@@ -143,14 +116,6 @@
             this.status.exerciseCompletePercentage = this.status.exerciseTotalSteps > 0 ? this.status.exerciseCurrentStep / this.status.exerciseTotalSteps : null;
             var currentChallengeIndex = this.exercise.challenges.indexOf(this.currentChallenge);
             this.canSkipCurrentChallenge = this.challengeDriver.canSkip();
-            this.canMoveBackward = this.challengeDriver.canMoveBackward() && (currentChallengeIndex > 0);
-            this.canMoveForward = this.challengeDriver.canMoveForward() && ((currentChallengeIndex < this.exercise.challenges.length - 1) || this.canMoveForwardPastEnd());
-        }
-
-        private canMoveForwardPastEnd(): boolean {
-            // If the exercise is not complete, allow moving forward if at the last challenge and it's complete.
-            var currentChallengeIndex = this.exercise.challenges.indexOf(this.currentChallenge);
-            return currentChallengeIndex === this.exercise.challenges.length - 1 && this.currentChallenge.isComplete && !this.exerciseCompleteDriver.isComplete();
         }
 
         private reduceChallenges(fn: (challenge: IChallenge) => number): number {

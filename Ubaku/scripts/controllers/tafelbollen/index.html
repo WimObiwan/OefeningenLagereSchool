@@ -59,17 +59,6 @@
                     <label for="configurationChallengeDriverCompleteAfterSeconds">seconden</label>
                 </div>
             </dd>
-            <dt class="offset-top-lg">Volgende opgave:</dt>
-            <dd class="offset-top-lg">
-                <div>
-                    <input id="configurationChallengeDriverEndTypeChallengeComplete" type="radio" ng-model="configuration.challengeDriver.endType" ng-value="{{ChallengeEndType.ChallengeComplete}}" />
-                    <label for="configurationChallengeDriverEndTypeChallengeComplete"><span class="glyphicon glyphicon-forward"></span> automatisch</label>
-                </div>
-                <div>
-                    <input id="configurationChallengeDriverEndTypeManual" type="radio" ng-model="configuration.challengeDriver.endType" ng-value="{{ChallengeEndType.Manual}}" />
-                    <label for="configurationChallengeDriverEndTypeManual"><span class="glyphicon glyphicon-step-forward"></span> manueel</label>
-                </div>
-            </dd>
         </dl>
         <button class="btn btn-default btn-success" ng-click="startExercise()"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Start</button>
     </div>
@@ -141,7 +130,7 @@
         <!-- Current Challenge -->
         <div class="panel panel-default">
             <div class="panel-body">
-                Welke cijfers staan op de tafelbol van {{exerciseDriver.currentChallenge.uiComponents[0].content}}
+                Welke cijfers staan op de tafelbol van <span class = "badge">{{exerciseDriver.currentChallenge.uiComponents[0].content}}</span>
                 <!--
                 <div class="offset-top-lg offset-bottom-lg">
                     <table ng-show="exerciseDriver.currentChallenge.layout === ChallengeLayoutType.SplitTop">
@@ -184,6 +173,7 @@
                         </span>
                     </div>
                 </div>
+                -->
             </div>
             <div class="panel-footer">
                 <div class="progress" ng-hide="exerciseDriver.status.challenge.timeRemainingPercentage === null">
@@ -197,12 +187,9 @@
                     </span>
                 </div>
                 <div>
-                    <button class="btn btn-default btn-lg btn-info" ng-disabled="!exerciseDriver.canMoveBackward" ng-click="moveBackward()"><span class="glyphicon glyphicon-step-backward"></span>&nbsp;Vorige</button>
-                    <button class="btn btn-default btn-lg btn-info" ng-hide="!exerciseDriver.canMoveForward" ng-click="moveForward()">Volgende&nbsp;<span class="glyphicon glyphicon-step-forward"></span></button>
                     <button class="btn btn-default btn-lg btn-warning" ng-show="exerciseDriver.canSkipCurrentChallenge" ng-click="skipCurrentChallenge()">Overslaan&nbsp;<span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
-            -->
         </div>
         <!-- Last Response Status -->
         <div ng-hide="exerciseDriver.status.challenge.lastResponseStatus === null" class="offset-top-lg">

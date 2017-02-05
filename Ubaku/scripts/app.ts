@@ -81,9 +81,9 @@ module app {
             $rootScope.ExerciseCompleteDriverType = app.models.ExerciseCompleteDriverType;
             $rootScope.ChallengeFactoryType = app.models.ChallengeFactoryType;
             $rootScope.ChallengeCompleteType = app.models.ChallengeCompleteType;
-            $rootScope.ChallengeEndType = app.models.ChallengeEndType;
             $rootScope.SequenceType = app.models.SequenceType;
             $rootScope.ChallengeLayoutType = app.models.ChallengeLayoutType;
-            $rootScope.ChallengeUIComponentType = app.models.ChallengeUIComponentType;
+            $rootScope.ArithmeticChallengeUIComponentType = app.models.ArithmeticChallengeUIComponentType;
+            $rootScope.ShowNumberPatternType = app.models.ShowNumberPatternType;
         }]);
 }

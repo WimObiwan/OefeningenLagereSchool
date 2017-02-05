@@ -32,6 +32,21 @@
                     <input id="configurationChallengeFactoryMaxNumber" type="number" ng-model="configuration.arithmeticChallengeFactory.maxNumber" class="form-control width-sm" />
                 </div>
             </dd>
+            <dt class="offset-top-lg">Getalbeelden:</dt>
+            <dd class="offset-top-lg">
+                <div class="form-inline">
+                    <input id="configurationChallengeFactoryShowNumberPatternTypeNone" type="radio" ng-model="configuration.arithmeticChallengeFactory.showNumberPatternType" ng-value="{{ShowNumberPatternType.None}}" />
+                    <label for="configurationChallengeFactoryShowNumberPatternTypeNone">geen</label>
+                <div class="form-inline">
+                </div>
+                    <input id="configurationChallengeFactoryShowNumberPatternTypeAlways10" type="radio" ng-model="configuration.arithmeticChallengeFactory.showNumberPatternType" ng-value="{{ShowNumberPatternType.Always10}}" />
+                    <label for="configurationChallengeFactoryShowNumberPatternTypeAlways10">altijd 10</label>
+                </div>
+                <div class="form-inline">
+                    <input id="configurationChallengeFactoryShowNumberPatternTypeHint" type="radio" ng-model="configuration.arithmeticChallengeFactory.showNumberPatternType" ng-value="{{ShowNumberPatternType.Hint}}"/>
+                    <label for="configurationChallengeFactoryShowNumberPatternTypeHint">hint</label>
+                </div>
+            </dd>
             <dt class="offset-top-lg">Einde oefening:</dt>
             <dd class="offset-top-lg">
                 <div class="form-inline">
@@ -72,17 +87,6 @@
                     <label for="configurationChallengeDriverCompleteTypeTime"><span class="glyphicon glyphicon-time"></span> na</label>
                     <input id="configurationChallengeDriverCompleteAfterSeconds" type="number" ng-model="configuration.challengeDriver.completeAfterSeconds" class="form-control width-sm" />
                     <label for="configurationChallengeDriverCompleteAfterSeconds">seconden</label>
-                </div>
-            </dd>
-            <dt class="offset-top-lg">Volgende opgave:</dt>
-            <dd class="offset-top-lg">
-                <div>
-                    <input id="configurationChallengeDriverEndTypeChallengeComplete" type="radio" ng-model="configuration.challengeDriver.endType" ng-value="{{ChallengeEndType.ChallengeComplete}}" />
-                    <label for="configurationChallengeDriverEndTypeChallengeComplete"><span class="glyphicon glyphicon-forward"></span> automatisch</label>
-                </div>
-                <div>
-                    <input id="configurationChallengeDriverEndTypeManual" type="radio" ng-model="configuration.challengeDriver.endType" ng-value="{{ChallengeEndType.Manual}}" />
-                    <label for="configurationChallengeDriverEndTypeManual"><span class="glyphicon glyphicon-step-forward"></span> manueel</label>
                 </div>
             </dd>
             <!--
@@ -217,10 +221,10 @@
                     </table>
                     <div ng-show="exerciseDriver.currentChallenge.layout === ChallengeLayoutType.LeftToRight">
                         <span ng-repeat="uiComponent in exerciseDriver.currentChallenge.uiComponents">
-                            <span ng-show="uiComponent.type === ChallengeUIComponentType.PrimaryComponent" class="alert alert-info xxl">{{uiComponent.content}}</span>
-                            <span ng-show="uiComponent.type === ChallengeUIComponentType.SecondaryComponent" class="alert alert-info xl">{{uiComponent.content}}</span>
-                            <span ng-show="uiComponent.type === ChallengeUIComponentType.Ornament" class="alert xl">{{uiComponent.content}}</span>
-                            <span ng-show="uiComponent.type === ChallengeUIComponentType.AnswerPlaceholder">
+                            <span ng-show="uiComponent.type === ArithmeticChallengeUIComponentType.PrimaryComponent" class="alert alert-info xxl">{{uiComponent.content}}</span>
+                            <span ng-show="uiComponent.type === ArithmeticChallengeUIComponentType.SecondaryComponent" class="alert alert-info xl">{{uiComponent.content}}</span>
+                            <span ng-show="uiComponent.type === ArithmeticChallengeUIComponentType.Ornament" class="alert xl">{{uiComponent.content}}</span>
+                            <span ng-show="uiComponent.type === ArithmeticChallengeUIComponentType.AnswerPlaceholder">
                                 <span ng-show="exerciseDriver.currentChallenge.getLastResponse() === null" class="alert alert-warning xl">?</span>
                                 <span ng-show="exerciseDriver.currentChallenge.getLastResponse() !== null && exerciseDriver.currentChallenge.getLastResponse().answer === null" class="alert xl alert-warning">X</span>
                                 <span ng-show="exerciseDriver.currentChallenge.getLastResponse() !== null && exerciseDriver.currentChallenge.getLastResponse().answer !== null" class="alert xl alert-{{exerciseDriver.currentChallenge.isSolved | bootstrap:'boolean'}}">{{exerciseDriver.currentChallenge.getLastResponse().answer}}</span>
@@ -228,6 +232,41 @@
                         </span>
                     </div>
                 </div>
+            </div>
+            <!-- Getalbeelden -->
+            <div class="panel-body" style="font-size:64px; line-height: 40%;" ng-hide="configuration.arithmeticChallengeFactory.showNumberPatternType == ShowNumberPatternType.None">
+                <table>
+                    <tr>
+                        <td>
+                            <div ng-style="{'color': configuration.arithmeticChallengeFactory.showNumberPatternType == ShowNumberPatternType.Always10 ? 'black' : exerciseDriver.currentChallenge.numberStyle[0]}">&bull;</div>
+                            <div ng-style="{'color': configuration.arithmeticChallengeFactory.showNumberPatternType == ShowNumberPatternType.Always10 ? 'black' : exerciseDriver.currentChallenge.numberStyle[1]}">&bull;</div>
+                        </td>
+                        <td>
+                            <div ng-style="{'color': configuration.arithmeticChallengeFactory.showNumberPatternType == ShowNumberPatternType.Always10 ? 'black' : exerciseDriver.currentChallenge.numberStyle[2]}">&bull;</div>
+                            <div ng-style="{'color': configuration.arithmeticChallengeFactory.showNumberPatternType == ShowNumberPatternType.Always10 ? 'black' : exerciseDriver.currentChallenge.numberStyle[3]}">&bull;</div>
+                        </td>
+                        <td>
+                            &nbsp;<br />
+                            &nbsp;
+                        </td>
+                        <td>
+                            <div ng-style="{'color': configuration.arithmeticChallengeFactory.showNumberPatternType == ShowNumberPatternType.Always10 ? 'black' : exerciseDriver.currentChallenge.numberStyle[4]}">&bull;</div>
+                            <div ng-style="{'color': configuration.arithmeticChallengeFactory.showNumberPatternType == ShowNumberPatternType.Always10 ? 'black' : exerciseDriver.currentChallenge.numberStyle[5]}">&bull;</div>
+                        </td>
+                        <td>
+                            <div ng-style="{'color': configuration.arithmeticChallengeFactory.showNumberPatternType == ShowNumberPatternType.Always10 ? 'black' : exerciseDriver.currentChallenge.numberStyle[6]}">&bull;</div>
+                            <div ng-style="{'color': configuration.arithmeticChallengeFactory.showNumberPatternType == ShowNumberPatternType.Always10 ? 'black' : exerciseDriver.currentChallenge.numberStyle[7]}">&bull;</div>
+                        </td>
+                        <td>
+                            &nbsp;<br />
+                            &nbsp;
+                        </td>
+                        <td>
+                            <div ng-style="{'color': configuration.arithmeticChallengeFactory.showNumberPatternType == ShowNumberPatternType.Always10 ? 'black' : exerciseDriver.currentChallenge.numberStyle[8]}">&bull;</div>
+                            <div ng-style="{'color': configuration.arithmeticChallengeFactory.showNumberPatternType == ShowNumberPatternType.Always10 ? 'black' : exerciseDriver.currentChallenge.numberStyle[9]}">&bull;</div>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="panel-footer">
                 <div class="progress" ng-hide="exerciseDriver.status.challenge.timeRemainingPercentage === null">
@@ -241,8 +280,6 @@
                     </span>
                 </div>
                 <div>
-                    <button class="btn btn-default btn-lg btn-info" ng-disabled="!exerciseDriver.canMoveBackward" ng-click="moveBackward()"><span class="glyphicon glyphicon-step-backward"></span>&nbsp;Vorige</button>
-                    <button class="btn btn-default btn-lg btn-info" ng-hide="!exerciseDriver.canMoveForward" ng-click="moveForward()">Volgende&nbsp;<span class="glyphicon glyphicon-step-forward"></span></button>
                     <button class="btn btn-default btn-lg btn-warning" ng-show="exerciseDriver.canSkipCurrentChallenge" ng-click="skipCurrentChallenge()">Overslaan&nbsp;<span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
