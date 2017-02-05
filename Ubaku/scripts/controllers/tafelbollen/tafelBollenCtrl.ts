@@ -50,7 +50,6 @@
             configuration.tafelBollenChallengeFactory.maxNumber = 40;
 
             configuration.challengeDriver.completeType = app.models.ChallengeCompleteType.Solved;
-            configuration.challengeDriver.endType = app.models.ChallengeEndType.ChallengeComplete;
             configuration.challengeDriver.completeAfterSeconds = 10;
 
             return configuration;

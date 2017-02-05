@@ -41,6 +41,7 @@
 
         public forceComplete(): void {
             this.isComplete = true;
+            this.lastResponse = new Response(null, false);
         }
 
         public getResponseStatus(response: Response): ResponseStatus {

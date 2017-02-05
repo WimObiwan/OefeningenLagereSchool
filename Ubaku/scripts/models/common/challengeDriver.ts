@@ -3,7 +3,6 @@
 
     export class ChallengeDriver {
         private completeType: ChallengeCompleteType;
-        private endType: ChallengeEndType;
         private completeAfterMilliseconds: number;
         private challenge: IChallenge = null;
         private challengeStartTime: Date = null;
@@ -12,7 +11,6 @@
         constructor(private exerciseDriver: ExerciseDriver, private status: ChallengeStatus, configuration: ChallengeDriverConfiguration, private $interval: ng.IIntervalService) {
             // Determine the configuration parameters.
             this.completeType = configuration.completeType || Defaults.ChallengeCompleteType;
-            this.endType = configuration.endType || Defaults.ChallengeEndType;
             this.completeAfterMilliseconds = 1000 * (configuration.completeAfterSeconds || Defaults.ChallengeCompleteAfterSeconds);
         }
 
@@ -71,6 +69,7 @@
             if (challengeTimeRemainingMilliseconds <= 0) {
                 this.challenge.forceComplete();
                 this.onChallengeComplete();
+                this.status.lastResponseStatus = this.challenge.addResponse(null);
             }
         }
 
@@ -97,13 +96,7 @@
         }
 
         private shouldStartNewChallenge(): boolean {
-            if (this.endType === ChallengeEndType.Manual) {
-                return false;
-            } else if (this.endType === ChallengeEndType.ChallengeComplete) {
-                return this.challenge.isComplete;
-            } else {
-                throw new Error("Unknown challenge end type: " + this.completeType);
-            }
+            return this.challenge.isComplete;
         }
     }
 }

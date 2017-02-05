@@ -9,7 +9,6 @@
         public static ChallengeFactoryType = ChallengeFactoryType.Random;
         public static ChallengeCompleteType = ChallengeCompleteType.Solved;
         public static ChallengeCompleteAfterSeconds = 10;
-        public static ChallengeEndType = ChallengeEndType.ChallengeComplete;
         public static PrimaryComponentSequenceType = SequenceType.Random;
         public static SecondaryComponentSequenceType = SequenceType.Random;
         public static MinNumber = 0;

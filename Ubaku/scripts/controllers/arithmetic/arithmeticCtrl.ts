@@ -52,7 +52,6 @@
             configuration.arithmeticChallengeFactory.secondaryComponentSequence = app.models.SequenceType.Up;
 
             configuration.challengeDriver.completeType = app.models.ChallengeCompleteType.Solved;
-            configuration.challengeDriver.endType = app.models.ChallengeEndType.ChallengeComplete;
             configuration.challengeDriver.completeAfterSeconds = 10;
 
             return configuration;
