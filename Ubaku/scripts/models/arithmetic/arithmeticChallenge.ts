@@ -7,11 +7,27 @@
         public responseCount: number = 0;
         public layout: ChallengeLayoutType;
         public lastResponse: IResponse = null;
+        public numberStyle: string[] = [];
 
-        constructor(public layout_: ChallengeLayoutType, public uiComponents: ChallengeUIComponent[], public availableAnswers: number[], public solution: number, public correctResponseMessage: string, public incorrectResponseMessage: string) {
+        constructor(public layout_: ChallengeLayoutType, public uiComponents: ChallengeUIComponent[], public availableAnswers: number[], public solution: number,
+            public numberPatternBlack: number, public numberPatternGreen: number, public numberPatternRed: number,
+            public correctResponseMessage: string, public incorrectResponseMessage: string) {
             super();
 
             this.layout = layout_;
+
+            this.numberStyle = new Array<string>(10);
+            for (var i: number = 0; i < 10; i++) {
+                if (i < numberPatternBlack) {
+                    this.numberStyle[i] = "black";
+                } else if (i < numberPatternBlack + numberPatternGreen) {
+                    this.numberStyle[i] = "lightgreen";
+                } else if (i < numberPatternBlack + numberPatternGreen + numberPatternRed) {
+                    this.numberStyle[i] = "red";
+                } else {
+                    this.numberStyle[i] = "white";
+                }
+            }
         }
 
         public equals(other: ArithmeticChallenge) {

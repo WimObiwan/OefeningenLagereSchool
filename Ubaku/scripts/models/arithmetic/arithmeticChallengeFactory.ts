@@ -79,7 +79,9 @@
                     ];
                     var correctResponseMessage = "Goed zo! " + primaryComponent + " kan je splitsen in " + secondaryComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
                     var incorrectResponseMessage = "Jammer! " + primaryComponent + " kan je niet splitsen in " + secondaryComponent + " en " + app.models.Constants.StringPlaceholders.Answer + ".";
-                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
+                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, solution,
+                        secondaryComponent, solution, 0,
+                        correctResponseMessage, incorrectResponseMessage);
                 } else if (this.type === ChallengeFactoryType.Subtract) {
                     // Subtract.
                     var layout = ChallengeLayoutType.LeftToRight;
@@ -92,7 +94,9 @@
                     ];
                     var correctResponseMessage = "Goed zo! " + primaryComponent + " min " + secondaryComponent + " is gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
                     var incorrectResponseMessage = "Jammer! " + primaryComponent + " min " + secondaryComponent + " is niet gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
-                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, solution, correctResponseMessage, incorrectResponseMessage);
+                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, solution,
+                        solution, 0, secondaryComponent,
+                        correctResponseMessage, incorrectResponseMessage);
                 } else if (this.type === ChallengeFactoryType.Add) {
                     // Add.
                     var layout = ChallengeLayoutType.LeftToRight;
@@ -105,7 +109,9 @@
                     ];
                     var correctResponseMessage = "Goed zo! " + solution + " plus " + secondaryComponent + " is gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
                     var incorrectResponseMessage = "Jammer! " + solution + " plus " + secondaryComponent + " is niet gelijk aan " + app.models.Constants.StringPlaceholders.Answer + ".";
-                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, primaryComponent, correctResponseMessage, incorrectResponseMessage);
+                    return new app.models.ArithmeticChallenge(layout, uiComponents, this.availableAnswers, primaryComponent,
+                        solution, secondaryComponent, 0,
+                        correctResponseMessage, incorrectResponseMessage);
                 }
             }
             throw new Error("Unknown challenge type: " + this.type);

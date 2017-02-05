@@ -50,6 +50,7 @@
             configuration.arithmeticChallengeFactory.maxNumber = 10;
             configuration.arithmeticChallengeFactory.primaryComponentSequence = app.models.SequenceType.Random;
             configuration.arithmeticChallengeFactory.secondaryComponentSequence = app.models.SequenceType.Up;
+            configuration.arithmeticChallengeFactory.showNumberPatternType = app.models.ShowNumberPatternType.None;
 
             configuration.challengeDriver.completeType = app.models.ChallengeCompleteType.Solved;
             configuration.challengeDriver.completeAfterSeconds = 10;

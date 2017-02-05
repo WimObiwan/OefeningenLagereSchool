@@ -11,6 +11,7 @@
         public static ChallengeCompleteAfterSeconds = 10;
         public static PrimaryComponentSequenceType = SequenceType.Random;
         public static SecondaryComponentSequenceType = SequenceType.Random;
+        public static ShowNumberPatternType = ShowNumberPatternType.None;
         public static MinNumber = 0;
         public static MaxNumber = 0;
     }

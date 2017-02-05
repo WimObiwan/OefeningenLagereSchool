@@ -44,6 +44,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="scripts\controllers\tafelBollen\tafelBollenCtrl.ts" />
     <TypeScriptCompile Include="scripts\models\arithmetic\arithmeticChallenge.ts" />
+    <TypeScriptCompile Include="scripts\models\arithmetic\showNumberPatternType.ts" />
     <TypeScriptCompile Include="scripts\models\tafelBollen\tafelBollenChallengeUIComponentType.ts" />
     <TypeScriptCompile Include="scripts\models\tafelBollen\tafelBollenChallenge.ts" />
     <TypeScriptCompile Include="scripts\models\tafelBollen\tafelBollenChallengeFactory.ts" />
