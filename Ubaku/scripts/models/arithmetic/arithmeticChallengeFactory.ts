@@ -1,6 +1,8 @@
 ﻿module app.models {
     "use strict";
 
+    declare var ga: any;
+
     export class ArithmeticChallengeFactory implements IChallengeFactory {
         private originalType: ChallengeFactoryType = null;
         private type: ChallengeFactoryType = null;
@@ -39,6 +41,17 @@
                         this.type = ChallengeFactoryType.Subtract;
                         break;
                 }
+            }
+
+            if (ga) {
+                var value: string;
+                if (this.originalType === ChallengeFactoryType.Random) {
+                    value = 'Random';
+                } else {
+                    value = '';
+                }
+                value += app.models.ChallengeFactoryType[this.type];
+                ga('send', 'event', 'leerjaar-1', 'challenge', 'type-' + value);
             }
 
             if (this.type === ChallengeFactoryType.SplitNumbers || this.type === ChallengeFactoryType.Subtract || this.type === ChallengeFactoryType.Add) {

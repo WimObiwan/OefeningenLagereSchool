@@ -1,6 +1,8 @@
 ﻿module app.models {
     "use strict";
 
+    declare var ga: any;
+
     export interface IExerciseDriver {
         status: ExerciseStatus;
         currentChallenge: IChallenge;
@@ -32,6 +34,30 @@
         public start(): void {
             this.exerciseCompleteDriver.stop();
             this.exerciseCompleteDriver.start();
+
+            if (ga) {
+                ga('send', 'event', 'leerjaar-1', 'start', 'type-' + app.models.ChallengeFactoryType[this.configuration.arithmeticChallengeFactory.type]);
+                ga('send', 'event', 'leerjaar-1', 'start', 
+                    'maxMinNumber-' + this.configuration.arithmeticChallengeFactory.maxNumber.toString() +
+                    '-' + this.configuration.arithmeticChallengeFactory.minNumber.toString());
+                ga('send', 'event', 'leerjaar-1', 'start', 'numberPattern-' + app.models.ShowNumberPatternType[this.configuration.arithmeticChallengeFactory.showNumberPatternType]);
+                var value: string;
+                switch (this.configuration.exerciseCompleteDriver.type) {
+                    default:
+                    case ExerciseCompleteDriverType.Infinite: value = ''; break;
+                    case ExerciseCompleteDriverType.ChallengesCompleted: value = this.configuration.exerciseCompleteDriver.completeAfterChallengesCompleted.toString(); break;
+                    case ExerciseCompleteDriverType.ChallengesSolved: value = this.configuration.exerciseCompleteDriver.completeAfterChallengesSolved.toString(); break;
+                    case ExerciseCompleteDriverType.Time: value = this.configuration.exerciseCompleteDriver.completeAfterMinutes.toString(); break;
+                }
+                ga('send', 'event', 'leerjaar-1', 'start', 'exerciseComplete-' + app.models.ExerciseCompleteDriverType[this.configuration.exerciseCompleteDriver.type] + '-' + value);
+                if (this.configuration.challengeDriver.completeType === ChallengeCompleteType.Time) {
+                    value = this.configuration.challengeDriver.completeAfterSeconds.toString();
+                } else {
+                    value = '';
+                }
+                ga('send', 'event', 'leerjaar-1', 'start', 'challengeComplete-' + app.models.ChallengeCompleteType[this.configuration.challengeDriver.completeType] + '-' + value);
+            }
+
             this.startNewChallenge();
             this.updateUI();
         }

@@ -1,6 +1,8 @@
 ﻿module app.models {
     "use strict";
 
+    declare var ga: any;
+
     export class ArithmeticChallenge extends ModelBase implements IChallenge {
         public isSolved: boolean = false;
         public isComplete: boolean = false;
@@ -52,6 +54,11 @@
             this.lastResponse = new Response(answer, this.solution === answer);
             this.responseCount++;
             this.isSolved = this.lastResponse.isSolution;
+
+            if (ga) {
+                ga('send', 'event', 'leerjaar-1', 'challenge', 'solved-' + (this.isSolved ? 'true' : 'false') + '-' + this.responseCount.toString());
+            }
+
             return this.getResponseStatus(this.lastResponse);
         }
 
